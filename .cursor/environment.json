@@ -1,0 +1,5 @@
+{
+  "name": "iGaming Creative Factory",
+  "install": "bash .cursor/install.sh",
+  "chromeExecutablePath": "/usr/bin/google-chrome-stable"
+}
