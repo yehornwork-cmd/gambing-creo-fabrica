@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "library_version": "1.0.0",
+    "created_at": "2026-08-08",
+    "status": "READY_FOR_BRIEF",
+    "rights_note": "Reference-only. Official Pragmatic Play assets require separate reuse clearance.",
+    "sources": [
+      "https://www.pragmaticplay.com/en/games/gates-of-olympus/",
+      "https://www.daznbet.com/uploads/media/DUK/Game-Rules/Gates_of_Olympus_EN.pdf",
+      "https://clientzone.betconstruct.com/media/download/18182z/Game-overview-Gates-of-Olympus-1.pdf"
+    ]
+  },
+  "identity": {
+    "title": "Gates of Olympus",
+    "title_trademark": "Gates of Olympus™",
+    "provider": "Pragmatic Play",
+    "game_id": "vs20olympgate",
+    "release_date": "2021-02",
+    "theme": ["Greek Mythology", "Olympus", "Zeus", "Ancient Greece"],
+    "tagline_official": "The Gates into Zeus' realm open wide to all players in Gates of Olympus™"
+  },
+  "specs": {
+    "grid": { "reels": 6, "rows": 5, "positions": 30 },
+    "pay_system": "Pay Anywhere / Scatter Pays",
+    "paylines_documented": 20,
+    "min_cluster": 8,
+    "rtp_default": 96.5,
+    "rtp_ante_bet": 96.5,
+    "volatility": "High",
+    "volatility_scale": "5/5",
+    "max_win_multiplier": 5000,
+    "hit_frequency_approx": 0.234,
+    "bet_min_eur": 0.2,
+    "bet_max_eur": 125,
+    "platform": "HTML5",
+    "languages": 33,
+    "progressive_jackpot": false,
+    "wild_symbol": false
+  },
+  "not_this_game": [
+    "Gates of Olympus 1000",
+    "Gates of Olympus Xmas",
+    "Gates of Olympus Super Scatter",
+    "Sweet Bonanza",
+    "Starlight Princess",
+    "Rise of Olympus (Play'n GO)",
+    "Zeus vs Hades: Gods of War"
+  ]
+}

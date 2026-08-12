@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "game_id": "",
+  "geo": {
+    "default": {
+      "disclaimer_18_plus": "18+ | Play responsibly",
+      "cta_text": "Play Now",
+      "vo_restrictions": [],
+      "notes": "User must validate per target GEO before render."
+    }
+  },
+  "blocked_claims": [
+    "guaranteed_win",
+    "bonus_triggered_when_not_in_capture"
+  ]
+}

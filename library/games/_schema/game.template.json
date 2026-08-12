@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "library_version": "1.0.0",
+    "created_at": "YYYY-MM-DD",
+    "status": "DRAFT",
+    "rights_note": "Reference-only. Official provider assets require separate reuse clearance.",
+    "sources": []
+  },
+  "identity": {
+    "title": "",
+    "title_trademark": "",
+    "provider": "",
+    "game_id": "",
+    "release_date": "",
+    "theme": [],
+    "tagline_official": ""
+  },
+  "specs": {
+    "grid": { "reels": 0, "rows": 0, "positions": 0 },
+    "pay_system": "",
+    "volatility": "",
+    "max_win_multiplier": 0,
+    "bet_min_eur": 0,
+    "bet_max_eur": 0,
+    "platform": "HTML5"
+  },
+  "not_this_game": []
+}

@@ -1,0 +1,127 @@
+{
+  "total_symbol_types": 11,
+  "pay_tiers": ["8-9", "10-11", "12+"],
+  "assets_index": "assets-manifest.json",
+  "low_value_gems": [
+    {
+      "id": "gem_blue",
+      "name": "Blue Gem",
+      "name_ru": "Голубой камень",
+      "tier": "low",
+      "color_hex": "#4FC3F7",
+      "shape": "faceted octagonal gem, cyan-blue",
+      "payouts_x_bet": { "8-9": 0.25, "10-11": 0.75, "12+": 2.0 },
+      "asset_file": "assets/symbols/gem_blue.png"
+    },
+    {
+      "id": "gem_green",
+      "name": "Green Gem",
+      "name_ru": "Зелёный камень",
+      "tier": "low",
+      "color_hex": "#66BB6A",
+      "shape": "faceted emerald-cut gem",
+      "payouts_x_bet": { "8-9": 0.4, "10-11": 0.9, "12+": 4.0 },
+      "asset_file": "assets/symbols/gem_green.png"
+    },
+    {
+      "id": "gem_yellow",
+      "name": "Yellow Gem",
+      "name_ru": "Жёлтый камень",
+      "tier": "low",
+      "color_hex": "#FFEB3B",
+      "shape": "faceted diamond-shaped gem",
+      "payouts_x_bet": { "8-9": 0.5, "10-11": 1.0, "12+": 5.0 },
+      "asset_file": "assets/symbols/gem_yellow.png"
+    },
+    {
+      "id": "gem_purple",
+      "name": "Purple Gem",
+      "name_ru": "Фиолетовый камень",
+      "tier": "low",
+      "color_hex": "#AB47BC",
+      "shape": "faceted amethyst gem",
+      "payouts_x_bet": { "8-9": 0.8, "10-11": 1.2, "12+": 8.0 },
+      "asset_file": "assets/symbols/gem_purple.png"
+    },
+    {
+      "id": "gem_red",
+      "name": "Red Gem",
+      "name_ru": "Красный камень",
+      "tier": "low",
+      "color_hex": "#E53935",
+      "shape": "faceted ruby gem, highest low-tier",
+      "payouts_x_bet": { "8-9": 1.0, "10-11": 1.5, "12+": 10.0 },
+      "asset_file": "assets/symbols/gem_red.png"
+    }
+  ],
+  "high_value_artifacts": [
+    {
+      "id": "chalice",
+      "name": "Chalice / Goblet",
+      "name_ru": "Золотая чаша",
+      "tier": "high",
+      "visual": "golden goblet with ornate handles, divine chalice",
+      "payouts_x_bet": { "8-9": 1.5, "10-11": 2.0, "12+": 12.0 },
+      "asset_file": "assets/symbols/chalice.png"
+    },
+    {
+      "id": "ring",
+      "name": "Ring",
+      "name_ru": "Золотое кольцо",
+      "tier": "high",
+      "visual": "golden ring with embedded gemstone",
+      "payouts_x_bet": { "8-9": 2.0, "10-11": 5.0, "12+": 15.0 },
+      "asset_file": "assets/symbols/ring.png"
+    },
+    {
+      "id": "hourglass",
+      "name": "Hourglass",
+      "name_ru": "Песочные часы",
+      "tier": "high",
+      "visual": "golden sand timer, ornate frame",
+      "payouts_x_bet": { "8-9": 2.5, "10-11": 10.0, "12+": 25.0 },
+      "asset_file": "assets/symbols/hourglass.png"
+    },
+    {
+      "id": "crown",
+      "name": "Crown",
+      "name_ru": "Корона",
+      "tier": "premium",
+      "visual": "golden royal crown with jewels, top-paying regular symbol",
+      "payouts_x_bet": { "8-9": 10.0, "10-11": 25.0, "12+": 50.0 },
+      "ad_priority": "hero_money_symbol",
+      "asset_file": "assets/symbols/crown.png"
+    }
+  ],
+  "scatter": {
+    "id": "scatter_zeus",
+    "name": "Zeus Scatter",
+    "name_ru": "Скаттер Зевс",
+    "visual": "golden tile/medallion with Zeus portrait (stern, divine face), text SCATTER at bottom",
+    "appears_on": "all reels, any position",
+    "tumbles": false,
+    "payouts_x_bet": { "4": 3.0, "5": 5.0, "6": 100.0 },
+    "triggers": { "free_spins_min_scatter": 4, "free_spins_awarded": 15 },
+    "asset_file": "assets/symbols/scatter_zeus.png"
+  },
+  "multiplier_orb": {
+    "id": "multiplier_orb",
+    "name": "Multiplier Symbol",
+    "name_ru": "Множитель-orb",
+    "visual": "glowing sphere with golden wings and gold ring, numeric multiplier displayed on orb",
+    "colors": ["green", "blue", "purple", "red"],
+    "values": [2, 3, 4, 5, 6, 8, 10, 15, 20, 25, 50, 100, 500],
+    "max_value": 500,
+    "pays_alone": false,
+    "tumbles": false,
+    "thrown_by": "Zeus character",
+    "formula": "Mult1 + Mult2 + ... applied to total win after all tumbles",
+    "asset_files": {
+      "10x_blue": "assets/symbols/multiplier_orb_10x_blue.png",
+      "25x_green": "assets/symbols/multiplier_orb_25x_green.png",
+      "100x_purple": "assets/symbols/multiplier_orb_100x_purple.png",
+      "500x_red": "assets/symbols/multiplier_orb_500x_red.png"
+    }
+  },
+  "contact_sheet": "assets/symbols/symbols_contact_sheet.png"
+}

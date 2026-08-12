@@ -1,0 +1,51 @@
+{
+  "target_duration_sec": 30,
+  "output_path": "assets/production/pilot/gates_pilot_ad_v2_30s.mp4",
+  "hook_note": "B01 opens on spinning reels (48s), not idle grid",
+  "beats": [
+    {
+      "beat": "B01_motion_hook",
+      "segment_id": "seg_v2_motion_hook",
+      "trim_in_sec": 48.0,
+      "duration_sec": 3.5
+    },
+    {
+      "beat": "B02_tumble_energy",
+      "segment_id": "seg_v2_tumble_spin",
+      "trim_in_sec": 52.0,
+      "duration_sec": 5.0
+    },
+    {
+      "beat": "B03_scatter_tension",
+      "segment_id": "seg_v2_scatter_proxy",
+      "trim_in_sec": 54.0,
+      "duration_sec": 6.0
+    },
+    {
+      "beat": "B04_orb_build",
+      "segment_id": "seg_v2_grid_full",
+      "trim_in_sec": 108.0,
+      "duration_sec": 6.0
+    },
+    {
+      "beat": "B05_win_climax",
+      "segment_id": "seg_v2_climax_proxy",
+      "trim_in_sec": 52.0,
+      "duration_sec": 5.0,
+      "fallback_v1_trim": {
+        "source": "gates_of_olympus_20spins_hq.mp4",
+        "trim_in_sec": 52.0,
+        "duration_sec": 5.0,
+        "crop": true
+      }
+    },
+    {
+      "beat": "B06_end_card",
+      "type": "logo_png",
+      "asset": "assets/logo/logo_end_card_compliance_9x16.png",
+      "duration_sec": 3.0
+    }
+  ],
+  "total_gameplay_sec": 25.5,
+  "total_with_endcard_sec": 28.5
+}
