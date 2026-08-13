@@ -10,8 +10,8 @@
   "aspect_default": "9:16",
   "hook_id_default": "mechanic_first",
   "notes": "Teach one mechanic (tumble / multiplier orb) without a bonus-payoff claim.",
-  "capture_requirements": {
-    "bonus_triggered": false,
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
     "honest_vo": true
   },
   "blocked_claims": ["guaranteed_win", "bonus_triggered_when_not_in_capture"],

@@ -4,7 +4,7 @@
 - Perplexity Computer: orchestrator
 - Cursor Cloud Agents: coding executor
 - n8n (n8n.vizioner.xyz): automation
-- Hetzner capture worker (65.108.48.54): game capture
+- Hetzner VOD worker (65.108.48.54): YouTube / Kick / Twitch analysis (`127.0.0.1:8787`)
 
 ## Rules
 - Agents work on `cursor/*` branches

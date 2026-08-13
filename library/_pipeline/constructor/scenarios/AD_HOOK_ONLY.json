@@ -10,8 +10,8 @@
   "aspect_default": "9:16",
   "hook_id_default": "motion_cold_open",
   "notes": "6s cold-open for thumb-stop tests. Fill beats when a hook template exists.",
-  "capture_requirements": {
-    "bonus_triggered": false,
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
     "honest_vo": true
   },
   "blocked_claims": ["guaranteed_win"],

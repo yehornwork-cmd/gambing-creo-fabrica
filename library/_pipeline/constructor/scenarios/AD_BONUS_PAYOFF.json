@@ -9,10 +9,11 @@
   "duration_target_sec": 30,
   "aspect_default": "9:16",
   "hook_id_default": "scatter_trigger",
-  "notes": "Full AD_B arc with real FS footage. Blocked until recapture has bonus_triggered: true.",
-  "capture_requirements": {
-    "bonus_triggered": true,
-    "honest_vo": true
+  "notes": "Full AD_B arc with real FS from YouTube/Kick/Twitch VOD. Stub until a clip with bonus_triggered is analyzed.",
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
+    "honest_vo": true,
+    "bonus_in_vod": true
   },
   "blocked_claims": ["guaranteed_win", "bonus_triggered_when_not_in_capture"],
   "arc_slots": ["ARC_TEASE", "ARC_MECHANIC_SHOWCASE", "ARC_PAYOFF", "ARC_CTA"],

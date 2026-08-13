@@ -51,3 +51,4 @@ Required fields: `game_id`, `scenario_id`, `locale`, `geo`, `format`, `cta_id`, 
 - Not a render farm. HyperFrames `--batch` / Cloud Run is the farm; this emits rows.
 - Not TTS. Locale packs are overlay/VO strings only.
 - Not a live Ads winner loop. Tag `parent_creative_id` by hand until F5.
+- Not demo-game capture. Footage comes from YouTube / Kick / Twitch VOD analysis.

@@ -10,8 +10,8 @@
   "aspect_default": "9:16",
   "hook_id_default": "handheld_reaction",
   "notes": "Lo-fi first-person / reaction overlay. Needs UGC template + talent pack.",
-  "capture_requirements": {
-    "bonus_triggered": false,
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
     "honest_vo": true
   },
   "blocked_claims": ["guaranteed_win"],
