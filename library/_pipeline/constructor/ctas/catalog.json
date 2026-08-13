@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "notes": "CTA copy is per locale. Compliance disclaimer comes from game compliance.json geo pack, not from here.",
+  "ctas": [
+    {
+      "cta_id": "play_now",
+      "enabled": true,
+      "locales": {
+        "ru": {
+          "cta_main": "ИГРАТЬ",
+          "cta_sub": "Ставка от €2.00",
+          "end_tag": "Открой врата."
+        },
+        "pl": {
+          "cta_main": "GRAJ TERAZ",
+          "cta_sub": "Zakład od 2,00 €",
+          "end_tag": "Otwórz wrota."
+        }
+      }
+    },
+    {
+      "cta_id": "bonus_first_deposit",
+      "enabled": true,
+      "locales": {
+        "ru": {
+          "cta_main": "ЗАБРАТЬ БОНУС",
+          "cta_sub": "+100% на первый депозит",
+          "end_tag": "Открой врата. Бонус на первый депозит."
+        },
+        "pl": {
+          "cta_main": "ODBIERZ BONUS",
+          "cta_sub": "+100% na pierwszy depozyt",
+          "end_tag": "Otwórz wrota. Bonus na pierwszy depozyt."
+        }
+      }
+    }
+  ]
+}

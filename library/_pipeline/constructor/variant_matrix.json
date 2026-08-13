@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "template_id": "gates-pilot-ad-v3",
+  "game_id": "vs20olympgate",
+  "scenario_id": "AD_B",
+  "hyperframes_project": "output/gates-pilot-ad-v3",
+  "compliance_file": "library/games/vs20olympgate/compliance.json",
+  "notes": "Default explode: ru+pl × 9x16 × 2 CTAs with geo matching locale = 4 jobs. Stub formats stay off until F1 layouts exist.",
+  "axes": {
+    "locale": [
+      {
+        "id": "ru",
+        "enabled": true,
+        "pack": "locale_packs/ru.json"
+      },
+      {
+        "id": "pl",
+        "enabled": true,
+        "status": "placeholder",
+        "pack": "locale_packs/pl.json"
+      }
+    ],
+    "format": [
+      {
+        "id": "9x16",
+        "aspect": "9:16",
+        "width": 1080,
+        "height": 1920,
+        "enabled": true
+      },
+      {
+        "id": "1x1",
+        "aspect": "1:1",
+        "width": 1080,
+        "height": 1080,
+        "enabled": false,
+        "status": "stub"
+      },
+      {
+        "id": "16x9",
+        "aspect": "16:9",
+        "width": 1920,
+        "height": 1080,
+        "enabled": false,
+        "status": "stub"
+      }
+    ],
+    "cta": [
+      { "id": "play_now", "enabled": true },
+      { "id": "bonus_first_deposit", "enabled": true }
+    ],
+    "geo": [
+      {
+        "id": "ru",
+        "locale": "ru",
+        "enabled": true,
+        "copy_status": "placeholder"
+      },
+      {
+        "id": "pl",
+        "locale": "pl",
+        "enabled": true,
+        "copy_status": "placeholder"
+      }
+    ]
+  },
+  "constraints": {
+    "geo_must_match_locale": true
+  },
+  "defaults": {
+    "hook_id": "motion_cold_open",
+    "parent_creative_id": null,
+    "status": "draft"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "scenario_id": "AD_HOOK_ONLY",
+  "name": "Hook only",
+  "arc_id": "ARC_HOOK",
+  "status": "stub",
+  "game_id": null,
+  "template_id": null,
+  "hyperframes_project": null,
+  "duration_target_sec": 6,
+  "aspect_default": "9:16",
+  "hook_id_default": "motion_cold_open",
+  "notes": "6s cold-open for thumb-stop tests. Fill beats when a hook template exists.",
+  "capture_requirements": {
+    "bonus_triggered": false,
+    "honest_vo": true
+  },
+  "blocked_claims": ["guaranteed_win"],
+  "arc_slots": ["ARC_TEASE", "ARC_CTA"],
+  "beats": []
+}

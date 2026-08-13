@@ -1,0 +1,20 @@
+{
+  "scenario_id": "AD_MECHANIC_SHOWCASE",
+  "name": "Mechanic showcase",
+  "arc_id": "ARC_MECHANIC_SHOWCASE",
+  "status": "stub",
+  "game_id": null,
+  "template_id": null,
+  "hyperframes_project": null,
+  "duration_target_sec": 15,
+  "aspect_default": "9:16",
+  "hook_id_default": "mechanic_first",
+  "notes": "Teach one mechanic (tumble / multiplier orb) without a bonus-payoff claim.",
+  "capture_requirements": {
+    "bonus_triggered": false,
+    "honest_vo": true
+  },
+  "blocked_claims": ["guaranteed_win", "bonus_triggered_when_not_in_capture"],
+  "arc_slots": ["ARC_TEASE", "ARC_MECHANIC_SHOWCASE", "ARC_CTA"],
+  "beats": []
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Creative Factory orchestrator — status and tick for bounded MVP chunks."""
+"""Creative Factory orchestrator — status and tick for MVP (P*) and scale (F*) chunks."""
 
 from __future__ import annotations
 
@@ -13,12 +13,15 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PIPELINE = REPO_ROOT / "library" / "_pipeline"
-ROADMAP = PIPELINE / "phases" / "MVP_ROADMAP.md"
+ROADMAPS = {
+    "mvp": PIPELINE / "phases" / "MVP_ROADMAP.md",
+    "scale": PIPELINE / "phases" / "FACTORY_SCALE.md",
+}
 STATE_FILE = PIPELINE / "state.json"
 RUNS_DIR = PIPELINE / "runs"
 
 CHUNK_RE = re.compile(
-    r"^\|\s*(P\d+\.\d+)\s*\|\s*([^|]+)\|\s*([^|]+)(?:\|\s*([^|]+))?\s*\|$"
+    r"^\|\s*((?:P|F)\d+\.\d+)\s*\|\s*([^|]+)\|\s*([^|]+)(?:\|\s*([^|]+))?\s*\|$"
 )
 
 
@@ -45,11 +48,12 @@ def save_state(state: dict[str, Any]) -> None:
     STATE_FILE.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
 
 
-def parse_roadmap() -> list[dict[str, str]]:
-    if not ROADMAP.exists():
+def parse_roadmap(roadmap: str = "mvp") -> list[dict[str, str]]:
+    path = ROADMAPS[roadmap]
+    if not path.exists():
         return []
     chunks: list[dict[str, str]] = []
-    for line in ROADMAP.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         match = CHUNK_RE.match(line.strip())
         if not match:
             continue
@@ -63,6 +67,13 @@ def parse_roadmap() -> list[dict[str, str]]:
             }
         )
     return chunks
+
+
+def all_known_chunk_ids() -> set[str]:
+    ids: set[str] = set()
+    for name in ROADMAPS:
+        ids.update(c["id"] for c in parse_roadmap(name))
+    return ids
 
 
 def next_chunk(state: dict[str, Any], chunks: list[dict[str, str]]) -> dict[str, str] | None:
@@ -84,46 +95,51 @@ def run_id_for(chunk_id: str) -> str:
     return f"{stamp}_{chunk_id}"
 
 
-def cmd_status(_: argparse.Namespace) -> int:
-    state = load_state()
-    chunks = parse_roadmap()
-    completed = state.get("completed", [])
+def _print_lane(name: str, chunks: list[dict[str, str]], state: dict[str, Any]) -> None:
+    completed = set(state.get("completed", []))
     blocked = state.get("blocked", {})
     pending = [c["id"] for c in chunks if c["id"] not in completed and c["id"] not in blocked]
+    done = [c["id"] for c in chunks if c["id"] in completed]
+    print(f"  {name}: {len(done)}/{len(chunks)} complete")
+    if done:
+        print(f"           {', '.join(done)}")
+    lane_blocked = {cid: blocked[cid] for cid in blocked if any(c["id"] == cid for c in chunks)}
+    if lane_blocked:
+        for cid, reason in lane_blocked.items():
+            print(f"           blocked {cid}: {reason}")
+    if pending:
+        print(f"           next: {pending[0]}")
+    elif not lane_blocked:
+        print("           next: (all chunks complete)")
+    else:
+        print("           next: (blocked)")
 
+
+def cmd_status(_: argparse.Namespace) -> int:
+    state = load_state()
     print("Creative Factory — status")
     print(f"  repo:      {REPO_ROOT}")
     print(f"  updated:   {state.get('updated_at', '—')}")
-    print(f"  completed: {len(completed)}/{len(chunks)} chunks")
-    if completed:
-        print(f"             {', '.join(completed)}")
-    if blocked:
-        print("  blocked:")
-        for cid, reason in blocked.items():
-            print(f"    {cid}: {reason}")
-    if pending:
-        print(f"  next up:   {pending[0]}")
-    elif not blocked:
-        print("  next up:   (all chunks complete)")
-    else:
-        print("  next up:   (blocked — resolve blockers or mark complete manually)")
+    _print_lane("mvp", parse_roadmap("mvp"), state)
+    _print_lane("scale", parse_roadmap("scale"), state)
     if state.get("in_progress"):
         print(f"  in flight: {state['in_progress']}")
     return 0
 
 
-def cmd_tick(_: argparse.Namespace) -> int:
+def cmd_tick(args: argparse.Namespace) -> int:
     state = load_state()
-    chunks = parse_roadmap()
+    roadmap = getattr(args, "roadmap", "mvp")
+    chunks = parse_roadmap(roadmap)
     if not chunks:
-        print("ERROR: MVP roadmap not found or empty.", file=sys.stderr)
+        print(f"ERROR: {roadmap} roadmap not found or empty.", file=sys.stderr)
         return 1
 
     chunk = next_chunk(state, chunks)
     if chunk is None:
         save_state(state)
         print("No actionable chunk — all complete or blocked.")
-        cmd_status(_)
+        cmd_status(args)
         return 0
 
     rid = run_id_for(chunk["id"])
@@ -177,7 +193,7 @@ python3 library/_pipeline/orchestrator/factory_run.py complete {chunk['id']}
 def cmd_complete(args: argparse.Namespace) -> int:
     state = load_state()
     chunk_id = args.chunk_id
-    if chunk_id not in {c["id"] for c in parse_roadmap()}:
+    if chunk_id not in all_known_chunk_ids():
         print(f"ERROR: unknown chunk {chunk_id}", file=sys.stderr)
         return 1
     completed = set(state.get("completed", []))
@@ -198,11 +214,17 @@ def main() -> int:
     p_status = sub.add_parser("status", help="Show pipeline status")
     p_status.set_defaults(func=cmd_status)
 
-    p_tick = sub.add_parser("tick", help="Start next bounded MVP chunk")
+    p_tick = sub.add_parser("tick", help="Start next bounded chunk")
+    p_tick.add_argument(
+        "--roadmap",
+        choices=sorted(ROADMAPS),
+        default="mvp",
+        help="Which roadmap to advance (default: mvp). Use 'scale' for F0–F5.",
+    )
     p_tick.set_defaults(func=cmd_tick)
 
     p_done = sub.add_parser("complete", help="Mark a chunk complete")
-    p_done.add_argument("chunk_id", help="Chunk ID e.g. P1.2")
+    p_done.add_argument("chunk_id", help="Chunk ID e.g. P1.2 or F0.1")
     p_done.set_defaults(func=cmd_complete)
 
     args = parser.parse_args()

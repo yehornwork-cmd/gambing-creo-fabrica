@@ -1,0 +1,22 @@
+{
+  "locale": "ru",
+  "status": "seed",
+  "notes": "Copy from pilot-ad-v3 storyboard. TTS not wired yet.",
+  "variables": {
+    "vo_b01": "Gates of Olympus. Ставка €2. Поехали.",
+    "vo_b02": "Каскад! Символы сыпятся…",
+    "vo_b03": "Два scatter… ещё два — и бонус!",
+    "vo_b04": "Orb! Множитель на поле…",
+    "vo_b05": "Вот это каскад! Смотри на множитель…",
+    "band_b01_title": "GATES OF OLYMPUS",
+    "band_b01_copy": "Ставка €2.00 · Поехали.",
+    "band_b02_title": "КАСКАД",
+    "band_b02_copy": "Символы сыплются… напряжение растёт.",
+    "band_b03_title": "SCATTER TEASE",
+    "band_b03_copy": "Два scatter… ещё два — и бонус!",
+    "band_b04_title": "MULTIPLIER",
+    "band_b04_copy": "Orb на поле · множители копятся.",
+    "band_b05_title": "WIN CLIMAX",
+    "band_b05_copy": "Выигрыш на экране — врата открыты."
+  }
+}

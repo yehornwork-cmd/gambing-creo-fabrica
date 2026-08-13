@@ -5,6 +5,6 @@ Templates for seeding new games. Copy and fill per game.
 | File | Purpose |
 |------|---------|
 | `game.template.json` | Identity + specs skeleton |
-| `compliance.template.json` | GEO disclaimer placeholders |
+| `compliance.template.json` | GEO disclaimer placeholders (`default`, `ru`, `pl`) |
 
 Seed script (future): `tools/seed_game.py --from context/<slug>/`

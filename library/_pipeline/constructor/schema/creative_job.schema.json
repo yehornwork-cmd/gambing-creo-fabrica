@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gambing-creo-fabrica.local/schema/creative_job.json",
+  "title": "CreativeJob",
+  "description": "One renderable creative variant produced by the constructor. 500/day is a cartesian explosion of these jobs, not 500 unique storyboards.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_id",
+    "schema_version",
+    "game_id",
+    "scenario_id",
+    "locale",
+    "geo",
+    "format",
+    "cta_id",
+    "status",
+    "lineage",
+    "render"
+  ],
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)+$",
+      "description": "Stable id: {game_id}_{scenario_id}_{locale}_{geo}_{format}_{cta_id}[_{hook_id}]"
+    },
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "game_id": { "type": "string", "minLength": 1 },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "locale": { "type": "string", "minLength": 2 },
+    "geo": { "type": "string", "minLength": 2 },
+    "format": {
+      "type": "string",
+      "enum": ["9x16", "1x1", "16x9"]
+    },
+    "cta_id": { "type": "string", "minLength": 1 },
+    "hook_id": { "type": ["string", "null"] },
+    "parent_creative_id": {
+      "type": ["string", "null"],
+      "description": "Set when this job is a winner clone. Null for template-originated variants."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "ready", "blocked", "rendered", "winner", "killed"]
+    },
+    "blocked_reason": { "type": ["string", "null"] },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template_id", "arc_id", "beats"],
+      "properties": {
+        "template_id": { "type": "string" },
+        "arc_id": { "type": "string" },
+        "source_scenario_status": { "type": "string" },
+        "parent_creative_id": { "type": ["string", "null"] },
+        "beats": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/beat_lineage" }
+        }
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project", "variables"],
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "Repo-relative HyperFrames project directory"
+        },
+        "output_name": { "type": "string" },
+        "variables": {
+          "type": "object",
+          "description": "HyperFrames --batch row (flat string/number/boolean values)",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean"]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "beat_lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["beat_id", "arc_slot_id"],
+      "properties": {
+        "beat_id": { "type": "string" },
+        "arc_slot_id": { "type": "string" },
+        "segment_id": { "type": ["string", "null"] },
+        "substitution_group": { "type": ["string", "null"] },
+        "taxonomy_tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "duration_sec": { "type": "number" }
+      }
+    }
+  }
+}

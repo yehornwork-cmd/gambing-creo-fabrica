@@ -37,8 +37,9 @@ compliance_layer: user
 
 - Hard cuts between gameplay beats — no cross-dissolve
 - Optional overlay: `2/4 SCATTER` counter on B03 (motion-graphics sub-comp)
-- VO RU per `pilot_ad_scenario.md` beats B01–B06
-- End card: logo + CTA placeholder + 18+ disclaimer placeholder
+- VO / overlay / CTA / disclaimer are HyperFrames `data-composition-variables` (see `output/gates-pilot-ad-v3/index.html`). Locale + CTA rows come from `library/_pipeline/constructor/explode.py`.
+- End card: logo + CTA + 18+ disclaimer from `compliance.json` geo packs (`ru`, `pl` placeholders — user validates before paid media).
+- Beat list: `gameplay/pilot_ad_scenario.md` → constructor `scenarios/AD_B.json`
 
 ## Capture upgrade (when ready)
 
