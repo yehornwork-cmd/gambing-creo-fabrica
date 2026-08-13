@@ -131,6 +131,14 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
         self.assertEqual(set(payload["blocked_geos"]), {"PL", "NL"})
         self.assertEqual(payload["n8n_geos"], ["NL", "PL"])
 
+    def test_it_and_cz_use_local_cta(self) -> None:
+        jobs = multiply.multiply(analysis=self.analysis, geos=["IT", "CZ"], cta_ids=["play_now"])
+        it = next(j for j in jobs if j["render"]["variables"]["forge_geo"] == "IT")
+        cz = next(j for j in jobs if j["render"]["variables"]["forge_geo"] == "CZ")
+        self.assertEqual(it["render"]["variables"]["cta_main"], "GIOCA ORA")
+        self.assertEqual(cz["render"]["variables"]["cta_main"], "HRÁT TEĎ")
+        self.assertTrue(all(j["status"] != "blocked" for j in jobs))
+
 
 class ShortAdScenarioTests(unittest.TestCase):
     def test_six_second_uses_hook_only(self) -> None:

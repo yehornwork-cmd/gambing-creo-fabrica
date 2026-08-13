@@ -35,6 +35,16 @@
           "cta_main": "JOUER",
           "cta_sub": "Dès 2,00 €",
           "end_tag": "Ouvre les portes."
+        },
+        "it": {
+          "cta_main": "GIOCA ORA",
+          "cta_sub": "Da 2,00 €",
+          "end_tag": "Apri i cancelli."
+        },
+        "cs": {
+          "cta_main": "HRÁT TEĎ",
+          "cta_sub": "Od 2,00 €",
+          "end_tag": "Otevři brány."
         }
       }
     },
@@ -71,6 +81,16 @@
           "cta_main": "PRENDRE LE BONUS",
           "cta_sub": "+100% sur le premier dépôt",
           "end_tag": "Ouvre les portes. Bonus premier dépôt."
+        },
+        "it": {
+          "cta_main": "PRENDI IL BONUS",
+          "cta_sub": "+100% sul primo deposito",
+          "end_tag": "Apri i cancelli. Bonus sul primo deposito."
+        },
+        "cs": {
+          "cta_main": "VÉZ SI BONUS",
+          "cta_sub": "+100 % na první vklad",
+          "end_tag": "Otevři brány. Bonus na první vklad."
         }
       }
     }
