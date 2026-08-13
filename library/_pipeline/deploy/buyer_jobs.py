@@ -56,6 +56,9 @@ def _download(url: str, dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     req = Request(url, headers={"User-Agent": "forge-buyer-multiply/1.0"})
     with urlopen(req, timeout=120) as resp:  # noqa: S310  — host allowlisted above
+        length = resp.headers.get("Content-Length")
+        if length and int(length) > 180 * 1024 * 1024:
+            raise ValueError(f"master too large: {length} bytes")
         dest.write_bytes(resp.read())
 
 
