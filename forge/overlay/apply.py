@@ -200,6 +200,14 @@ def main() -> int:
         if old_update not in text:
             raise SystemExit("applyReportToRun update marker missing")
         text = text.replace(old_update, new_update, 1)
+    hold_throw_old = 'if (runs.length === 0) throw new ApiError("ALL_GEOS_BLOCKED");'
+    hold_throw_new = (
+        'if (runs.length === 0) throw new ApiError('
+        '"PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");'
+    )
+    if hold_throw_old in text:
+        text = text.replace(hold_throw_old, hold_throw_new, 1)
+        print("patched submitOrder hold message")
     data.write_text(text, encoding="utf-8")
     print("patched data.ts")
 
@@ -297,6 +305,32 @@ def main() -> int:
     g = g.replace(
         '{g.code === "GULF-EN" ? "Gulf" : g.code}',
         '{g.code === "GULF-EN" ? "Gulf" : g.code}{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
+        1,
+    )
+    g = g.replace(
+        """    if (selected.length === 0) {
+      setErr("Выберите хотя бы один рынок.");
+      return;
+    }""",
+        """    if (selected.length === 0) {
+      setErr("Выберите хотя бы один рынок.");
+      return;
+    }
+    if (selected.every(([code]) => code === "NL" || code === "PL")) {
+      setErr("PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");
+      return;
+    }""",
+        1,
+    )
+    g = g.replace(
+        """        error instanceof ApiError
+          ? error.message
+          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
+        """        error instanceof ApiError
+          ? error.message === "ALL_GEOS_BLOCKED" || error.code === "ALL_GEOS_BLOCKED"
+            ? "PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE."
+            : error.message
+          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
         1,
     )
     gen.write_text(g, encoding="utf-8")
