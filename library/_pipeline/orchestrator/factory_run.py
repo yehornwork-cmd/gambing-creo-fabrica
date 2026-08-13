@@ -98,15 +98,17 @@ def cmd_status(args: argparse.Namespace) -> int:
     chunks = parse_roadmap(roadmap_path)
     completed = state.get("completed", [])
     blocked = state.get("blocked", {})
+    chunk_ids = {c["id"] for c in chunks}
+    phase_completed = [c for c in completed if c in chunk_ids]
     pending = [c["id"] for c in chunks if c["id"] not in completed and c["id"] not in blocked]
 
     print("Creative Factory — status")
     print(f"  phase:     {phase}")
     print(f"  repo:      {REPO_ROOT}")
     print(f"  updated:   {state.get('updated_at', '—')}")
-    print(f"  completed: {len(completed)}/{len(chunks)} chunks")
-    if completed:
-        print(f"             {', '.join(completed)}")
+    print(f"  completed: {len(phase_completed)}/{len(chunks)} chunks")
+    if phase_completed:
+        print(f"             {', '.join(phase_completed)}")
     if blocked:
         print("  blocked:")
         for cid, reason in blocked.items():
