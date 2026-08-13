@@ -7,9 +7,8 @@ upload (Forge /media)
     → POST /jobs/buyer/multiply   (youtube-worker, internal)
         ffprobe + scenario pick (hook / mechanic / AD_B)
         explode locale × CTA with parent_creative_id
-        NL/PL jobs status=blocked unless compliance_allow
-    → buyer sees N variants immediately (hold chips on restricted geos)
-    → n8n webhook localizes/renders **ready** geos only (all-hold → no farm call)
+    → buyer sees N variants immediately
+    → n8n webhook localizes/renders every requested geo
     → Factory v3 layout is `forge-renderer` `/api/layout` (not Vercel)
     → async buyer_deep: Gemini native video rewrites beats + optional extract_signals
 ```
@@ -33,9 +32,9 @@ Keys and file formats: [SECRETS.md](SECRETS.md). Worker token is `CAPTURE_API_TO
 }
 ```
 
-Response (sync, typically 1–3s): `analysis` + `jobs[]` + `summary.ready_geos` / `blocked_geos` + optional `deep_job_id`.
+Response (sync, typically 1–3s): `analysis` + `jobs[]` + `summary.n8n_geos` + optional `deep_job_id`.
 
-`compliance_allow: true` unlocks NL/PL (licensed operator brief only). Default is hold.
+The generator does **not** hold NL/PL. Compliance review is a later step.
 
 Duration → scenario: `<8s` `AD_HOOK_ONLY`, `8–18s` `AD_MECHANIC_SHOWCASE`, else `AD_B`.
 
@@ -57,6 +56,6 @@ Artifacts on Hetzner: `/opt/igaming-library/_pipeline/buyer_uploads/<analysis_id
 
 ## Forge wiring
 
-`submitRun` calls the worker **before** n8n, stores `analysis` / `multiply` on the run report, then fires the factory webhook **only if `n8n_geos` is non-empty**. An all-hold batch (NL/PL without `compliance.allow`) finishes immediately with a hold notice — do not retry those geos.
+`submitRun` / `submitOrder` call the worker **before** n8n, store `analysis` / `multiply` on the run report, then fire the factory webhook for every requested geo.
 
 Layout/render stay on the Hetzner host (`forge-renderer`). Do not call `creative-localizer.vercel.app`.

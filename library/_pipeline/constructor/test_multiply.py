@@ -80,18 +80,16 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
             self.assertEqual(job["parent_creative_id"], "buyer12abcd")
             self.assertTrue(job["job_id"].endswith("buyer12a"))
             self.assertEqual(job["format"], "9x16")
-            self.assertEqual(job["status"], "blocked")
-            self.assertIn(job["blocked_reason"], {"nl_untargeted_gambling_ads", "pl_private_casino_ads"})
+            self.assertNotEqual(job["status"], "blocked")
+            self.assertEqual(job.get("compliance_gate"), "restricted")
 
-    def test_allow_unlocks_restricted_geos(self) -> None:
-        jobs = multiply.multiply(
-            analysis=self.analysis,
-            geos=["PL", "NL"],
-            compliance_allow=True,
-        )
-        self.assertEqual(len(jobs), 4)
-        self.assertTrue(all(j["status"] != "blocked" or "geo" not in (j.get("blocked_reason") or "") for j in jobs))
+    def test_nl_pl_are_not_held_by_generator(self) -> None:
+        jobs = multiply.multiply(analysis=self.analysis, geos=["PL", "NL"], cta_ids=["play_now"])
+        self.assertEqual(len(jobs), 2)
         self.assertTrue(all(j["status"] != "blocked" for j in jobs))
+        payload = multiply.summary_payload(self.analysis, jobs)
+        self.assertEqual(set(payload["n8n_geos"]), {"PL", "NL"})
+        self.assertEqual(payload["blocked_jobs"], 0)
 
     def test_open_geos_are_ready(self) -> None:
         jobs = multiply.multiply(analysis=self.analysis, geos=["CA-EN", "AU"], cta_ids=["play_now"])
@@ -124,20 +122,20 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
     def test_summary_counts(self) -> None:
         payload = multiply.summary_payload(self.analysis, self.jobs)
         self.assertEqual(payload["jobs"], 4)
-        self.assertEqual(payload["ready_jobs"], 0)
-        self.assertEqual(payload["blocked_jobs"], 4)
+        self.assertEqual(payload["ready_jobs"], 4)
+        self.assertEqual(payload["blocked_jobs"], 0)
         self.assertEqual(payload["beats"], 6)
         self.assertEqual(set(payload["geos"]), {"PL", "NL"})
-        self.assertEqual(set(payload["blocked_geos"]), {"PL", "NL"})
-        self.assertEqual(payload["n8n_geos"], [])
-        self.assertEqual(payload["n8n_skip_reason"], "all_geos_held")
+        self.assertEqual(payload["blocked_geos"], [])
+        self.assertEqual(set(payload["n8n_geos"]), {"NL", "PL"})
+        self.assertIsNone(payload["n8n_skip_reason"])
 
-    def test_mixed_batch_sends_only_ready_geos(self) -> None:
+    def test_mixed_batch_sends_every_requested_geo(self) -> None:
         jobs = multiply.multiply(analysis=self.analysis, geos=["PL", "CA-EN"], cta_ids=["play_now"])
         payload = multiply.summary_payload(self.analysis, jobs)
-        self.assertEqual(payload["ready_geos"], ["CA-EN"])
-        self.assertEqual(payload["blocked_geos"], ["PL"])
-        self.assertEqual(payload["n8n_geos"], ["CA-EN"])
+        self.assertEqual(set(payload["ready_geos"]), {"CA-EN", "PL"})
+        self.assertEqual(payload["blocked_geos"], [])
+        self.assertEqual(set(payload["n8n_geos"]), {"CA-EN", "PL"})
         self.assertIsNone(payload["n8n_skip_reason"])
 
     def test_it_and_cz_use_local_cta(self) -> None:

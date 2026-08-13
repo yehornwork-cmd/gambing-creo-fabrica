@@ -91,7 +91,7 @@ Bottlenecks they name that we already feel: TTS, Drive fetch of the master, QC, 
 - **NL:** untargeted gambling ads banned; digital ads must prove **≥95% of reached audience is 24+**; operator is liable for affiliates; no celebrity/influencer talent ([KSA leidraad Mar 2026](https://kansspelautoriteit.nl/sites/default/files/2026-03/Leidraad%20verbod%20op%20ongerichte%20reclame.pdf), [gamingcompliance.io](https://gamingcompliance.io/ksa-advertising-rules-in-the-netherlands-the-phased-restrictions-and-what-licence-holders-must-do-now/)). Forge listing NL as a default GEO is a product risk.
 - **PL:** private online casino/slots advertising is not a normal affiliate lane; state-monopoly / betting-only ([Softswiss](https://www.softswiss.com/news/affiliate-marketing-trends-igaming-promotion-europe/)). Constructor `pl` pack stays placeholder.
 
-Multiply should **block** NL/PL slot ads unless a human sets `compliance.allow = true` for a licensed operator brief.
+Multiply does **not** block NL/PL — the generator is performance UA only. Compliance review is a later step.
 
 ## Recommended wiring (no new SaaS required for v1)
 

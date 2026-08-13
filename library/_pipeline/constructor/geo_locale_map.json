@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "notes": "Forge buyer geo codes → constructor locale + copy pack. gate=restricted jobs are status=blocked unless multiply(..., compliance_allow=True). n8n_geos lists only ready geos — an all-hold batch must not call the farm.",
+  "notes": "Forge buyer geo codes → constructor locale + copy pack. gate flags are annotations for a later compliance review — the generator does not block jobs.",
   "geos": {
     "NL": {
       "locale": "nl",

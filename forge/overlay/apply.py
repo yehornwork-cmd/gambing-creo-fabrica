@@ -33,13 +33,9 @@ export async function submitRun(
     .bind(runId, user.id, input.master_url, JSON.stringify(input.geos), input.product ?? "", input.intent ?? "", input.tone ?? "", t)
     .run();
 
-  const restricted = new Set(["NL", "PL"]);
   let analysis: Record<string, unknown> | null = null;
   let multiplyNotice = "";
-  let n8nGeos = input.geos.filter((g) => !restricted.has(g));
-  let skipN8n = n8nGeos.length === 0;
-  let blockedGeos: string[] = input.geos.filter((g) => restricted.has(g));
-  let multiply: Record<string, unknown> | null = null;
+  let n8nGeos = input.geos;
   try {
     const plan = await triggerBuyerMultiply({
       master_url: input.master_url,
@@ -51,22 +47,19 @@ export async function submitRun(
     if (plan) {
       analysis = plan.analysis ?? null;
       const summary = (plan.summary ?? {}) as Record<string, unknown>;
-      const readyGeos = Array.isArray(summary.ready_geos) ? (summary.ready_geos as string[]) : [];
-      blockedGeos = Array.isArray(summary.blocked_geos) ? (summary.blocked_geos as string[]) : blockedGeos;
       const planned = Array.isArray(summary.n8n_geos) ? (summary.n8n_geos as string[]) : [];
-      n8nGeos = planned.length ? planned : readyGeos;
-      skipN8n = n8nGeos.length === 0;
-      multiply = {
+      if (planned.length > 0) n8nGeos = planned;
+      else if (Array.isArray(summary.geos) && (summary.geos as string[]).length) n8nGeos = summary.geos as string[];
+      const multiply = {
         analysis_id: plan.analysis_id,
         jobs: summary.jobs ?? plan.jobs?.length ?? 0,
         ready_jobs: summary.ready_jobs,
         blocked_jobs: summary.blocked_jobs,
         job_ids: summary.job_ids,
         geos: summary.geos,
-        ready_geos: readyGeos,
-        blocked_geos: blockedGeos,
+        ready_geos: summary.ready_geos,
+        blocked_geos: summary.blocked_geos,
         n8n_geos: n8nGeos,
-        n8n_skip_reason: skipN8n ? "all_geos_held" : null,
         ctas: summary.ctas,
         format: summary.format,
         duration_sec: summary.duration_sec,
@@ -81,44 +74,10 @@ export async function submitRun(
       const beats = Array.isArray((analysis as { beats?: unknown[] } | null)?.beats)
         ? (analysis as { beats: unknown[] }).beats.length
         : 0;
-      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План: ${String(summary.ready_jobs ?? multiply.jobs)} к рендеру`;
-      if (blockedGeos.length) {
-        multiplyNotice += `, hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow)`;
-      }
-      multiplyNotice += ". ";
+      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План: ${String(summary.ready_jobs ?? multiply.jobs)} к рендеру. `;
     }
   } catch {
-    multiplyNotice = "Разбор не успел за отведённое время — фабрика локализует только открытые GEO. ";
-  }
-
-  if (skipN8n) {
-    const holdReport = {
-      готово: 0,
-      отсеяно: blockedGeos.length || input.geos.length,
-      гео_отсеяно: (blockedGeos.length ? blockedGeos : input.geos).map((g) => ({
-        гео: g,
-        этап: "hold",
-        причина: "licensed operator / compliance.allow",
-      })),
-      analysis,
-      multiply,
-    };
-    await db()
-      .prepare("UPDATE runs SET status='done', report_json=?1, error=NULL, summary=?2, finished_at=?3 WHERE id=?4")
-      .bind(
-        JSON.stringify(holdReport),
-        `0/${blockedGeos.length || input.geos.length}`,
-        nowIso(),
-        runId,
-      )
-      .run();
-    const row = await fetchRunRow(runId);
-    return {
-      run: runToSummary(row),
-      notice:
-        multiplyNotice +
-        "Рендер не запущен: нет открытых GEO. Выберите CA-EN, AU, IT или CH-DE. NL и PL — только с licensed operator.",
-    };
+    multiplyNotice = "Разбор не успел за отведённое время — фабрика всё равно локализует мастер. ";
   }
 
   void triggerRun({
@@ -208,14 +167,21 @@ def main() -> int:
         if old_update not in text:
             raise SystemExit("applyReportToRun update marker missing")
         text = text.replace(old_update, new_update, 1)
-    hold_throw_old = 'if (runs.length === 0) throw new ApiError("ALL_GEOS_BLOCKED");'
-    hold_throw_new = (
-        'if (runs.length === 0) throw new ApiError('
-        '"PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");'
+    text = text.replace(
+        "const waveGeos = waves[w].filter((g) => !blockedGeos.includes(g));",
+        "const waveGeos = waves[w];",
+        1,
     )
-    if hold_throw_old in text:
-        text = text.replace(hold_throw_old, hold_throw_new, 1)
-        print("patched submitOrder hold message")
+    text = text.replace(
+        'if (runs.length === 0) throw new ApiError("ALL_GEOS_BLOCKED");',
+        'if (runs.length === 0) throw new ApiError("NO_GEOS");',
+        1,
+    )
+    text = text.replace(
+        'if (runs.length === 0) throw new ApiError("PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");',
+        'if (runs.length === 0) throw new ApiError("NO_GEOS");',
+        1,
+    )
     data.write_text(text, encoding="utf-8")
     print("patched data.ts")
 
@@ -298,46 +264,45 @@ def main() -> int:
               небольшое число рынков за раз; большие батчи уходят в работу и файлы публикуются в
               Google Drive.""",
         """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
-              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.
-              NL и PL на hold без licensed operator — для проверки берите CA-EN, AU, IT или CH-DE.""",
+              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.""",
         1,
     )
     g = g.replace(
+        """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
+              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.
+              NL и PL на hold без licensed operator — для проверки берите CA-EN, AU, IT или CH-DE.""",
         """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
               на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.""",
-        """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
-              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.
-              NL и PL на hold без licensed operator — для проверки берите CA-EN, AU, IT или CH-DE.""",
         1,
     )
     g = g.replace(
-        '{g.code === "GULF-EN" ? "Gulf" : g.code}',
         '{g.code === "GULF-EN" ? "Gulf" : g.code}{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
+        '{g.code === "GULF-EN" ? "Gulf" : g.code}',
         1,
     )
     g = g.replace(
-        """    if (selected.length === 0) {
-      setErr("Выберите хотя бы один рынок.");
-      return;
-    }""",
-        """    if (selected.length === 0) {
-      setErr("Выберите хотя бы один рынок.");
-      return;
-    }
-    if (selected.every(([code]) => code === "NL" || code === "PL")) {
+        """    if (selected.every(([code]) => code === "NL" || code === "PL")) {
       setErr("PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");
       return;
-    }""",
-        1,
+    }
+""",
+        "",
     )
+    while "PL и NL на hold без licensed operator" in g:
+        # leftover copies from a previous apply
+        start = g.find("    if (selected.every(([code]) => code === \"NL\" || code === \"PL\")) {")
+        if start < 0:
+            break
+        end = g.find("    }", start)
+        if end < 0:
+            break
+        g = g[:start] + g[end + len("    }\n") :]
     g = g.replace(
-        """        error instanceof ApiError
-          ? error.message
-          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
-        """        error instanceof ApiError
-          ? error.message === "ALL_GEOS_BLOCKED" || error.code === "ALL_GEOS_BLOCKED"
+        """          ? error.message === "ALL_GEOS_BLOCKED" || error.code === "ALL_GEOS_BLOCKED"
             ? "PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE."
             : error.message
+          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
+        """          ? error.message
           : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
         1,
     )

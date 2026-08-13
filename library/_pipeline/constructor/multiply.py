@@ -133,7 +133,7 @@ def multiply(
     constructor_dir: Path | None = None,
     repo_root: Path | None = None,
     cta_ids: list[str] | None = None,
-    compliance_allow: bool = False,
+    compliance_allow: bool = False,  # noqa: ARG001 — kept for API compat; geos are not gated
 ) -> list[dict[str, Any]]:
     constructor_dir = constructor_dir or CONSTRUCTOR_DIR
     repo_root = repo_root or REPO_ROOT
@@ -198,9 +198,11 @@ def multiply(
             job["render"]["variables"]["name"] = job["job_id"]
             job["render"]["variables"]["parent_creative_id"] = parent_id
             job["render"]["variables"]["forge_geo"] = geo_row["id"]
-            if geo_row.get("gate") == "restricted" and not compliance_allow:
-                job["status"] = "blocked"
-                job["blocked_reason"] = geo_row.get("gate_reason") or "geo_restricted"
+            # GEO compliance is a later review step. The generator ships every
+            # requested market — performance UA creatives are not gated here.
+            if geo_row.get("gate"):
+                job["compliance_gate"] = geo_row.get("gate")
+                job["compliance_gate_reason"] = geo_row.get("gate_reason") or ""
             jobs.append(job)
     bonus_in_source = bool((analysis.get("vlm") or {}).get("has_bonus_footage"))
     return lint.lint_jobs(jobs, bonus_in_source=bonus_in_source)
@@ -224,8 +226,9 @@ def summary_payload(analysis: dict[str, Any], jobs: list[dict[str, Any]]) -> dic
         "ready_geos": sorted({geo_of(job) for job in ready}),
         "blocked_geos": sorted({geo_of(job) for job in blocked}),
         "ctas": sorted({job["cta_id"] for job in jobs}),
-        "n8n_geos": sorted({geo_of(job) for job in ready}),
-        "n8n_skip_reason": "all_geos_held" if jobs and not ready else None,
+        "n8n_geos": sorted({geo_of(job) for job in ready})
+        or sorted({geo_of(job) for job in jobs}),
+        "n8n_skip_reason": None,
     }
 
 
@@ -233,7 +236,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Explode a CreativeAnalysis into locale × CTA CreativeJobs.")
     parser.add_argument("--analysis", type=Path, required=True, help="Path to CreativeAnalysis JSON")
     parser.add_argument("--geos", required=True, help="Comma-separated Forge geo codes (PL,NL,...)")
-    parser.add_argument("--allow", action="store_true", help="Set compliance.allow for restricted geos (NL/PL)")
+    parser.add_argument("--allow", action="store_true", help="Kept for API compat; generator does not gate geos")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--dry-run", action="store_true")
     return parser
