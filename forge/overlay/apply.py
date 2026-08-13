@@ -280,6 +280,11 @@ def main() -> int:
         if marker not in r:
             raise SystemExit("run-result marker missing")
         r = r.replace(marker, extra, 1)
+    if '{v.status === "blocked"' not in r:
+        r = r.replace(
+            "{v.geo} · {v.cta_main || v.cta_id}",
+            '{v.geo} · {v.cta_main || v.cta_id}{v.status === "blocked" ? " · hold" : ""}',
+        )
     result.write_text(r, encoding="utf-8")
     print("patched run-result.tsx")
 
