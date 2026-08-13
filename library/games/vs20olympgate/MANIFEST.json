@@ -15,7 +15,7 @@
   },
   "capture_status": {
     "bonus_triggered": false,
-    "recapture_needed": true,
-    "note": "50-spin session \u2014 no FS trigger. See gameplay/game_analysis_v3.json"
+    "recapture_needed": false,
+    "note": "Demo capture retired. FS/bonus beats come from YouTube/Kick/Twitch VOD analysis."
   }
 }

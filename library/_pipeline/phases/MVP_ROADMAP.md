@@ -25,11 +25,11 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ---
 
-## P2 — Capture integration
+## P2 — VOD analysis (no demo capture)
 
-| ID | Chunk | Acceptance | Blocker |
-|----|-------|------------|---------|
-| P2.1 | Capture client | `tools/capture_client.py` + env docs | `CAPTURE_API_TOKEN` for live jobs |
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| P2.1 | YouTube / Kick / Twitch sources | Worker tick uses `platforms=youtube,kick,twitch`; `/jobs/capture` removed |
 
 ---
 

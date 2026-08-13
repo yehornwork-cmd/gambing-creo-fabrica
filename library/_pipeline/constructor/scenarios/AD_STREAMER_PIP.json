@@ -11,8 +11,8 @@
   "format_variant": "streamer_pip",
   "hook_id_default": "dual_track",
   "notes": "Promote context/gates-of-olympus/build_draft_vod_youtube_vs20olympgate_Axv9FBmoNvc.json when streamer_corpus assets land.",
-  "capture_requirements": {
-    "bonus_triggered": false,
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
     "honest_vo": true,
     "streamer_corpus": true
   },

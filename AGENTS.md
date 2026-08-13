@@ -22,7 +22,7 @@ Scale work (`F0`–`F5`) lives in `library/_pipeline/phases/FACTORY_SCALE.md` an
 | `library/_pipeline/` | Orchestrator, MVP + Factory Scale roadmaps, run logs |
 | `library/_pipeline/constructor/` | CreativeJob schema, scenario catalog, variant matrix, exploder |
 | `hyperframes/` | Renderable HyperFrames projects |
-| `tools/` | Helper scripts (path normalizer, capture client) |
+| `tools/` | Helper scripts (path normalizer) |
 | `context/` | Staging area — migrate into `library/` then deprecate |
 | `output/` | Render previews (promote to `hyperframes/` when approved) |
 | `n8n/` | Automation workflow JSONs |
@@ -40,25 +40,18 @@ Scale work (`F0`–`F5`) lives in `library/_pipeline/phases/FACTORY_SCALE.md` an
 
 | Blocker | Env / decision needed |
 |---------|----------------------|
-| Capture jobs | `CAPTURE_API_TOKEN` for Hetzner worker (`65.108.48.54:8787`) |
 | Compliance copy | GEO-specific disclaimers, 18+ text, CTA legality |
 | Ambiguous business reqs | Target GEO, brand voice, budget caps |
 
 Everything else: make a reasonable default, document the assumption in the run log, and ship.
 
+## Material sources
+
+Demo-game capture is retired. Gameplay and streamer beats come from **YouTube / Kick / Twitch VOD analysis** on Hetzner (`POST /jobs/youtube/tick` with `platforms: "youtube,kick,twitch"`). See [VOD_SOURCES.md](library/_pipeline/VOD_SOURCES.md). Do not fabricate bonus/FS claims that are not in an analyzed clip.
+
 ## Ad intelligence (SpyTrend)
 
 When a chunk tags `spytrend`, query SpyTrend MCP for competitor vertical ads (Meta archive is fine on demo tier). Save a markdown snapshot to the run log — do not block the chunk on paid media fetches.
-
-## Capture upgrade path
-
-When `bonus_triggered: false` in analysis, note `recapture_needed` in the run log. Do not fabricate FS footage. Re-capture via:
-
-```bash
-curl -s -X POST http://65.108.48.54:8787/jobs/capture \
-  -H "Authorization: Bearer $CAPTURE_API_TOKEN" \
-  -d '{"game_id":"vs20olympgate","spins":80}'
-```
 
 ## Git workflow
 

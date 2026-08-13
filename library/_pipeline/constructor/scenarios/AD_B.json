@@ -11,13 +11,11 @@
   "hook_id_default": "motion_cold_open",
   "brief": "library/games/vs20olympgate/briefs/pilot-ad-v3/BRIEF.md",
   "trim_map": "library/games/vs20olympgate/gameplay/pilot_ad_trim_map_v2.json",
-  "capture_requirements": {
-    "bonus_triggered": true,
+  "source_requirements": {
+    "platforms": ["youtube", "kick", "twitch"],
     "honest_vo": true,
-    "current_capture": {
-      "bonus_triggered": false,
-      "note": "50-spin session — no FS. Partial AD_B only. Do not VO a bonus trigger."
-    }
+    "bonus_in_vod": false,
+    "note": "Partial AD_B — no verified FS clip in corpus. Do not VO a bonus trigger."
   },
   "blocked_claims": [
     "guaranteed_win",
@@ -72,7 +70,7 @@
       "vo_key": "vo_b04",
       "band_title_key": "band_b04_title",
       "band_copy_key": "band_b04_copy",
-      "notes": "Visual orb only. Do not claim free spins until recapture has FS footage."
+      "notes": "Visual orb only. Do not claim free spins until a VOD clip has FS footage."
     },
     {
       "beat_id": "B05",

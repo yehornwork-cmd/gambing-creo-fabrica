@@ -20,7 +20,7 @@ compliance_layer: user
 
 30s vertical perf ad assembled from **verified HQ screencast segments**. v3 replaces ffmpeg-only v2 with HyperFrames for overlays, VO sync, and variant iteration.
 
-**Blocker for full AD_B:** current capture has no FS trigger (`bonus_triggered: false`). This cut uses available segments and honest VO — same constraint as pilot v2 audit.
+**Blocker for full AD_B:** no verified FS clip in the VOD corpus yet. This cut uses available segments and honest VO.
 
 ## Assets
 
@@ -41,15 +41,9 @@ compliance_layer: user
 - End card: logo + CTA + 18+ disclaimer from `compliance.json` geo packs (`ru`, `pl` placeholders — user validates before paid media).
 - Beat list: `gameplay/pilot_ad_scenario.md` → constructor `scenarios/AD_B.json`
 
-## Capture upgrade (when ready)
+## VOD upgrade (when ready)
 
-Re-capture on Hetzner with 80+ spins or Ante Bet until `bonus_triggered: true`, then replace B03–B05 with FS segments and unlock full AD_B arc.
-
-```bash
-curl -s -X POST http://capture-worker:8787/jobs/capture \
-  -H "Authorization: Bearer $TOKEN" \
-  -d '{"game_id":"vs20olympgate","spins":80}'
-```
+Pull a YouTube / Kick / Twitch bonus session via Hetzner `POST /jobs/youtube/tick`, then substitute B03–B05 from analyzed clips. Do not recapture a Pragmatic demo.
 
 ## Run shape
 

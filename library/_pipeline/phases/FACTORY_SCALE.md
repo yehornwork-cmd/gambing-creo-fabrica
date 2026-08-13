@@ -26,11 +26,11 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 
 ---
 
-## F2 — Capture inventory
+## F2 — VOD inventory
 
-| ID | Chunk | Acceptance | Blocker |
-|----|-------|------------|---------|
-| F2.1 | Capture client + FS recapture | `tools/capture_client.py`; `bonus_triggered: true` in analysis | `CAPTURE_API_TOKEN` |
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F2.1 | YouTube + Kick + Twitch discover | Tick discovers/fetches from all three platforms; bonus/FS beats come from analyzed clips, not demo recapture |
 
 ---
 
@@ -60,4 +60,4 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 
 ## Current focus
 
-Constructor v0 (F0.1). Next scale chunk: F1.1 — actually render the 4-job batch. GEO copy and capture tokens remain human blockers and must not stall the constructor.
+Constructor v0 (F0.1). Next scale chunk: F1.1 — actually render the 4-job batch. Demo capture is retired; material is YouTube / Kick / Twitch VODs.
