@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gambing-creo-fabrica.local/schema/creative_analysis.json",
+  "title": "CreativeAnalysis",
+  "description": "Fast structural read of a buyer-uploaded master. Feeds multiply() so Forge can explode locale × CTA jobs before the n8n render farm finishes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "analysis_id",
+    "schema_version",
+    "source",
+    "probe",
+    "format",
+    "game_id",
+    "scenario_id",
+    "beats",
+    "status"
+  ],
+  "properties": {
+    "analysis_id": { "type": "string", "minLength": 8 },
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "parent_creative_id": { "type": ["string", "null"] },
+    "source": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["upload", "url", "library"] },
+        "path": { "type": "string" },
+        "url": { "type": ["string", "null"] },
+        "original_name": { "type": ["string", "null"] }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "required": ["duration_sec", "width", "height"],
+      "properties": {
+        "duration_sec": { "type": "number" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "fps": { "type": "number" },
+        "has_audio": { "type": "boolean" },
+        "aspect": { "type": "string" }
+      }
+    },
+    "format": { "type": "string", "enum": ["9x16", "1x1", "16x9"] },
+    "game_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "product": { "type": "string" },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["beat_id", "t_start", "t_end", "substitution_group"],
+        "properties": {
+          "beat_id": { "type": "string" },
+          "name": { "type": "string" },
+          "t_start": { "type": "number" },
+          "t_end": { "type": "number" },
+          "duration_sec": { "type": "number" },
+          "arc_slot_id": { "type": "string" },
+          "substitution_group": { "type": "string" },
+          "taxonomy_tags": { "type": "array", "items": { "type": "string" } },
+          "source": { "type": "string", "enum": ["heuristic", "signals", "vlm"] }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["probed", "heuristic", "signals", "ready"]
+    },
+    "notes": { "type": "string" }
+  }
+}

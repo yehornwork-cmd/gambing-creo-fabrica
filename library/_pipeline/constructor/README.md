@@ -13,13 +13,27 @@ Default Gates matrix: `ru+pl × 9x16 × 2 CTAs` with geo locked to locale → **
 ```
 constructor/
 ├── schema/creative_job.schema.json   # CreativeJob + lineage
+├── schema/creative_analysis.schema.json
 ├── scenarios/                        # AD_B live; 5 catalog stubs
-├── locale_packs/                     # ru seed, pl placeholder
+├── locale_packs/                     # ru seed, pl placeholder, en fallback
+├── geo_locale_map.json               # Forge buyer geos → locale packs
 ├── ctas/catalog.json
 ├── variant_matrix.json               # axes + constraints
 ├── explode.py                        # 1 template → N jobs + HyperFrames batch
+├── analyze_upload.py                 # buyer master → CreativeAnalysis (ffprobe)
+├── multiply.py                       # analysis × geos → jobs with parent_creative_id
 └── jobs/                             # generated CreativeJobs + batch.json
 ```
+
+## Buyer multiply (Forge)
+
+```bash
+python3 library/_pipeline/constructor/analyze_upload.py --video /path/master.mp4 --out /tmp/analysis.json
+python3 library/_pipeline/constructor/multiply.py --analysis /tmp/analysis.json --geos PL,NL --dry-run
+python3 library/_pipeline/constructor/test_multiply.py
+```
+
+See [BUYER_LOOP.md](../BUYER_LOOP.md). One uploaded winner × selected Forge geos × 2 CTAs. Footage stays the master; copy/CTA change.
 
 ## Explode
 
@@ -50,5 +64,5 @@ Required fields: `game_id`, `scenario_id`, `locale`, `geo`, `format`, `cta_id`, 
 
 - Not a render farm. HyperFrames `--batch` / Cloud Run is the farm; this emits rows.
 - Not TTS. Locale packs are overlay/VO strings only.
-- Not a live Ads winner loop. Tag `parent_creative_id` by hand until F5.
+- Not a live Ads winner loop. Buyer uploads set `parent_creative_id` (F6.1); substitution-group clones are still F5.1.
 - Not demo-game capture. Footage comes from YouTube / Kick / Twitch VOD analysis.

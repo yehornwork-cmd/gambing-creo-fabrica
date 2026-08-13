@@ -58,6 +58,14 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 
 ---
 
+## F6 — Buyer loop (forge.vizioner.xyz)
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F6.1 | Upload → analyze → multiply plan | Buyer master on Forge is probed, beats are mapped, locale × CTA jobs land in `<10s`; n8n still renders MP4s |
+
+---
+
 ## Current focus
 
-Constructor v0 (F0.1). Next scale chunk: F1.1 — actually render the 4-job batch. Demo capture is retired; material is YouTube / Kick / Twitch VODs.
+F6.1 buyer loop on `forge.vizioner.xyz`. Constructor explode (F0.1) and VOD sources (F2.1) are in. Next after F6.1: F1.1 HyperFrames batch render of the 4-job Gates matrix.

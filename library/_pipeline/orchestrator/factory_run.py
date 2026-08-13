@@ -219,7 +219,7 @@ def main() -> int:
         "--roadmap",
         choices=sorted(ROADMAPS),
         default="mvp",
-        help="Which roadmap to advance (default: mvp). Use 'scale' for F0–F5.",
+        help="Which roadmap to advance (default: mvp). Use 'scale' for F0–F6.",
     )
     p_tick.set_defaults(func=cmd_tick)
 
