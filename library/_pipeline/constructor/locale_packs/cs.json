@@ -1,0 +1,22 @@
+{
+  "locale": "cs",
+  "status": "fallback",
+  "notes": "Czech overlay/VO for CZ. n8n may still rewrite market VO.",
+  "variables": {
+    "vo_b01": "Gates of Olympus. Sázka 2 €. Jdeme na to.",
+    "vo_b02": "Kaskáda! Symboly pořád padají…",
+    "vo_b03": "Dva scatter… ještě dva a je bonus.",
+    "vo_b04": "Orb! Násobitel na poli…",
+    "vo_b05": "To je kaskáda — sleduj násobitel.",
+    "band_b01_title": "GATES OF OLYMPUS",
+    "band_b01_copy": "Sázka 2,00 € · Jdeme na to.",
+    "band_b02_title": "KASKÁDA",
+    "band_b02_copy": "Symboly padají… napětí stoupá.",
+    "band_b03_title": "SCATTER TEASE",
+    "band_b03_copy": "Dva scatter… ještě dva do bonusu.",
+    "band_b04_title": "MULTIPLIER",
+    "band_b04_copy": "Orb na poli · násobitele se sčítají.",
+    "band_b05_title": "WIN CLIMAX",
+    "band_b05_copy": "Výhra na obrazovce — brány jsou otevřené."
+  }
+}

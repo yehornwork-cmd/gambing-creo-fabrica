@@ -46,7 +46,7 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 
 | ID | Chunk | Acceptance |
 |----|-------|------------|
-| F4.1 | Lint + compliance + sample review | Batch jobs fail on `blocked_claims`; human reviews a sample, not every render |
+| F4.1 | Lint + compliance + sample review | Batch jobs fail on `blocked_claims`; NL/PL buyer geos are `status: blocked` unless `compliance.allow`; human reviews a sample, not every render |
 
 ---
 
@@ -63,9 +63,10 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 | ID | Chunk | Acceptance |
 |----|-------|------------|
 | F6.1 | Upload → analyze → multiply plan | Buyer master on Forge is probed, beats are mapped, locale × CTA jobs land in `<10s`; n8n still renders MP4s |
+| F6.2 | Deep Gemini + GEO hold | Async `buyer_deep` rewrites heuristic beats via Gemini native video. GEO hold is deferred — generator ships all requested markets |
 
 ---
 
 ## Current focus
 
-F6.1 buyer loop on `forge.vizioner.xyz`. Constructor explode (F0.1) and VOD sources (F2.1) are in. Next after F6.1: F1.1 HyperFrames batch render of the 4-job Gates matrix.
+F1.1 HyperFrames `--batch` of the 4-job Gates matrix is proven on Node 22 (`render_batch.py`). Live Hetzner host is still Node 18 — buyer MP4s stay on n8n + forge-renderer until the render host is upgraded.

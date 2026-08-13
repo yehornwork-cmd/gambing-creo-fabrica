@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "updated_at": "2026-08-13",
-  "notes": "AD_B is the only live scenario. Remaining entries are catalog slots so the variant matrix is explicit before footage exists.",
+  "notes": "AD_B is the default 18s+ arc. AD_HOOK_ONLY (<8s) and AD_MECHANIC_SHOWCASE (8–18s) are live partial templates. Remaining entries stay stubs until footage exists.",
   "scenarios": [
     {
       "scenario_id": "AD_B",
@@ -13,16 +13,16 @@
     {
       "scenario_id": "AD_HOOK_ONLY",
       "name": "Hook only",
-      "status": "stub",
+      "status": "partial",
       "file": "AD_HOOK_ONLY.json",
-      "game_id": null
+      "game_id": "vs20olympgate"
     },
     {
       "scenario_id": "AD_MECHANIC_SHOWCASE",
       "name": "Mechanic showcase",
-      "status": "stub",
+      "status": "partial",
       "file": "AD_MECHANIC_SHOWCASE.json",
-      "game_id": null
+      "game_id": "vs20olympgate"
     },
     {
       "scenario_id": "AD_BONUS_PAYOFF",

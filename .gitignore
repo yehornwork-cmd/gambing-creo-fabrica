@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 library/_pipeline/buyer_uploads/
+output/renders/
 .env
 .env.*
 !.env.example

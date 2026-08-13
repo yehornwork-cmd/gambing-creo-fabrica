@@ -35,6 +35,7 @@ export async function submitRun(
 
   let analysis: Record<string, unknown> | null = null;
   let multiplyNotice = "";
+  let n8nGeos = input.geos;
   try {
     const plan = await triggerBuyerMultiply({
       master_url: input.master_url,
@@ -46,11 +47,19 @@ export async function submitRun(
     if (plan) {
       analysis = plan.analysis ?? null;
       const summary = (plan.summary ?? {}) as Record<string, unknown>;
+      const planned = Array.isArray(summary.n8n_geos) ? (summary.n8n_geos as string[]) : [];
+      if (planned.length > 0) n8nGeos = planned;
+      else if (Array.isArray(summary.geos) && (summary.geos as string[]).length) n8nGeos = summary.geos as string[];
       const multiply = {
         analysis_id: plan.analysis_id,
         jobs: summary.jobs ?? plan.jobs?.length ?? 0,
+        ready_jobs: summary.ready_jobs,
+        blocked_jobs: summary.blocked_jobs,
         job_ids: summary.job_ids,
         geos: summary.geos,
+        ready_geos: summary.ready_geos,
+        blocked_geos: summary.blocked_geos,
+        n8n_geos: n8nGeos,
         ctas: summary.ctas,
         format: summary.format,
         duration_sec: summary.duration_sec,
@@ -65,7 +74,7 @@ export async function submitRun(
       const beats = Array.isArray((analysis as { beats?: unknown[] } | null)?.beats)
         ? (analysis as { beats: unknown[] }).beats.length
         : 0;
-      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План размножения: ${String(multiply.jobs)} вариантов. `;
+      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План: ${String(summary.ready_jobs ?? multiply.jobs)} к рендеру. `;
     }
   } catch {
     multiplyNotice = "Разбор не успел за отведённое время — фабрика всё равно локализует мастер. ";
@@ -73,7 +82,7 @@ export async function submitRun(
 
   void triggerRun({
     master_url: input.master_url,
-    geos: input.geos,
+    geos: n8nGeos,
     product: input.product,
     intent: input.intent,
     tone: input.tone,
@@ -119,7 +128,15 @@ def main() -> int:
             1,
         )
     start = text.find("export async function submitRun(")
-    end = text.find("// ---------- Библиотека ----------")
+    end = -1
+    for marker in (
+        "\n// ---------- Пакетный заказ",
+        "\nexport async function submitOrder(",
+        "\n// ---------- Библиотека ----------",
+    ):
+        i = text.find(marker, start + 1)
+        if i >= 0 and (end < 0 or i < end):
+            end = i
     if start < 0 or end < 0:
         raise SystemExit("submitRun block not found")
     text = text[:start] + SUBMIT_RUN.strip() + "\n\n" + text[end:]
@@ -150,6 +167,41 @@ def main() -> int:
         if old_update not in text:
             raise SystemExit("applyReportToRun update marker missing")
         text = text.replace(old_update, new_update, 1)
+    text = text.replace(
+        "const waveGeos = waves[w].filter((g) => !blockedGeos.includes(g));",
+        "const waveGeos = waves[w];",
+    )
+    text = text.replace(
+        """      if (readyGeos.length > 0) n8nGeos = readyGeos;
+      else if (planned.length > 0) n8nGeos = planned;""",
+        """      if (planned.length > 0) n8nGeos = planned;
+      else if (readyGeos.length > 0) n8nGeos = readyGeos;
+      else if (Array.isArray(summary.geos) && (summary.geos as string[]).length) n8nGeos = summary.geos as string[];""",
+    )
+    text = text.replace(
+        """      if (blockedGeos.length) {
+        multiplyNotice += `, hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow)`;
+      }
+""",
+        "",
+    )
+    text = text.replace(
+        """      if (blockedGeos.length) {
+        notice += `Hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow). `;
+      }
+""",
+        "",
+    )
+    text = text.replace(
+        'if (runs.length === 0) throw new ApiError("ALL_GEOS_BLOCKED");',
+        'if (runs.length === 0) throw new ApiError("NO_GEOS");',
+        1,
+    )
+    text = text.replace(
+        'if (runs.length === 0) throw new ApiError("PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");',
+        'if (runs.length === 0) throw new ApiError("NO_GEOS");',
+        1,
+    )
     data.write_text(text, encoding="utf-8")
     print("patched data.ts")
 
@@ -184,6 +236,8 @@ def main() -> int:
     duration_sec?: number;
     beats?: number;
     deep_job_id?: string | null;
+    n8n_geos?: string[];
+    n8n_skip_reason?: string | null;
     variants?: {
       job_id: string;
       geo?: string;
@@ -193,6 +247,7 @@ def main() -> int:
       status?: string;
       cta_main?: string;
       disclaimer?: string;
+      blocked_reason?: string | null;
     }[];
   } | null;
 };"""
@@ -232,6 +287,44 @@ def main() -> int:
               на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.""",
         1,
     )
+    g = g.replace(
+        """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
+              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.
+              NL и PL на hold без licensed operator — для проверки берите CA-EN, AU, IT или CH-DE.""",
+        """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
+              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.""",
+        1,
+    )
+    g = g.replace(
+        '{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
+        "",
+    )
+    g = g.replace(
+        """    if (selected.every(([code]) => code === "NL" || code === "PL")) {
+      setErr("PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE.");
+      return;
+    }
+""",
+        "",
+    )
+    while "PL и NL на hold без licensed operator" in g:
+        # leftover copies from a previous apply
+        start = g.find("    if (selected.every(([code]) => code === \"NL\" || code === \"PL\")) {")
+        if start < 0:
+            break
+        end = g.find("    }", start)
+        if end < 0:
+            break
+        g = g[:start] + g[end + len("    }\n") :]
+    g = g.replace(
+        """          ? error.message === "ALL_GEOS_BLOCKED" || error.code === "ALL_GEOS_BLOCKED"
+            ? "PL и NL на hold без licensed operator. Снимите их и выберите CA-EN, AU, IT или CH-DE."
+            : error.message
+          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
+        """          ? error.message
+          : "Не удалось запустить заказ. Проверьте мастер-видео и повторите.",""",
+        1,
+    )
     gen.write_text(g, encoding="utf-8")
     print("patched generate.tsx")
 
@@ -254,7 +347,7 @@ def main() -> int:
           <div className="mt-2 flex flex-wrap gap-1.5">
             {run.report.multiply.variants.slice(0, 12).map((v) => (
               <span key={v.job_id} className="rounded-full border border-line bg-ink2 px-2 py-0.5 text-[11px] text-t2">
-                {v.geo} · {v.cta_main || v.cta_id}
+                {v.geo} · {v.cta_main || v.cta_id}{v.status === "blocked" ? " · hold" : ""}
               </span>
             ))}
           </div>
@@ -264,6 +357,11 @@ def main() -> int:
         if marker not in r:
             raise SystemExit("run-result marker missing")
         r = r.replace(marker, extra, 1)
+    if '{v.status === "blocked"' not in r:
+        r = r.replace(
+            "{v.geo} · {v.cta_main || v.cta_id}",
+            '{v.geo} · {v.cta_main || v.cta_id}{v.status === "blocked" ? " · hold" : ""}',
+        )
     result.write_text(r, encoding="utf-8")
     print("patched run-result.tsx")
 

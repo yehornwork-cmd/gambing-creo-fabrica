@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "notes": "Equivalent footage per substitution_group. Buyer uploads keep the master; VOD clones swap segment_id only. Add real clip paths when the corpus tags them.",
+  "groups": {
+    "motion_hook": [
+      { "segment_id": "seg_v2_motion_hook", "source": "library", "notes": "pilot trim map" },
+      { "segment_id": "seg_vod_hook_spin_press", "source": "vod", "notes": "alternate cold-open spin" }
+    ],
+    "tumble_chain": [
+      { "segment_id": "seg_v2_tumble_spin", "source": "library" },
+      { "segment_id": "seg_vod_tumble_cascade_01", "source": "vod" }
+    ],
+    "scatter_bonus_4": [
+      { "segment_id": "seg_v2_scatter_proxy", "source": "library", "notes": "2-scatter tease only" }
+    ],
+    "multiplier_orb": [
+      { "segment_id": "seg_v2_grid_full", "source": "library" }
+    ],
+    "win_climax": [
+      { "segment_id": "seg_v2_climax_proxy", "source": "library" },
+      { "segment_id": "seg_vod_win_highlight_01", "source": "vod" }
+    ],
+    "end_card": [
+      { "segment_id": "end_card_logo", "source": "asset" }
+    ]
+  }
+}

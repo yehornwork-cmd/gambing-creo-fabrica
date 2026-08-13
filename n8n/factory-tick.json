@@ -1,0 +1,39 @@
+{
+  "name": "Factory tick stub",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "factory-tick",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "factory-tick-stub"
+    },
+    {
+      "parameters": {
+        "command": "python3 library/_pipeline/orchestrator/factory_run.py tick --roadmap scale"
+      },
+      "id": "note",
+      "name": "Run on the library host (not in n8n Code)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [240, 0],
+      "notes": "P7.1 stub. Wire SSH/Execute Command to the Hetzner library host. Do not put secrets in jsCode. Auth: existing HTTP Header Auth (x-agent-os-key)."
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "note", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateCredsSetupCompleted": true },
+  "tags": [{ "name": "factory" }]
+}

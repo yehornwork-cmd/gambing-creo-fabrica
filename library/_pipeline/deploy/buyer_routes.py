@@ -19,6 +19,7 @@ class BuyerMultiplyRequest(BaseModel):
     deep_analyze: bool = True
     cta_ids: list[str] | None = None
     analysis_id: str | None = None
+    compliance_allow: bool = False
 
 
 def job_previews(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -35,6 +36,7 @@ def job_previews(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "status": job.get("status"),
                 "cta_main": variables.get("cta_main"),
                 "disclaimer": variables.get("disclaimer"),
+                "blocked_reason": job.get("blocked_reason"),
             }
         )
     return rows
@@ -64,6 +66,11 @@ def register(
                 {
                     "video_path": result["video_path"],
                     "analysis_id": result["analysis_id"],
+                    "geos": payload.geos,
+                    "cta_ids": payload.cta_ids,
+                    "compliance_allow": payload.compliance_allow,
+                    "product": payload.product,
+                    "game_id": payload.game_id,
                 },
             )
             deep_job_id = deep["job_id"]
@@ -74,4 +81,33 @@ def register(
             "summary": result["summary"],
             "jobs": job_previews(result.get("jobs") or []),
             "deep_job_id": deep_job_id,
+        }
+
+    @app.get("/jobs/buyer/{analysis_id}")
+    def buyer_analysis(
+        analysis_id: str,
+        _: None = Depends(verify_token),
+    ) -> dict[str, Any]:
+        from pathlib import Path
+        import json
+        import os
+
+        root = Path(os.environ.get("PIPELINE_ROOT", "/data/library/_pipeline")) / "buyer_uploads" / analysis_id
+        analysis_path = root / "analysis.json"
+        if not analysis_path.is_file():
+            raise HTTPException(status_code=404, detail="analysis not found")
+        analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+        summary = {}
+        if (root / "summary.json").is_file():
+            summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+        jobs = []
+        jobs_path = root / "jobs" / "jobs.json"
+        if jobs_path.is_file():
+            jobs = job_previews(json.loads(jobs_path.read_text(encoding="utf-8")))
+        return {
+            "status": "ok",
+            "analysis_id": analysis_id,
+            "analysis": analysis,
+            "summary": summary,
+            "jobs": jobs,
         }

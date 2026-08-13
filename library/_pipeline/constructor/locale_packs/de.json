@@ -1,0 +1,22 @@
+{
+  "locale": "de",
+  "status": "fallback",
+  "notes": "German overlay/VO strings for CH-DE. n8n may still rewrite market VO. Not a licensed-copy sign-off.",
+  "variables": {
+    "vo_b01": "Gates of Olympus. Einsatz 2 €. Los geht's.",
+    "vo_b02": "Kaskade! Die Symbole fallen weiter…",
+    "vo_b03": "Zwei Scatter… noch zwei, dann Bonus.",
+    "vo_b04": "Orb! Multiplikator auf dem Feld…",
+    "vo_b05": "Diese Kaskade — schau den Multiplikator.",
+    "band_b01_title": "GATES OF OLYMPUS",
+    "band_b01_copy": "Einsatz 2,00 € · Los geht's.",
+    "band_b02_title": "KASKADE",
+    "band_b02_copy": "Symbole fallen… Spannung steigt.",
+    "band_b03_title": "SCATTER TEASE",
+    "band_b03_copy": "Zwei Scatter… noch zwei bis Bonus.",
+    "band_b04_title": "MULTIPLIER",
+    "band_b04_copy": "Orb auf dem Feld · Multiplikatoren stapeln.",
+    "band_b05_title": "WIN CLIMAX",
+    "band_b05_copy": "Gewinn auf dem Screen — die Tore sind offen."
+  }
+}

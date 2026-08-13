@@ -2,6 +2,8 @@
 // Формат входа/выхода извлечён из воркфлоу «Фабрика креативов v3»:
 //   вход:  { master_url, layout_url?, geos[], product?, intent?, tone?, analysis? }
 //   выход: отчёт (готово/отсеяно/ссылки/прогон/отчёт_в_drive)
+// Раскладка только на своём сервере: forge-renderer POST /api/layout.
+// creative-localizer.vercel.app не используем.
 // ВАЖНО: n8n-вебхук принимает заголовок ТОЛЬКО строчными буквами (x-agent-os-key).
 import { bindings } from "./bindings.server";
 import type { RunReportShape } from "./types";
@@ -31,6 +33,7 @@ export type BuyerMultiplyResult = {
     status?: string;
     cta_main?: string;
     disclaimer?: string;
+    blocked_reason?: string | null;
   }>;
   deep_job_id?: string | null;
 };
