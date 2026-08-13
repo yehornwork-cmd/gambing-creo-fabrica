@@ -45,7 +45,25 @@ def shell_with_env(inner: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def run_enhancer(preset: dict[str, Any], brief: str, *, game_title: str, game_id: str) -> str:
+def load_competitor_hook(game_id: str) -> str:
+    intel = REPO_ROOT / "library" / "games" / game_id / "intelligence" / "spytrend_snapshot.md"
+    if not intel.is_file():
+        return "Use verified gameplay footage — avoid fake star-rating affiliate tropes."
+    for line in intel.read_text(encoding="utf-8").splitlines():
+        if line.startswith("1. **"):
+            return line.lstrip("1. ").strip()
+    return "Differentiate with authentic screencast + compliance end card."
+
+
+def run_enhancer(
+    preset: dict[str, Any],
+    brief: str,
+    *,
+    brief_source: str,
+    game_title: str,
+    game_id: str,
+    dry_run: bool = False,
+) -> str:
     flow = preset.get("enhancer_flow", "ugc-character")
     vars_json = json.dumps(
         {
@@ -54,11 +72,13 @@ def run_enhancer(preset: dict[str, Any], brief: str, *, game_title: str, game_id
             "aspect": preset.get("aspect", "9:16"),
             "duration_sec": str(preset.get("duration_sec", 30)),
             "locale": preset.get("locale", "en"),
+            "competitor_hook": load_competitor_hook(game_id),
         }
     )
+    no_llm = " --no-llm" if dry_run else ""
     inner = (
-        f"python3 tools/creative_enhancer.py enhance {shlex.quote(flow)} {shlex.quote(brief)} "
-        f"--vars {shlex.quote(vars_json)}"
+        f"python3 tools/creative_enhancer.py enhance {shlex.quote(flow)} {shlex.quote(brief_source)} "
+        f"--vars {shlex.quote(vars_json)}{no_llm}"
     )
     proc = shell_with_env(inner)
     if proc.returncode != 0:
@@ -113,7 +133,12 @@ def write_run_log(run_dir: Path, payload: dict[str, Any]) -> None:
 def cmd_run(args: argparse.Namespace) -> int:
     preset = find_preset(args.preset or "ugc_streamer_template")
     brief_path = Path(args.brief)
-    brief = brief_path.read_text(encoding="utf-8") if brief_path.is_file() else args.brief
+    if brief_path.is_file():
+        brief = brief_path.read_text(encoding="utf-8")
+        brief_source = str(brief_path)
+    else:
+        brief = args.brief
+        brief_source = args.brief
 
     run_id = f"{utc_stamp()}_{preset['id']}"
     run_dir = RUNS_DIR / run_id
@@ -121,8 +146,10 @@ def cmd_run(args: argparse.Namespace) -> int:
     enhanced_prompt = run_enhancer(
         preset,
         brief,
+        brief_source=brief_source,
         game_title=args.game_title,
         game_id=args.game_id,
+        dry_run=args.dry_run,
     )
     hf_result = submit_higgsfield(preset, enhanced_prompt, dry_run=args.dry_run)
 

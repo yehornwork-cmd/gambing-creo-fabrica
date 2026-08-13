@@ -8,6 +8,7 @@ You are generating an **authentic UGC testimonial character** spot for a mobile 
 - Aspect: **{{aspect}}**
 - Target duration: **{{duration_sec}}s**
 - Locale: **{{locale}}**
+- Competitor insight: {{competitor_hook}}
 
 ## Brief
 

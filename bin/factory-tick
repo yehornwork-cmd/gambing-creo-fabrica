@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Convenience wrapper for factory_run.py tick + status.
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+case "${1:-tick}" in
+  tick)
+    python3 library/_pipeline/orchestrator/factory_run.py tick
+    ;;
+  status)
+    python3 library/_pipeline/orchestrator/factory_run.py status
+    ;;
+  complete)
+    shift
+    python3 library/_pipeline/orchestrator/factory_run.py complete "$@"
+    ;;
+  *)
+    echo "Usage: factory-tick [tick|status|complete CHUNK_ID]" >&2
+    exit 1
+    ;;
+esac

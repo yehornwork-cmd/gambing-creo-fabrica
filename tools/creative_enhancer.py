@@ -76,6 +76,7 @@ def build_enhancement(
         "aspect": "9:16",
         "duration_sec": "30",
         "locale": "en",
+        "competitor_hook": "",
     }
     if variables:
         merged_vars.update({k: str(v) for k, v in variables.items()})
