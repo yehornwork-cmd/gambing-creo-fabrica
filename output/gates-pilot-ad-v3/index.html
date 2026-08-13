@@ -1,5 +1,33 @@
 <!doctype html>
-<html lang="ru">
+<html
+  lang="ru"
+  data-composition-variables='[
+    {"id":"name","type":"string","label":"Output name","default":"vs20olympgate_AD_B_ru_ru_9x16_play_now"},
+    {"id":"locale","type":"string","label":"Locale","default":"ru"},
+    {"id":"geo","type":"string","label":"GEO","default":"ru"},
+    {"id":"format","type":"string","label":"Format","default":"9x16"},
+    {"id":"cta_id","type":"string","label":"CTA id","default":"play_now"},
+    {"id":"vo_b01","type":"string","label":"VO B01","default":"Gates of Olympus. Ставка €2. Поехали."},
+    {"id":"vo_b02","type":"string","label":"VO B02","default":"Каскад! Символы сыпятся…"},
+    {"id":"vo_b03","type":"string","label":"VO B03","default":"Два scatter… ещё два — и бонус!"},
+    {"id":"vo_b04","type":"string","label":"VO B04","default":"Orb! Множитель на поле…"},
+    {"id":"vo_b05","type":"string","label":"VO B05","default":"Вот это каскад! Смотри на множитель…"},
+    {"id":"band_b01_title","type":"string","label":"Band B01 title","default":"GATES OF OLYMPUS"},
+    {"id":"band_b01_copy","type":"string","label":"Band B01 copy","default":"Ставка €2.00 · Поехали."},
+    {"id":"band_b02_title","type":"string","label":"Band B02 title","default":"КАСКАД"},
+    {"id":"band_b02_copy","type":"string","label":"Band B02 copy","default":"Символы сыплются… напряжение растёт."},
+    {"id":"band_b03_title","type":"string","label":"Band B03 title","default":"SCATTER TEASE"},
+    {"id":"band_b03_copy","type":"string","label":"Band B03 copy","default":"Два scatter… ещё два — и бонус!"},
+    {"id":"band_b04_title","type":"string","label":"Band B04 title","default":"MULTIPLIER"},
+    {"id":"band_b04_copy","type":"string","label":"Band B04 copy","default":"Orb на поле · множители копятся."},
+    {"id":"band_b05_title","type":"string","label":"Band B05 title","default":"WIN CLIMAX"},
+    {"id":"band_b05_copy","type":"string","label":"Band B05 copy","default":"Выигрыш на экране — врата открыты."},
+    {"id":"end_tag","type":"string","label":"End tag","default":"Открой врата."},
+    {"id":"cta_main","type":"string","label":"CTA","default":"ИГРАТЬ"},
+    {"id":"cta_sub","type":"string","label":"CTA sub","default":"Ставка от €2.00"},
+    {"id":"disclaimer","type":"string","label":"Disclaimer","default":"18+ · Играйте ответственно · Только развлечение"}
+  ]'
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
@@ -510,8 +538,8 @@
           <div id="b01-tension" class="tension-pulse"></div>
         </div>
         <div class="bottom-band">
-          <div class="bottom-band-title">GATES OF OLYMPUS</div>
-          <div class="bottom-band-copy">Ставка €2.00 · Поехали.</div>
+          <div class="bottom-band-title" data-var-text="band_b01_title">GATES OF OLYMPUS</div>
+          <div class="bottom-band-copy" data-var-text="band_b01_copy">Ставка €2.00 · Поехали.</div>
         </div>
         <div class="brand-bar">
           <div>
@@ -527,7 +555,7 @@
           <img src="frames/pip_b01.png" alt="Streamer reaction" />
           <div class="pip-label">LIVE</div>
         </div>
-        <div class="vo-rail" id="b01-vo">Gates of Olympus. Ставка €2. Поехали.</div>
+        <div class="vo-rail" id="b01-vo" data-var-text="vo_b01">Gates of Olympus. Ставка €2. Поехали.</div>
       </section>
 
       <!-- ===================== B02 · Near miss / Tumble 3.5–8.5s ===================== -->
@@ -543,8 +571,8 @@
           />
         </div>
         <div class="bottom-band">
-          <div class="bottom-band-title">КАСКАД</div>
-          <div class="bottom-band-copy">Символы сыплются… напряжение растёт.</div>
+          <div class="bottom-band-title" data-var-text="band_b02_title">КАСКАД</div>
+          <div class="bottom-band-copy" data-var-text="band_b02_copy">Символы сыплются… напряжение растёт.</div>
         </div>
         <div class="brand-bar">
           <div>
@@ -564,7 +592,7 @@
           <img src="frames/pip_b02.png" alt="Streamer near-miss" />
           <div class="pip-label">TENSION</div>
         </div>
-        <div class="vo-rail" id="b02-vo">Каскад! Символы сыпятся…</div>
+        <div class="vo-rail" id="b02-vo" data-var-text="vo_b02">Каскад! Символы сыпятся…</div>
       </section>
 
       <!-- ===================== B03 · Trigger / BIG WIN 8.5–14.5s ===================== -->
@@ -580,8 +608,8 @@
           />
         </div>
         <div class="bottom-band">
-          <div class="bottom-band-title">SCATTER TEASE</div>
-          <div class="bottom-band-copy">Два scatter… ещё два — и бонус!</div>
+          <div class="bottom-band-title" data-var-text="band_b03_title">SCATTER TEASE</div>
+          <div class="bottom-band-copy" data-var-text="band_b03_copy">Два scatter… ещё два — и бонус!</div>
         </div>
         <div class="brand-bar">
           <div>
@@ -610,7 +638,7 @@
           <img src="frames/pip_b03.png" alt="Streamer reaction" />
           <div class="pip-label">HIT</div>
         </div>
-        <div class="vo-rail" id="b03-vo">Два scatter… ещё два — и бонус!</div>
+        <div class="vo-rail" id="b03-vo" data-var-text="vo_b03">Два scatter… ещё два — и бонус!</div>
       </section>
 
       <!-- ===================== B04 · Free Spins UI 14.5–20.5s ===================== -->
@@ -626,8 +654,8 @@
           />
         </div>
         <div class="bottom-band">
-          <div class="bottom-band-title">FREE SPINS</div>
-          <div class="bottom-band-copy">15 спинов · множители копятся.</div>
+          <div class="bottom-band-title" data-var-text="band_b04_title">MULTIPLIER</div>
+          <div class="bottom-band-copy" data-var-text="band_b04_copy">Orb на поле · множители копятся.</div>
         </div>
         <div class="brand-bar">
           <div>
@@ -651,7 +679,7 @@
           <img src="frames/pip_b04.png" alt="Streamer free spins" />
           <div class="pip-label">FS</div>
         </div>
-        <div class="vo-rail" id="b04-vo">Orb! Множитель на поле…</div>
+        <div class="vo-rail" id="b04-vo" data-var-text="vo_b04">Orb! Множитель на поле…</div>
       </section>
 
       <!-- ===================== B05 · Big win celebration 20.5–25.5s ===================== -->
@@ -667,8 +695,8 @@
           />
         </div>
         <div class="bottom-band">
-          <div class="bottom-band-title">WIN CLIMAX</div>
-          <div class="bottom-band-copy">Выигрыш на экране — врата открыты.</div>
+          <div class="bottom-band-title" data-var-text="band_b05_title">WIN CLIMAX</div>
+          <div class="bottom-band-copy" data-var-text="band_b05_copy">Выигрыш на экране — врата открыты.</div>
         </div>
         <div class="brand-bar">
           <div>
@@ -713,19 +741,19 @@
           <img src="frames/pip_b05.png" alt="Streamer celebration" />
           <div class="pip-label">WIN</div>
         </div>
-        <div class="vo-rail" id="b05-vo">Вот это каскад! Смотри на множитель…</div>
+        <div class="vo-rail" id="b05-vo" data-var-text="vo_b05">Вот это каскад! Смотри на множитель…</div>
       </section>
 
       <!-- ===================== B06 · CTA end card 25.5–28.5s ===================== -->
       <section id="scene-b06" class="clip" data-start="25.5" data-duration="3" data-track-index="1">
         <div class="end-card" id="end-card">
           <div class="end-logo" id="end-logo">GATES OF<br />OLYMPUS</div>
-          <div class="end-tag" id="end-tag">Открой врата. Бонус на первый депозит.</div>
+          <div class="end-tag" id="end-tag" data-var-text="end_tag">Открой врата.</div>
           <div class="cta-btn" id="cta-btn">
-            <div class="cta-main">PLAY NOW</div>
-            <div class="cta-sub">+100% Bonus · Bet from €2.00</div>
+            <div class="cta-main" data-var-text="cta_main">ИГРАТЬ</div>
+            <div class="cta-sub" data-var-text="cta_sub">Ставка от €2.00</div>
           </div>
-          <div class="disclaimer" id="end-disclaimer">18+ · Играйте ответственно · Только развлечение</div>
+          <div class="disclaimer" id="end-disclaimer" data-var-text="disclaimer">18+ · Играйте ответственно · Только развлечение</div>
         </div>
         <div
           class="pip"

@@ -1,0 +1,22 @@
+{
+  "locale": "pl",
+  "status": "placeholder",
+  "notes": "Placeholder PL pack (SpyTrend sample was PL-heavy). User must validate before paid media. TTS not wired.",
+  "variables": {
+    "vo_b01": "Gates of Olympus. Stawka 2 €. Jedziemy.",
+    "vo_b02": "Kaskada! Symbole sypią się…",
+    "vo_b03": "Dwa scatter… jeszcze dwa — i bonus!",
+    "vo_b04": "Orb! Mnożnik na polu…",
+    "vo_b05": "Co za kaskada! Patrz na mnożnik…",
+    "band_b01_title": "GATES OF OLYMPUS",
+    "band_b01_copy": "Stawka 2,00 € · Jedziemy.",
+    "band_b02_title": "KASKADA",
+    "band_b02_copy": "Symbole sypią się… napięcie rośnie.",
+    "band_b03_title": "SCATTER TEASE",
+    "band_b03_copy": "Dwa scatter… jeszcze dwa — i bonus!",
+    "band_b04_title": "MULTIPLIER",
+    "band_b04_copy": "Orb na polu · mnożniki rosną.",
+    "band_b05_title": "WIN CLIMAX",
+    "band_b05_copy": "Wygrana na ekranie — wrota otwarte."
+  }
+}

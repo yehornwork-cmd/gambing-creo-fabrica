@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-08-13",
+  "notes": "AD_B is the only live scenario. Remaining entries are catalog slots so the variant matrix is explicit before footage exists.",
+  "scenarios": [
+    {
+      "scenario_id": "AD_B",
+      "name": "Gates Open",
+      "status": "partial",
+      "file": "AD_B.json",
+      "game_id": "vs20olympgate"
+    },
+    {
+      "scenario_id": "AD_HOOK_ONLY",
+      "name": "Hook only",
+      "status": "stub",
+      "file": "AD_HOOK_ONLY.json",
+      "game_id": null
+    },
+    {
+      "scenario_id": "AD_MECHANIC_SHOWCASE",
+      "name": "Mechanic showcase",
+      "status": "stub",
+      "file": "AD_MECHANIC_SHOWCASE.json",
+      "game_id": null
+    },
+    {
+      "scenario_id": "AD_BONUS_PAYOFF",
+      "name": "Bonus payoff",
+      "status": "stub",
+      "file": "AD_BONUS_PAYOFF.json",
+      "game_id": null
+    },
+    {
+      "scenario_id": "AD_STREAMER_PIP",
+      "name": "Streamer PiP",
+      "status": "stub",
+      "file": "AD_STREAMER_PIP.json",
+      "game_id": null
+    },
+    {
+      "scenario_id": "AD_UGC",
+      "name": "UGC-style",
+      "status": "stub",
+      "file": "AD_UGC.json",
+      "game_id": null
+    }
+  ]
+}

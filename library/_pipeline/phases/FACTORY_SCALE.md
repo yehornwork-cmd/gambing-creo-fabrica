@@ -1,0 +1,63 @@
+# Factory Scale Roadmap
+
+Path from one Gates pilot to ~500 quality creatives/day. Status tracked in `library/_pipeline/state.json` (`completed` holds both `P*` and `F*` ids).
+
+500/day is combinatorial: `games × scenarios × locales × formats × CTAs × winner clones`. Do not treat this as 500 unique storyboards.
+
+Legend: `[ ]` pending · `[x]` done · `[!]` blocked
+
+MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **P1.3 path normalizer is hygiene** (`tools/path_normalizer.py` + `tools/library_audit.py` already in repo) — not the scale path. Tick MVP chunks with `factory_run.py tick`; tick scale chunks with `factory_run.py tick --roadmap scale`.
+
+---
+
+## F0 — Constructor schema
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F0.1 | CreativeJob + matrix + exploder | `library/_pipeline/constructor/` with schema, AD_B catalog, variant matrix, `explode.py` emitting HyperFrames batch rows |
+
+---
+
+## F1 — Golden path variants
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F1.1 | Two locales × two CTAs render | One template renders 4 jobs (`ru/pl` × `play_now` / `bonus_first_deposit`) via `hyperframes render --batch` |
+
+---
+
+## F2 — Capture inventory
+
+| ID | Chunk | Acceptance | Blocker |
+|----|-------|------------|---------|
+| F2.1 | Capture client + FS recapture | `tools/capture_client.py`; `bonus_triggered: true` in analysis | `CAPTURE_API_TOKEN` |
+
+---
+
+## F3 — Scenario catalog fill
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F3.1 | Live arcs beyond AD_B | At least one additional scenario (`AD_HOOK_ONLY` or `AD_MECHANIC_SHOWCASE`) has beats + template, not `status: stub` |
+
+---
+
+## F4 — QC gates
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F4.1 | Lint + compliance + sample review | Batch jobs fail on `blocked_claims`; human reviews a sample, not every render |
+
+---
+
+## F5 — Winner multiply
+
+| ID | Chunk | Acceptance |
+|----|-------|------------|
+| F5.1 | Clone via substitution groups | `parent_creative_id` + equivalent `substitution_group` segments explode a tagged winner into N variants |
+
+---
+
+## Current focus
+
+Constructor v0 (F0.1). Next scale chunk: F1.1 — actually render the 4-job batch. GEO copy and capture tokens remain human blockers and must not stall the constructor.

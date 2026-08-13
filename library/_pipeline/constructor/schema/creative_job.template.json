@@ -1,0 +1,40 @@
+{
+  "job_id": "vs20olympgate_AD_B_ru_ru_9x16_play_now",
+  "schema_version": "1.0.0",
+  "game_id": "vs20olympgate",
+  "scenario_id": "AD_B",
+  "locale": "ru",
+  "geo": "ru",
+  "format": "9x16",
+  "cta_id": "play_now",
+  "hook_id": "motion_cold_open",
+  "parent_creative_id": null,
+  "status": "draft",
+  "blocked_reason": null,
+  "lineage": {
+    "template_id": "gates-pilot-ad-v3",
+    "arc_id": "ARC_TEASE_NEAR_MISS_PAYOFF",
+    "source_scenario_status": "partial",
+    "parent_creative_id": null,
+    "beats": [
+      {
+        "beat_id": "B01",
+        "arc_slot_id": "ARC_TEASE",
+        "segment_id": "seg_v2_motion_hook",
+        "substitution_group": "motion_hook",
+        "taxonomy_tags": ["motion_hook", "spin_button_press"],
+        "duration_sec": 3.5
+      }
+    ]
+  },
+  "render": {
+    "project": "output/gates-pilot-ad-v3",
+    "output_name": "vs20olympgate_AD_B_ru_ru_9x16_play_now",
+    "variables": {
+      "name": "vs20olympgate_AD_B_ru_ru_9x16_play_now",
+      "vo_b01": "Gates of Olympus. Ставка €2. Поехали.",
+      "cta_main": "ИГРАТЬ",
+      "disclaimer": "18+ · Играйте ответственно · Только развлечение"
+    }
+  }
+}

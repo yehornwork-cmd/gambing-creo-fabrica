@@ -7,16 +7,20 @@ Autonomous cloud agents run bounded MVP chunks via the factory orchestrator.
 ```bash
 python3 library/_pipeline/orchestrator/factory_run.py status
 python3 library/_pipeline/orchestrator/factory_run.py tick
+python3 library/_pipeline/orchestrator/factory_run.py tick --roadmap scale
 ```
 
 After `tick`, implement **exactly one** PR-sized chunk from the returned run log. Commit, push to `cursor/*`, and update the PR.
+
+Scale work (`F0`–`F5`) lives in `library/_pipeline/phases/FACTORY_SCALE.md` and `library/_pipeline/constructor/`. MVP `P*` chunks bootstrap the bridge; they are not the 500/day factory.
 
 ## Repo layout
 
 | Path | Purpose |
 |------|---------|
 | `library/games/<game_id>/` | Canonical Game DNA, gameplay analysis, assets refs |
-| `library/_pipeline/` | Orchestrator, MVP roadmap, run logs |
+| `library/_pipeline/` | Orchestrator, MVP + Factory Scale roadmaps, run logs |
+| `library/_pipeline/constructor/` | CreativeJob schema, scenario catalog, variant matrix, exploder |
 | `hyperframes/` | Renderable HyperFrames projects |
 | `tools/` | Helper scripts (path normalizer, capture client) |
 | `context/` | Staging area — migrate into `library/` then deprecate |

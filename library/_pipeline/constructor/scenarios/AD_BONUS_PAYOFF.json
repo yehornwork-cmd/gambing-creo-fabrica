@@ -1,0 +1,20 @@
+{
+  "scenario_id": "AD_BONUS_PAYOFF",
+  "name": "Bonus payoff",
+  "arc_id": "ARC_BONUS_PAYOFF",
+  "status": "stub",
+  "game_id": "vs20olympgate",
+  "template_id": null,
+  "hyperframes_project": null,
+  "duration_target_sec": 30,
+  "aspect_default": "9:16",
+  "hook_id_default": "scatter_trigger",
+  "notes": "Full AD_B arc with real FS footage. Blocked until recapture has bonus_triggered: true.",
+  "capture_requirements": {
+    "bonus_triggered": true,
+    "honest_vo": true
+  },
+  "blocked_claims": ["guaranteed_win", "bonus_triggered_when_not_in_capture"],
+  "arc_slots": ["ARC_TEASE", "ARC_MECHANIC_SHOWCASE", "ARC_PAYOFF", "ARC_CTA"],
+  "beats": []
+}

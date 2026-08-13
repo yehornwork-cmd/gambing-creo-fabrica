@@ -1,0 +1,118 @@
+{
+  "job_id": "vs20olympgate_AD_B_pl_pl_9x16_play_now",
+  "schema_version": "1.0.0",
+  "game_id": "vs20olympgate",
+  "scenario_id": "AD_B",
+  "locale": "pl",
+  "geo": "pl",
+  "format": "9x16",
+  "cta_id": "play_now",
+  "hook_id": "motion_cold_open",
+  "parent_creative_id": null,
+  "status": "draft",
+  "blocked_reason": null,
+  "lineage": {
+    "template_id": "gates-pilot-ad-v3",
+    "arc_id": "ARC_TEASE_NEAR_MISS_PAYOFF",
+    "source_scenario_status": "partial",
+    "parent_creative_id": null,
+    "beats": [
+      {
+        "beat_id": "B01",
+        "arc_slot_id": "ARC_TEASE",
+        "segment_id": "seg_v2_motion_hook",
+        "substitution_group": "motion_hook",
+        "taxonomy_tags": [
+          "motion_hook",
+          "spin_button_press"
+        ],
+        "duration_sec": 3.5
+      },
+      {
+        "beat_id": "B02",
+        "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+        "segment_id": "seg_v2_tumble_spin",
+        "substitution_group": "tumble_chain",
+        "taxonomy_tags": [
+          "tumble_chain",
+          "cluster_win"
+        ],
+        "duration_sec": 5.0
+      },
+      {
+        "beat_id": "B03",
+        "arc_slot_id": "ARC_TEASE",
+        "segment_id": "seg_v2_scatter_proxy",
+        "substitution_group": "scatter_bonus_4",
+        "taxonomy_tags": [
+          "scatter_tease",
+          "bonus_tease"
+        ],
+        "duration_sec": 6.0
+      },
+      {
+        "beat_id": "B04",
+        "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+        "segment_id": "seg_v2_grid_full",
+        "substitution_group": "multiplier_orb",
+        "taxonomy_tags": [
+          "multiplier_orb",
+          "global_multiplier_fs"
+        ],
+        "duration_sec": 6.0
+      },
+      {
+        "beat_id": "B05",
+        "arc_slot_id": "ARC_PAYOFF",
+        "segment_id": "seg_v2_climax_proxy",
+        "substitution_group": "win_climax",
+        "taxonomy_tags": [
+          "cluster_win",
+          "win_highlight"
+        ],
+        "duration_sec": 5.0
+      },
+      {
+        "beat_id": "B06",
+        "arc_slot_id": "ARC_CTA",
+        "segment_id": null,
+        "substitution_group": "end_card",
+        "taxonomy_tags": [
+          "end_card",
+          "compliance"
+        ],
+        "duration_sec": 3.0
+      }
+    ]
+  },
+  "render": {
+    "project": "output/gates-pilot-ad-v3",
+    "output_name": "vs20olympgate_AD_B_pl_pl_9x16_play_now",
+    "variables": {
+      "name": "vs20olympgate_AD_B_pl_pl_9x16_play_now",
+      "vo_b01": "Gates of Olympus. Stawka 2 €. Jedziemy.",
+      "vo_b02": "Kaskada! Symbole sypią się…",
+      "vo_b03": "Dwa scatter… jeszcze dwa — i bonus!",
+      "vo_b04": "Orb! Mnożnik na polu…",
+      "vo_b05": "Co za kaskada! Patrz na mnożnik…",
+      "band_b01_title": "GATES OF OLYMPUS",
+      "band_b01_copy": "Stawka 2,00 € · Jedziemy.",
+      "band_b02_title": "KASKADA",
+      "band_b02_copy": "Symbole sypią się… napięcie rośnie.",
+      "band_b03_title": "SCATTER TEASE",
+      "band_b03_copy": "Dwa scatter… jeszcze dwa — i bonus!",
+      "band_b04_title": "MULTIPLIER",
+      "band_b04_copy": "Orb na polu · mnożniki rosną.",
+      "band_b05_title": "WIN CLIMAX",
+      "band_b05_copy": "Wygrana na ekranie — wrota otwarte.",
+      "cta_main": "GRAJ TERAZ",
+      "cta_sub": "Zakład od 2,00 €",
+      "end_tag": "Otwórz wrota.",
+      "disclaimer": "18+ · Graj odpowiedzialnie · Tylko rozrywka",
+      "locale": "pl",
+      "geo": "pl",
+      "format": "9x16",
+      "cta_id": "play_now"
+    }
+  }
+}

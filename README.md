@@ -4,10 +4,20 @@ Bridge repo for Cursor Cloud Agents.
 
 ## Structure
 - `library/` — game library (Game DNA, segments, constructor builds)
-- `tools/` — helper scripts (cursor_agent.py, path_normalizer.py)
+- `library/_pipeline/constructor/` — CreativeJob schema, scenario catalog, variant matrix
+- `tools/` — helper scripts (path_normalizer.py, explode via constructor)
 - `hyperframes/` — HyperFrames projects
 - `n8n/` — n8n workflow JSONs
 - `docs/` — documentation
+
+## Factory scale
+
+500 creatives/day is combinatorial (`locale × format × CTA × scenario`), not 500 unique storyboards. See `library/_pipeline/phases/FACTORY_SCALE.md` and `library/_pipeline/constructor/README.md`.
+
+```bash
+python3 library/_pipeline/constructor/explode.py --dry-run
+python3 library/_pipeline/orchestrator/factory_run.py status
+```
 
 ## Usage
 This repo is used by Perplexity Computer to delegate coding tasks to Cursor Cloud Agents.

@@ -6,7 +6,22 @@
       "disclaimer_18_plus": "18+ | Play responsibly",
       "cta_text": "Play Now",
       "vo_restrictions": [],
-      "notes": "User must validate per target GEO before render."
+      "copy_status": "placeholder",
+      "notes": "Fallback when a GEO pack is missing. User must validate per target GEO before paid media."
+    },
+    "ru": {
+      "disclaimer_18_plus": "18+ · Играйте ответственно · Только развлечение",
+      "cta_text": "Играть",
+      "vo_restrictions": [],
+      "copy_status": "placeholder",
+      "notes": "Seeded from pilot-ad-v3. User must validate before paid media."
+    },
+    "pl": {
+      "disclaimer_18_plus": "18+ · Graj odpowiedzialnie · Tylko rozrywka",
+      "cta_text": "Graj teraz",
+      "vo_restrictions": [],
+      "copy_status": "placeholder",
+      "notes": "Placeholder PL pack (SpyTrend sample was PL-heavy). User must validate before paid media."
     }
   },
   "blocked_claims": [

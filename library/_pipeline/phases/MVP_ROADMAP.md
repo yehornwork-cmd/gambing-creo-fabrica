@@ -79,3 +79,9 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Current focus
 
 Autopilot advances **one chunk per tick** in ID order, skipping `[!]` blocked chunks unless unblocked in state.
+
+**Scale path is separate:** [FACTORY_SCALE.md](FACTORY_SCALE.md) (`F0`–`F5`). P1.3 (path normalizer) is hygiene — `tools/path_normalizer.py` and `tools/library_audit.py` already live in the repo. Do not treat finishing P1–P7 as the way to 500 creatives/day.
+
+```bash
+python3 library/_pipeline/orchestrator/factory_run.py tick --roadmap scale
+```
