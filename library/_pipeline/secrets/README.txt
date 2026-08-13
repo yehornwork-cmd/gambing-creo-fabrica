@@ -1,5 +1,26 @@
 Gitignored secret keys for the Creative Factory media connectors.
 
+─── ПРОСТАЯ ИНСТРУКЦИЯ (RU) ───
+
+Самый простой способ — один файл в корне проекта:
+
+  .env
+
+Открой его и вставь ключи ПОСЛЕ знака = (строки 8, 12, 15).
+Файл уже создан, комментарии на русском.
+
+Альтернатива — три отдельных файла (если не хочешь .env):
+
+  library/_pipeline/secrets/HF_KEY.key
+  library/_pipeline/secrets/PERPLEXITY_API_KEY.key
+  library/_pipeline/secrets/FAL_KEY.key
+
+В каждый — одна строка, только значение ключа (без кавычек).
+
+Проверка:  bin/connect-factory --strict
+
+─── EN ───
+
 Priority (highest first):
 1. Runtime secrets injected by Cursor Cloud Agent (HF_KEY, PERPLEXITY_API_KEY, FAL_KEY, …)
 2. Repo .env or library/_pipeline/.env
