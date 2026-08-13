@@ -9,8 +9,8 @@
       "gate": "restricted",
       "gate_reason": "nl_untargeted_gambling_ads"
     },
-    "CH-DE": { "locale": "de", "language": "de", "pack": "locale_packs/en.json" },
-    "CH-FR": { "locale": "fr", "language": "fr", "pack": "locale_packs/en.json" },
+    "CH-DE": { "locale": "de", "language": "de", "pack": "locale_packs/de.json" },
+    "CH-FR": { "locale": "fr", "language": "fr", "pack": "locale_packs/fr.json" },
     "FI": { "locale": "fi", "language": "fi", "pack": "locale_packs/en.json" },
     "NO": { "locale": "no", "language": "no", "pack": "locale_packs/en.json" },
     "CZ": { "locale": "cs", "language": "cs", "pack": "locale_packs/en.json" },
@@ -34,7 +34,7 @@
     "BH": { "locale": "ar", "language": "ar", "pack": "locale_packs/en.json" },
     "GULF-EN": { "locale": "en", "language": "en", "pack": "locale_packs/en.json" },
     "CA-EN": { "locale": "en", "language": "en", "pack": "locale_packs/en.json" },
-    "CA-FR": { "locale": "fr", "language": "fr", "pack": "locale_packs/en.json" },
+    "CA-FR": { "locale": "fr", "language": "fr", "pack": "locale_packs/fr.json" },
     "AU": { "locale": "en", "language": "en", "pack": "locale_packs/en.json" },
     "RU": { "locale": "ru", "language": "ru", "pack": "locale_packs/ru.json" }
   }

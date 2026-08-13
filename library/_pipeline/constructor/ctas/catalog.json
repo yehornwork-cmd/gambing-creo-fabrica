@@ -25,6 +25,16 @@
           "cta_main": "SPEEL NU",
           "cta_sub": "Vanaf €2,00",
           "end_tag": "Open de poorten."
+        },
+        "de": {
+          "cta_main": "JETZT SPIELEN",
+          "cta_sub": "Ab 2,00 €",
+          "end_tag": "Öffne die Tore."
+        },
+        "fr": {
+          "cta_main": "JOUER",
+          "cta_sub": "Dès 2,00 €",
+          "end_tag": "Ouvre les portes."
         }
       }
     },
@@ -51,6 +61,16 @@
           "cta_main": "PAK BONUS",
           "cta_sub": "+100% op eerste storting",
           "end_tag": "Open de poorten. Bonus op eerste storting."
+        },
+        "de": {
+          "cta_main": "BONUS HOLEN",
+          "cta_sub": "+100% auf die erste Einzahlung",
+          "end_tag": "Öffne die Tore. Bonus auf die erste Einzahlung."
+        },
+        "fr": {
+          "cta_main": "PRENDRE LE BONUS",
+          "cta_sub": "+100% sur le premier dépôt",
+          "end_tag": "Ouvre les portes. Bonus premier dépôt."
         }
       }
     }

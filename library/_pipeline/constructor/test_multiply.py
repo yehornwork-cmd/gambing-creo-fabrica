@@ -118,6 +118,8 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
         self.assertEqual(jobs[0]["geo"], "chde")
         self.assertRegex(jobs[0]["job_id"], r"^[A-Za-z0-9_]+$")
         self.assertIn("chde", jobs[0]["job_id"])
+        self.assertEqual(jobs[0]["render"]["variables"]["cta_main"], "JETZT SPIELEN")
+        self.assertIn("Los geht's", jobs[0]["render"]["variables"]["vo_b01"])
 
     def test_summary_counts(self) -> None:
         payload = multiply.summary_payload(self.analysis, self.jobs)
