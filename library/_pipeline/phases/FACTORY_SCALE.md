@@ -69,4 +69,4 @@ MVP bootstrap (`P0`–`P7` in [MVP_ROADMAP.md](MVP_ROADMAP.md)) still exists. **
 
 ## Current focus
 
-F6.2 deep analysis + GEO hold on the buyer loop. F1.1 HyperFrames `--batch` still needs Node 22 on the render host (Hetzner node is 18).
+F1.1 HyperFrames `--batch` of the 4-job Gates matrix is proven on Node 22 (`render_batch.py`). Live Hetzner host is still Node 18 — buyer MP4s stay on n8n + forge-renderer until the render host is upgraded.

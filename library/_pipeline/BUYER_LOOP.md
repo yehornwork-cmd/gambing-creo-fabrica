@@ -38,6 +38,8 @@ Response (sync, typically 1–3s): `analysis` + `jobs[]` + `summary.ready_geos` 
 
 Duration → scenario: `<8s` `AD_HOOK_ONLY`, `8–18s` `AD_MECHANIC_SHOWCASE`, else `AD_B`.
 
+`GET /jobs/buyer/{analysis_id}` returns the (possibly deep-updated) analysis + jobs. Poll after `deep_job_id` completes.
+
 Allowed download hosts: `forge`, `forge.vizioner.xyz`, `*.vizioner.xyz`.
 
 ## Constructor

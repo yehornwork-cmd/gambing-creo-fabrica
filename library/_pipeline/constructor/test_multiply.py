@@ -109,7 +109,7 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
             j for j in self.jobs if j["cta_id"] == "play_now" and j["render"]["variables"]["forge_geo"] == "NL"
         )
         self.assertEqual(pl_play["render"]["variables"]["cta_main"], "GRAJ TERAZ")
-        self.assertEqual(nl_play["render"]["variables"]["cta_main"], "PLAY NOW")
+        self.assertEqual(nl_play["render"]["variables"]["cta_main"], "SPEEL NU")
         self.assertEqual(nl_play["locale"], "nl")
 
     def test_hyphenated_geo_is_safe_in_job_id(self) -> None:

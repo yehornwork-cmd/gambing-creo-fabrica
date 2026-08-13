@@ -20,6 +20,11 @@
           "cta_main": "PLAY NOW",
           "cta_sub": "From €2.00",
           "end_tag": "Open the gates."
+        },
+        "nl": {
+          "cta_main": "SPEEL NU",
+          "cta_sub": "Vanaf €2,00",
+          "end_tag": "Open de poorten."
         }
       }
     },
@@ -41,6 +46,11 @@
           "cta_main": "GET BONUS",
           "cta_sub": "+100% on first deposit",
           "end_tag": "Open the gates. First-deposit bonus."
+        },
+        "nl": {
+          "cta_main": "PAK BONUS",
+          "cta_sub": "+100% op eerste storting",
+          "end_tag": "Open de poorten. Bonus op eerste storting."
         }
       }
     }

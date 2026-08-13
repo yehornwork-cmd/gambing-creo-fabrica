@@ -50,10 +50,8 @@ python3 library/_pipeline/constructor/test_explode.py
 Writes `jobs/batch.json` for:
 
 ```bash
-npx hyperframes render \
-  --batch library/_pipeline/constructor/jobs/batch.json \
-  --output "renders/{name}.mp4" \
-  --strict-variables
+python3 library/_pipeline/constructor/render_batch.py --dry-run
+python3 library/_pipeline/constructor/render_batch.py   # Node >= 22
 ```
 
 (`hyperframes/` project promotion is F1 / P4.1 — today the template lives at `output/gates-pilot-ad-v3/`.)
