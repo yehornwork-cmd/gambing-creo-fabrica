@@ -1,0 +1,6 @@
+.env
+.env.local
+library/_pipeline/secrets/*.key
+!library/_pipeline/secrets/*.key.example
+!library/_pipeline/secrets/.gitignore
+!library/_pipeline/secrets/README.txt
