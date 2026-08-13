@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 
@@ -53,7 +53,10 @@ def register(
     ) -> dict[str, Any]:
         from buyer_jobs import run_buyer_multiply
 
-        result = run_buyer_multiply(payload.model_dump())
+        try:
+            result = run_buyer_multiply(payload.model_dump())
+        except (FileNotFoundError, ValueError) as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
         deep_job_id = None
         if payload.deep_analyze and result.get("video_path"):
             deep = enqueue(

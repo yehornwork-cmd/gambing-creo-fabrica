@@ -73,7 +73,8 @@ def run_buyer_multiply(params: dict[str, Any]) -> dict[str, Any]:
 
     analysis_id = params.get("analysis_id") or uuid.uuid4().hex[:12]
     out_dir = BUYER_ROOT / analysis_id
-    video = Path(params["video_path"]) if params.get("video_path") else out_dir / "source.mp4"
+    raw_path = str(params.get("video_path") or "").strip()
+    video = Path(raw_path) if raw_path else out_dir / "source.mp4"
 
     if params.get("source_url") and not video.is_file():
         _download(str(params["source_url"]), video)
