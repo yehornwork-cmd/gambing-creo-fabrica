@@ -2,8 +2,8 @@
 """Set Factory v3 render fan-out.
 
 Renderer jobs used to share one HyperFrames project dir, so live sat at
-CONCURRENCY=2 and this node was capped to match. Projects are now per-job;
-fan-out can be higher. Renderer still queues above its slot count.
+CONCURRENCY=2. Projects are now per-job. Fan-out matches renderer slots
+(4). Higher (8+) makes the n8n JS task runner miss heartbeats and abort.
 
 Keeps a single retry after 2s for a transient 500.
 """
@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 WORKFLOW_ID = "bzPWFbzTKkGHW1hW"
-TARGET_CONC = 8
+TARGET_CONC = 4
 BACKUP = Path("/opt/forge") / (
     f"backup-v3-before-render-conc-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
 )
