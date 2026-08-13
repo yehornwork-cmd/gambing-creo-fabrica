@@ -101,15 +101,19 @@ class ExplodeTests(unittest.TestCase):
 
 
 class CatalogTests(unittest.TestCase):
-    def test_catalog_lists_live_ad_b_and_five_stubs(self) -> None:
+    def test_catalog_lists_live_arcs_and_remaining_stubs(self) -> None:
         catalog = json.loads((CONSTRUCTOR / "scenarios" / "catalog.json").read_text(encoding="utf-8"))
         by_id = {s["scenario_id"]: s for s in catalog["scenarios"]}
         self.assertEqual(by_id["AD_B"]["status"], "partial")
+        self.assertEqual(by_id["AD_HOOK_ONLY"]["status"], "partial")
+        self.assertEqual(by_id["AD_MECHANIC_SHOWCASE"]["status"], "partial")
         stubs = [s for s in catalog["scenarios"] if s["status"] == "stub"]
-        self.assertEqual(len(stubs), 5)
+        self.assertEqual(len(stubs), 3)
         for entry in catalog["scenarios"]:
             path = CONSTRUCTOR / "scenarios" / entry["file"]
             self.assertTrue(path.is_file(), msg=entry["file"])
+        hook = json.loads((CONSTRUCTOR / "scenarios" / "AD_HOOK_ONLY.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(hook["beats"]), 2)
 
 
 if __name__ == "__main__":

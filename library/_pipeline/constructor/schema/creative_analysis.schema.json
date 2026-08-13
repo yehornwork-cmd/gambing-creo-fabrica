@@ -68,6 +68,18 @@
       "type": "string",
       "enum": ["probed", "heuristic", "signals", "ready"]
     },
-    "notes": { "type": "string" }
+    "notes": { "type": "string" },
+    "vlm": {
+      "type": "object",
+      "properties": {
+        "language": { "type": ["string", "null"] },
+        "spoken_cta": { "type": ["string", "null"] },
+        "on_screen_cta": { "type": ["string", "null"] },
+        "has_bonus_footage": { "type": "boolean" },
+        "has_end_card": { "type": "boolean" },
+        "overlay_safe": { "type": "object" },
+        "model": { "type": "string" }
+      }
+    }
   }
 }

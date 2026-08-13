@@ -31,6 +31,7 @@ export type BuyerMultiplyResult = {
     status?: string;
     cta_main?: string;
     disclaimer?: string;
+    blocked_reason?: string | null;
   }>;
   deep_job_id?: string | null;
 };

@@ -48,7 +48,7 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.tmp = tempfile.TemporaryDirectory()
         cls.video = Path(cls.tmp.name) / "master.mp4"
-        make_silent_mp4(cls.video, width=1080, height=1920, duration=12.0)
+        make_silent_mp4(cls.video, width=1080, height=1920, duration=24.0)
         cls.analysis = analyze_upload.analyze(
             video=cls.video,
             product="Gates of Olympus",
@@ -66,7 +66,8 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
     def test_probe_and_game(self) -> None:
         self.assertEqual(self.analysis["format"], "9x16")
         self.assertEqual(self.analysis["game_id"], "vs20olympgate")
-        self.assertGreaterEqual(self.analysis["probe"]["duration_sec"], 11.5)
+        self.assertGreaterEqual(self.analysis["probe"]["duration_sec"], 23.5)
+        self.assertEqual(self.analysis["scenario_id"], "AD_B")
         self.assertEqual(len(self.analysis["beats"]), 6)
         span = self.analysis["beats"][-1]["t_end"] - self.analysis["beats"][0]["t_start"]
         self.assertAlmostEqual(span, self.analysis["probe"]["duration_sec"], delta=0.15)
@@ -79,6 +80,26 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
             self.assertEqual(job["parent_creative_id"], "buyer12abcd")
             self.assertTrue(job["job_id"].endswith("buyer12a"))
             self.assertEqual(job["format"], "9x16")
+            self.assertEqual(job["status"], "blocked")
+            self.assertIn(job["blocked_reason"], {"nl_untargeted_gambling_ads", "pl_private_casino_ads"})
+
+    def test_allow_unlocks_restricted_geos(self) -> None:
+        jobs = multiply.multiply(
+            analysis=self.analysis,
+            geos=["PL", "NL"],
+            compliance_allow=True,
+        )
+        self.assertEqual(len(jobs), 4)
+        self.assertTrue(all(j["status"] != "blocked" or "geo" not in (j.get("blocked_reason") or "") for j in jobs))
+        self.assertTrue(all(j["status"] != "blocked" for j in jobs))
+
+    def test_open_geos_are_ready(self) -> None:
+        jobs = multiply.multiply(analysis=self.analysis, geos=["CA-EN", "AU"], cta_ids=["play_now"])
+        self.assertEqual(len(jobs), 2)
+        self.assertTrue(all(j["status"] != "blocked" for j in jobs))
+        payload = multiply.summary_payload(self.analysis, jobs)
+        self.assertEqual(payload["ready_jobs"], 2)
+        self.assertEqual(payload["n8n_geos"], ["AU", "CA-EN"])
 
     def test_pl_uses_polish_cta_nl_falls_back_to_en(self) -> None:
         pl_play = next(
@@ -101,8 +122,35 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
     def test_summary_counts(self) -> None:
         payload = multiply.summary_payload(self.analysis, self.jobs)
         self.assertEqual(payload["jobs"], 4)
+        self.assertEqual(payload["ready_jobs"], 0)
+        self.assertEqual(payload["blocked_jobs"], 4)
         self.assertEqual(payload["beats"], 6)
         self.assertEqual(set(payload["geos"]), {"PL", "NL"})
+        self.assertEqual(set(payload["blocked_geos"]), {"PL", "NL"})
+        self.assertEqual(payload["n8n_geos"], ["NL", "PL"])
+
+
+class ShortAdScenarioTests(unittest.TestCase):
+    def test_six_second_uses_hook_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            video = Path(tmp) / "short.mp4"
+            make_silent_mp4(video, width=1080, height=1920, duration=6.0)
+            analysis = analyze_upload.analyze(video=video, analysis_id="shorthook01")
+            self.assertEqual(analysis["scenario_id"], "AD_HOOK_ONLY")
+            self.assertEqual(len(analysis["beats"]), 2)
+            self.assertEqual(analysis["beats"][0]["beat_id"], "B01")
+            self.assertEqual(analysis["beats"][-1]["beat_id"], "B06")
+
+    def test_twelve_second_uses_mechanic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            video = Path(tmp) / "mid.mp4"
+            make_silent_mp4(video, width=1080, height=1920, duration=12.0)
+            analysis = analyze_upload.analyze(video=video, analysis_id="mechanic12xx")
+            self.assertEqual(analysis["scenario_id"], "AD_MECHANIC_SHOWCASE")
+            self.assertEqual(len(analysis["beats"]), 3)
+        self.assertEqual(analyze_upload.pick_scenario_id(5.0), "AD_HOOK_ONLY")
+        self.assertEqual(analyze_upload.pick_scenario_id(12.0), "AD_MECHANIC_SHOWCASE")
+        self.assertEqual(analyze_upload.pick_scenario_id(30.0), "AD_B")
 
 
 class GuessGameTests(unittest.TestCase):

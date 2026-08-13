@@ -2,19 +2,56 @@
   "scenario_id": "AD_MECHANIC_SHOWCASE",
   "name": "Mechanic showcase",
   "arc_id": "ARC_MECHANIC_SHOWCASE",
-  "status": "stub",
-  "game_id": null,
-  "template_id": null,
-  "hyperframes_project": null,
+  "status": "partial",
+  "game_id": "vs20olympgate",
+  "template_id": "gates-pilot-ad-v3",
+  "hyperframes_project": "output/gates-pilot-ad-v3",
   "duration_target_sec": 15,
   "aspect_default": "9:16",
   "hook_id_default": "mechanic_first",
-  "notes": "Teach one mechanic (tumble / multiplier orb) without a bonus-payoff claim.",
+  "notes": "Teach tumble / multiplier without a bonus-payoff claim. Used for 8–18s buyer uploads.",
   "source_requirements": {
     "platforms": ["youtube", "kick", "twitch"],
-    "honest_vo": true
+    "honest_vo": true,
+    "bonus_in_vod": false
   },
   "blocked_claims": ["guaranteed_win", "bonus_triggered_when_not_in_capture"],
   "arc_slots": ["ARC_TEASE", "ARC_MECHANIC_SHOWCASE", "ARC_CTA"],
-  "beats": []
+  "beats": [
+    {
+      "beat_id": "B01",
+      "name": "motion_hook",
+      "arc_slot_id": "ARC_TEASE",
+      "duration_sec": 3.0,
+      "taxonomy_tags": ["motion_hook"],
+      "substitution_group": "motion_hook",
+      "segment_id": "seg_v2_motion_hook",
+      "vo_key": "vo_b01",
+      "band_title_key": "band_b01_title",
+      "band_copy_key": "band_b01_copy"
+    },
+    {
+      "beat_id": "B02",
+      "name": "tumble_energy",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "duration_sec": 9.0,
+      "taxonomy_tags": ["tumble_chain", "multiplier_orb"],
+      "substitution_group": "tumble_chain",
+      "segment_id": "seg_v2_tumble_spin",
+      "vo_key": "vo_b02",
+      "band_title_key": "band_b02_title",
+      "band_copy_key": "band_b02_copy"
+    },
+    {
+      "beat_id": "B06",
+      "name": "end_card",
+      "arc_slot_id": "ARC_CTA",
+      "duration_sec": 3.0,
+      "taxonomy_tags": ["end_card", "compliance"],
+      "substitution_group": "end_card",
+      "segment_id": null,
+      "vo_key": null,
+      "cta_keys": ["end_tag", "cta_main", "cta_sub", "disclaimer"]
+    }
+  ]
 }

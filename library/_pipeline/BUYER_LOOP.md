@@ -5,11 +5,12 @@ Buyers get results fast by **analyzing the video they upload**, then **multiplyi
 ```
 upload (Forge /media)
     → POST /jobs/buyer/multiply   (youtube-worker, internal)
-        ffprobe + AD_B beats scaled to duration
+        ffprobe + scenario pick (hook / mechanic / AD_B)
         explode locale × CTA with parent_creative_id
-    → buyer sees N variants immediately
-    → n8n webhook localizes/renders MP4s (existing farm)
-    → optional extract_signals --skip-ocr (deep_job_id)
+        NL/PL jobs status=blocked unless compliance_allow
+    → buyer sees N variants immediately (hold chips on restricted geos)
+    → n8n webhook localizes/renders ready geos (existing farm)
+    → async buyer_deep: Gemini native video rewrites beats + optional extract_signals
 ```
 
 ## Why this exists
@@ -31,7 +32,11 @@ Keys and file formats: [SECRETS.md](SECRETS.md). Worker token is `CAPTURE_API_TO
 }
 ```
 
-Response (sync, typically 1–3s): `analysis` (probe + 6 scaled beats) + `jobs[]` (geo × CTA) + optional `deep_job_id`.
+Response (sync, typically 1–3s): `analysis` + `jobs[]` + `summary.ready_geos` / `blocked_geos` + optional `deep_job_id`.
+
+`compliance_allow: true` unlocks NL/PL (licensed operator brief only). Default is hold.
+
+Duration → scenario: `<8s` `AD_HOOK_ONLY`, `8–18s` `AD_MECHANIC_SHOWCASE`, else `AD_B`.
 
 Allowed download hosts: `forge`, `forge.vizioner.xyz`, `*.vizioner.xyz`.
 
@@ -41,6 +46,8 @@ Allowed download hosts: `forge`, `forge.vizioner.xyz`, `*.vizioner.xyz`.
 python3 library/_pipeline/constructor/analyze_upload.py --video /path/master.mp4
 python3 library/_pipeline/constructor/multiply.py --analysis analysis.json --geos PL,NL --dry-run
 python3 library/_pipeline/constructor/test_multiply.py
+python3 library/_pipeline/constructor/test_clone.py
+python3 library/_pipeline/constructor/test_deep_analyze.py
 ```
 
 Artifacts on Hetzner: `/opt/igaming-library/_pipeline/buyer_uploads/<analysis_id>/`.

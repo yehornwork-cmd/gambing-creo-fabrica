@@ -1,8 +1,14 @@
 {
   "schema_version": "1.0.0",
-  "notes": "Forge buyer geo codes → constructor locale + copy pack. Packs that do not exist yet fall back to locale_packs/en.json. n8n still localizes VO/disclaimer for the live farm.",
+  "notes": "Forge buyer geo codes → constructor locale + copy pack. gate=restricted jobs are status=blocked unless multiply(..., compliance_allow=True). n8n still localizes VO for ready geos.",
   "geos": {
-    "NL": { "locale": "nl", "language": "nl", "pack": "locale_packs/en.json" },
+    "NL": {
+      "locale": "nl",
+      "language": "nl",
+      "pack": "locale_packs/en.json",
+      "gate": "restricted",
+      "gate_reason": "nl_untargeted_gambling_ads"
+    },
     "CH-DE": { "locale": "de", "language": "de", "pack": "locale_packs/en.json" },
     "CH-FR": { "locale": "fr", "language": "fr", "pack": "locale_packs/en.json" },
     "FI": { "locale": "fi", "language": "fi", "pack": "locale_packs/en.json" },
@@ -12,7 +18,13 @@
     "SK": { "locale": "sk", "language": "sk", "pack": "locale_packs/en.json" },
     "SI": { "locale": "sl", "language": "sl", "pack": "locale_packs/en.json" },
     "HR": { "locale": "hr", "language": "hr", "pack": "locale_packs/en.json" },
-    "PL": { "locale": "pl", "language": "pl", "pack": "locale_packs/pl.json" },
+    "PL": {
+      "locale": "pl",
+      "language": "pl",
+      "pack": "locale_packs/pl.json",
+      "gate": "restricted",
+      "gate_reason": "pl_private_casino_ads"
+    },
     "HU": { "locale": "hu", "language": "hu", "pack": "locale_packs/en.json" },
     "AE": { "locale": "ar", "language": "ar", "pack": "locale_packs/en.json" },
     "SA": { "locale": "ar", "language": "ar", "pack": "locale_packs/en.json" },

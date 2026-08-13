@@ -21,8 +21,20 @@
       "cta_text": "Graj teraz",
       "vo_restrictions": [],
       "copy_status": "placeholder",
-      "notes": "Placeholder PL pack (SpyTrend sample was PL-heavy). User must validate before paid media."
+      "notes": "Placeholder PL pack. Private online casino/slots ads are not a normal affiliate lane — jobs stay blocked unless compliance.allow."
+    },
+    "nl": {
+      "disclaimer_18_plus": "24+ | Speel bewust | Kansspelen kunnen verslavend zijn",
+      "cta_text": "Speel nu",
+      "vo_restrictions": ["no_celebrity_talent", "no_untargeted_digital"],
+      "copy_status": "placeholder",
+      "min_age": 24,
+      "notes": "KSA Mar 2026: digital ads must prove ≥95% of reached audience is 24+. Default gate=restricted."
     }
+  },
+  "geo_gates": {
+    "NL": { "gate": "restricted", "reason": "nl_untargeted_gambling_ads" },
+    "PL": { "gate": "restricted", "reason": "pl_private_casino_ads" }
   },
   "blocked_claims": [
     "guaranteed_win",

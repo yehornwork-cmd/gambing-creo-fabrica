@@ -35,6 +35,7 @@ export async function submitRun(
 
   let analysis: Record<string, unknown> | null = null;
   let multiplyNotice = "";
+  let n8nGeos = input.geos;
   try {
     const plan = await triggerBuyerMultiply({
       master_url: input.master_url,
@@ -46,11 +47,21 @@ export async function submitRun(
     if (plan) {
       analysis = plan.analysis ?? null;
       const summary = (plan.summary ?? {}) as Record<string, unknown>;
+      const readyGeos = Array.isArray(summary.ready_geos) ? (summary.ready_geos as string[]) : [];
+      const blockedGeos = Array.isArray(summary.blocked_geos) ? (summary.blocked_geos as string[]) : [];
+      const planned = Array.isArray(summary.n8n_geos) ? (summary.n8n_geos as string[]) : [];
+      if (readyGeos.length > 0) n8nGeos = readyGeos;
+      else if (planned.length > 0) n8nGeos = planned;
       const multiply = {
         analysis_id: plan.analysis_id,
         jobs: summary.jobs ?? plan.jobs?.length ?? 0,
+        ready_jobs: summary.ready_jobs,
+        blocked_jobs: summary.blocked_jobs,
         job_ids: summary.job_ids,
         geos: summary.geos,
+        ready_geos: readyGeos,
+        blocked_geos: blockedGeos,
+        n8n_geos: n8nGeos,
         ctas: summary.ctas,
         format: summary.format,
         duration_sec: summary.duration_sec,
@@ -65,7 +76,11 @@ export async function submitRun(
       const beats = Array.isArray((analysis as { beats?: unknown[] } | null)?.beats)
         ? (analysis as { beats: unknown[] }).beats.length
         : 0;
-      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План размножения: ${String(multiply.jobs)} вариантов. `;
+      multiplyNotice = `Ролик разобран (${beats} битов, ${String(summary.format ?? "")}). План: ${String(summary.ready_jobs ?? multiply.jobs)} к рендеру`;
+      if (blockedGeos.length) {
+        multiplyNotice += `, hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow)`;
+      }
+      multiplyNotice += ". ";
     }
   } catch {
     multiplyNotice = "Разбор не успел за отведённое время — фабрика всё равно локализует мастер. ";
@@ -73,7 +88,7 @@ export async function submitRun(
 
   void triggerRun({
     master_url: input.master_url,
-    geos: input.geos,
+    geos: n8nGeos,
     product: input.product,
     intent: input.intent,
     tone: input.tone,
@@ -193,6 +208,7 @@ def main() -> int:
       status?: string;
       cta_main?: string;
       disclaimer?: string;
+      blocked_reason?: string | null;
     }[];
   } | null;
 };"""
@@ -254,7 +270,7 @@ def main() -> int:
           <div className="mt-2 flex flex-wrap gap-1.5">
             {run.report.multiply.variants.slice(0, 12).map((v) => (
               <span key={v.job_id} className="rounded-full border border-line bg-ink2 px-2 py-0.5 text-[11px] text-t2">
-                {v.geo} · {v.cta_main || v.cta_id}
+                {v.geo} · {v.cta_main || v.cta_id}{v.status === "blocked" ? " · hold" : ""}
               </span>
             ))}
           </div>

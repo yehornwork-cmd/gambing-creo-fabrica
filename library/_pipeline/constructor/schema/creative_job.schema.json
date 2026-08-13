@@ -93,7 +93,9 @@
           "type": "array",
           "items": { "type": "string" }
         },
-        "duration_sec": { "type": "number" }
+        "duration_sec": { "type": "number" },
+        "t_start": { "type": "number" },
+        "t_end": { "type": "number" }
       }
     }
   }

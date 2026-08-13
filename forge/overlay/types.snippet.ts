@@ -7,6 +7,7 @@ export type BuyerJobPreview = {
   status?: string;
   cta_main?: string;
   disclaimer?: string;
+  blocked_reason?: string | null;
 };
 
 export type RunReportShape = {
@@ -64,6 +65,11 @@ export type RunReportShape = {
     duration_sec?: number;
     beats?: number;
     deep_job_id?: string | null;
+    ready_jobs?: number;
+    blocked_jobs?: number;
+    ready_geos?: string[];
+    blocked_geos?: string[];
+    n8n_geos?: string[];
     variants?: BuyerJobPreview[];
   } | null;
 };

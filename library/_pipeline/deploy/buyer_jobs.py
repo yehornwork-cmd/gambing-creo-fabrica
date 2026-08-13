@@ -97,6 +97,7 @@ def run_buyer_multiply(params: dict[str, Any]) -> dict[str, Any]:
         constructor_dir=CONSTRUCTOR,
         repo_root=repo_root,
         cta_ids=params.get("cta_ids"),
+        compliance_allow=bool(params.get("compliance_allow")),
     )
 
     jobs_dir = out_dir / "jobs"
@@ -118,36 +119,70 @@ def run_buyer_multiply(params: dict[str, Any]) -> dict[str, Any]:
 
 
 def run_buyer_deep(params: dict[str, Any]) -> dict[str, Any]:
-    """Optional motion/scene pass. Does not block the buyer-facing multiply plan."""
+    """Gemini native-video rewrite of beats. Does not block the sync multiply plan."""
     video = Path(params.get("video_path") or "")
     analysis_id = params.get("analysis_id") or video.parent.name
+    analysis_path = BUYER_ROOT / analysis_id / "analysis.json"
     if not video.is_file():
         raise FileNotFoundError(f"video not found: {video}")
-    out = BUYER_ROOT / analysis_id / "signals.json"
-    script = PIPELINE_ROOT / "orchestrator" / "signals" / "extract_signals.py"
-    if not script.is_file():
-        return {"status": "skipped", "reason": "extract_signals.py missing", "exit_code": 0}
-    import subprocess
+    if str(CONSTRUCTOR) not in sys.path:
+        sys.path.insert(0, str(CONSTRUCTOR))
+    import deep_analyze  # noqa: E402
 
-    proc = subprocess.run(
-        [
-            sys.executable,
-            str(script),
-            "--video",
-            str(video),
-            "--out",
-            str(out),
-            "--skip-ocr",
-        ],
-        capture_output=True,
-        text=True,
-        cwd=str(script.parent),
-        env=os.environ.copy(),
-        check=False,
-    )
+    if analysis_path.is_file():
+        analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+    else:
+        analysis = analyze_upload.analyze(video=video, analysis_id=analysis_id, constructor_dir=CONSTRUCTOR)
+    updated = deep_analyze.deepen(analysis, video, constructor_dir=CONSTRUCTOR)
+    _write(analysis_path, updated)
+
+    geos = params.get("geos") or []
+    jobs = None
+    summary = None
+    if geos:
+        repo_root = LIBRARY_ROOT.parent if (LIBRARY_ROOT.parent / "library").is_dir() else LIBRARY_ROOT
+        jobs = multiply.multiply(
+            analysis=updated,
+            geos=list(geos),
+            constructor_dir=CONSTRUCTOR,
+            repo_root=repo_root,
+            cta_ids=params.get("cta_ids"),
+            compliance_allow=bool(params.get("compliance_allow")),
+        )
+        jobs_dir = BUYER_ROOT / analysis_id / "jobs"
+        _write(jobs_dir / "jobs.json", jobs)
+        summary = multiply.summary_payload(updated, jobs)
+        _write(BUYER_ROOT / analysis_id / "summary.json", summary)
+
+    signals_script = PIPELINE_ROOT / "orchestrator" / "signals" / "extract_signals.py"
+    signals_status = "skipped"
+    if signals_script.is_file():
+        import subprocess
+
+        out = BUYER_ROOT / analysis_id / "signals.json"
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(signals_script),
+                "--video",
+                str(video),
+                "--out",
+                str(out),
+                "--skip-ocr",
+            ],
+            capture_output=True,
+            text=True,
+            cwd=str(signals_script.parent),
+            env=os.environ.copy(),
+            check=False,
+        )
+        signals_status = "success" if proc.returncode == 0 else "failed"
+
     return {
-        "status": "success" if proc.returncode == 0 else "failed",
-        "exit_code": proc.returncode,
-        "signals_path": str(out) if proc.returncode == 0 else None,
-        "output_tail": ((proc.stdout or "") + (proc.stderr or ""))[-8000:],
+        "status": "success",
+        "exit_code": 0,
+        "analysis_status": updated.get("status"),
+        "beats": len(updated.get("beats") or []),
+        "signals": signals_status,
+        "summary": summary,
     }

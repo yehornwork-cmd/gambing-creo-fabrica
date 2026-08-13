@@ -19,6 +19,7 @@ CONSTRUCTOR_DIR = Path(__file__).resolve().parent
 REPO_ROOT = CONSTRUCTOR_DIR.parents[2]
 
 import explode  # noqa: E402  (sibling module)
+import lint  # noqa: E402
 
 GEO_ID_RE = re.compile(r"[^a-z0-9]+")
 
@@ -68,12 +69,16 @@ def resolve_geo(geo: str, geo_map: dict[str, dict[str, str]]) -> dict[str, str]:
             "locale": row["locale"],
             "language": row.get("language") or row["locale"],
             "pack": row.get("pack") or "locale_packs/en.json",
+            "gate": row.get("gate") or "open",
+            "gate_reason": row.get("gate_reason") or "",
         }
     return {
         "id": key,
         "locale": key.lower(),
         "language": key.lower(),
         "pack": "locale_packs/en.json",
+        "gate": "open",
+        "gate_reason": "",
     }
 
 
@@ -128,6 +133,7 @@ def multiply(
     constructor_dir: Path | None = None,
     repo_root: Path | None = None,
     cta_ids: list[str] | None = None,
+    compliance_allow: bool = False,
 ) -> list[dict[str, Any]]:
     constructor_dir = constructor_dir or CONSTRUCTOR_DIR
     repo_root = repo_root or REPO_ROOT
@@ -192,11 +198,18 @@ def multiply(
             job["render"]["variables"]["name"] = job["job_id"]
             job["render"]["variables"]["parent_creative_id"] = parent_id
             job["render"]["variables"]["forge_geo"] = geo_row["id"]
+            if geo_row.get("gate") == "restricted" and not compliance_allow:
+                job["status"] = "blocked"
+                job["blocked_reason"] = geo_row.get("gate_reason") or "geo_restricted"
             jobs.append(job)
-    return jobs
+    bonus_in_source = bool((analysis.get("vlm") or {}).get("has_bonus_footage"))
+    return lint.lint_jobs(jobs, bonus_in_source=bonus_in_source)
 
 
 def summary_payload(analysis: dict[str, Any], jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    ready = [job for job in jobs if job.get("status") != "blocked"]
+    blocked = [job for job in jobs if job.get("status") == "blocked"]
+    geo_of = lambda job: job["render"]["variables"].get("forge_geo") or job["geo"]
     return {
         "analysis_id": analysis.get("analysis_id"),
         "parent_creative_id": analysis.get("parent_creative_id") or analysis.get("analysis_id"),
@@ -204,9 +217,15 @@ def summary_payload(analysis: dict[str, Any], jobs: list[dict[str, Any]]) -> dic
         "duration_sec": (analysis.get("probe") or {}).get("duration_sec"),
         "beats": len(analysis.get("beats") or []),
         "jobs": len(jobs),
+        "ready_jobs": len(ready),
+        "blocked_jobs": len(blocked),
         "job_ids": [job["job_id"] for job in jobs],
-        "geos": sorted({job["render"]["variables"].get("forge_geo") or job["geo"] for job in jobs}),
+        "geos": sorted({geo_of(job) for job in jobs}),
+        "ready_geos": sorted({geo_of(job) for job in ready}),
+        "blocked_geos": sorted({geo_of(job) for job in blocked}),
         "ctas": sorted({job["cta_id"] for job in jobs}),
+        "n8n_geos": sorted({geo_of(job) for job in ready})
+        or sorted({geo_of(job) for job in jobs}),
     }
 
 
@@ -214,6 +233,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Explode a CreativeAnalysis into locale × CTA CreativeJobs.")
     parser.add_argument("--analysis", type=Path, required=True, help="Path to CreativeAnalysis JSON")
     parser.add_argument("--geos", required=True, help="Comma-separated Forge geo codes (PL,NL,...)")
+    parser.add_argument("--allow", action="store_true", help="Set compliance.allow for restricted geos (NL/PL)")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--dry-run", action="store_true")
     return parser
@@ -226,7 +246,7 @@ def main() -> int:
         return 2
     analysis = load_json(args.analysis)
     geos = [g.strip() for g in args.geos.split(",") if g.strip()]
-    jobs = multiply(analysis=analysis, geos=geos)
+    jobs = multiply(analysis=analysis, geos=geos, compliance_allow=args.allow)
     payload = summary_payload(analysis, jobs)
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     if args.dry_run:

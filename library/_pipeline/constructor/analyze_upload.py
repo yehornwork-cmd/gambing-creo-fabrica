@@ -139,6 +139,17 @@ def scale_scenario_beats(
     return beats
 
 
+def pick_scenario_id(duration_sec: float, requested: str | None = None) -> str:
+    """Short ads use the live hook/mechanic arcs; 18s+ stays on AD_B."""
+    if requested and requested != "AD_B":
+        return requested
+    if duration_sec > 0 and duration_sec < 8:
+        return "AD_HOOK_ONLY"
+    if duration_sec >= 8 and duration_sec < 18:
+        return "AD_MECHANIC_SHOWCASE"
+    return requested or "AD_B"
+
+
 def analyze(
     *,
     video: Path,
@@ -155,6 +166,7 @@ def analyze(
         raise FileNotFoundError(f"video not found: {video}")
 
     probe = probe_video(video)
+    scenario_id = pick_scenario_id(probe["duration_sec"], scenario_id)
     catalog = load_json(constructor_dir / "scenarios" / "catalog.json")
     entry = next((s for s in catalog["scenarios"] if s["scenario_id"] == scenario_id), None)
     if entry is None:

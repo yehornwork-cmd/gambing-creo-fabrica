@@ -14,14 +14,18 @@ Default Gates matrix: `ru+pl × 9x16 × 2 CTAs` with geo locked to locale → **
 constructor/
 ├── schema/creative_job.schema.json   # CreativeJob + lineage
 ├── schema/creative_analysis.schema.json
-├── scenarios/                        # AD_B live; 5 catalog stubs
+├── scenarios/                        # AD_B, AD_HOOK_ONLY, AD_MECHANIC_SHOWCASE live; 3 stubs
 ├── locale_packs/                     # ru seed, pl placeholder, en fallback
-├── geo_locale_map.json               # Forge buyer geos → locale packs
+├── geo_locale_map.json               # Forge buyer geos → locale packs + NL/PL gates
+├── substitution_catalog.json         # F5.1 equivalent clips per group
 ├── ctas/catalog.json
 ├── variant_matrix.json               # axes + constraints
 ├── explode.py                        # 1 template → N jobs + HyperFrames batch
 ├── analyze_upload.py                 # buyer master → CreativeAnalysis (ffprobe)
 ├── multiply.py                       # analysis × geos → jobs with parent_creative_id
+├── deep_analyze.py                   # Gemini native video beat rewrite
+├── lint.py                           # blocked_claims QC
+├── clone.py                          # substitution_group winner clones
 └── jobs/                             # generated CreativeJobs + batch.json
 ```
 
@@ -33,7 +37,7 @@ python3 library/_pipeline/constructor/multiply.py --analysis /tmp/analysis.json 
 python3 library/_pipeline/constructor/test_multiply.py
 ```
 
-See [BUYER_LOOP.md](../BUYER_LOOP.md). One uploaded winner × selected Forge geos × 2 CTAs. Footage stays the master; copy/CTA change.
+Constructor: `clone.py` (F5.1), `lint.py` (F4.1), `deep_analyze.py` (F6.2). Live arcs: AD_B, AD_HOOK_ONLY, AD_MECHANIC_SHOWCASE.
 
 ## Explode
 
