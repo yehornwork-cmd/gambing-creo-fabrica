@@ -1,0 +1,16 @@
+{
+  "game_id": "vs20olympgate",
+  "schema_version": "1.0.0",
+  "status": "references_only",
+  "note": "Binary assets not in repo — paths for capture worker + render pipeline",
+  "paths": {
+    "screencast_primary": "assets/production/screencast/gates_of_olympus_bonus_hunt_hq.mp4",
+    "screencast_fallback": "assets/production/screencast/gates_of_olympus_20spins_hq.mp4",
+    "end_card": "assets/logo/logo_end_card_compliance_9x16.png",
+    "render_output": "assets/production/pilot/gates_pilot_ad_v2_30s.mp4"
+  },
+  "hyperframes": {
+    "project": "hyperframes/gates-pilot-ad-v3/",
+    "preview": "hyperframes/gates-pilot-ad-v3/preview.mp4"
+  }
+}

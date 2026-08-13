@@ -1,0 +1,19 @@
+name: Preset batch dry-run
+
+on:
+  push:
+    branches: [main, 'cursor/**']
+  pull_request:
+
+jobs:
+  presets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install certifi
+      - run: |
+          python3 library/_pipeline/orchestrator/preset_factory.py validate
+          python3 tools/preset_batch.py library/games/vs20olympgate/briefs/pilot-ad-v3/BRIEF.md --dry-run

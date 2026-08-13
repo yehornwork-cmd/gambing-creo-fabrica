@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "spytrend": {
+      "url": "https://mcp.spytrend.com/mcp",
+      "headersHelper": "bash bin/spytrend-token.sh"
+    },
+    "magnific": {
+      "url": "https://mcp.magnific.com"
+    }
+  }
+}

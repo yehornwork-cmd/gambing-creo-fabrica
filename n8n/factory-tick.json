@@ -1,0 +1,74 @@
+{
+  "name": "Factory tick webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 6 hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "command": "cd /workspace && python3 library/_pipeline/orchestrator/factory_run.py tick"
+      },
+      "id": "factory-tick",
+      "name": "Factory tick",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "command": "cd /workspace && python3 library/_pipeline/orchestrator/factory_run.py status"
+      },
+      "id": "factory-status",
+      "name": "Factory status",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [720, 300]
+    }
+  ],
+  "connections": {
+    "Every 6 hours": {
+      "main": [
+        [
+          {
+            "node": "Factory tick",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Factory tick": {
+      "main": [
+        [
+          {
+            "node": "Factory status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Stub workflow — triggers factory_run.py tick on schedule. Import into n8n and point executeCommand to repo path on worker host."
+  }
+}

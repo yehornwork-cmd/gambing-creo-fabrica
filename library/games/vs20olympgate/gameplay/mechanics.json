@@ -1,0 +1,81 @@
+{
+  "core_mechanics": [
+    {
+      "id": "pay_anywhere",
+      "name": "Pay Anywhere",
+      "name_ru": "Оплата где угодно",
+      "description": "8+ matching symbols anywhere on 6x5 grid trigger win. No adjacency, no paylines.",
+      "min_symbols": 8,
+      "max_symbols": 30
+    },
+    {
+      "id": "tumble",
+      "name": "Tumble / Cascade",
+      "name_ru": "Каскад / Tumble",
+      "description": "Winning symbols disappear, new symbols fall from above. Continues until no new wins. Free re-spins within same paid spin.",
+      "scatter_tumbles": false,
+      "multiplier_tumbles": false,
+      "unlimited_chain": true
+    },
+    {
+      "id": "base_multiplier",
+      "name": "Random Multiplier (Base Game)",
+      "name_ru": "Случайный множитель (база)",
+      "description": "Multiplier orbs land randomly. After all tumbles, sum of all orbs multiplies total win. Only applies if win occurred.",
+      "resets_each_spin": true
+    },
+    {
+      "id": "free_spins",
+      "name": "Free Spins",
+      "name_ru": "Бесплатные спины",
+      "trigger": "4+ Scatter symbols",
+      "initial_spins": 15,
+      "retrigger": { "min_scatter": 3, "extra_spins": 5 },
+      "special_reels": true
+    },
+    {
+      "id": "global_multiplier_fs",
+      "name": "Global Multiplier (Free Spins)",
+      "name_ru": "Накопительный множитель (FS)",
+      "description": "Each multiplier orb on a winning spin adds to total multiplier for entire FS round. Total never resets during feature.",
+      "example": "Total 7 + orbs 3+6 on win 2.5x = 2.5 * (7+3+6) = 40x. New total = 16"
+    },
+    {
+      "id": "win_cap",
+      "name": "Win Cap",
+      "name_ru": "Лимит выигрыша",
+      "max_multiplier": 5000,
+      "behavior": "Round ends immediately when 5000x reached"
+    }
+  ],
+  "optional_features": [
+    {
+      "id": "ante_bet",
+      "name": "Ante Bet / Double Chance",
+      "name_ru": "Ante Bet / Двойной шанс",
+      "cost": "+25% stake",
+      "effect": "Doubles scatter frequency, uses alternate reel set",
+      "disables": ["bonus_buy"],
+      "rtp": 96.5
+    },
+    {
+      "id": "bonus_buy",
+      "name": "Bonus Buy / Buy Free Spins",
+      "name_ru": "Покупка бонуса",
+      "cost": "100x stake",
+      "effect": "Guaranteed 4 scatters on next spin, triggers 15 FS",
+      "geo_restricted": true,
+      "restricted_markets": ["UK", "Netherlands", "others"],
+      "disabled_when": "ante_bet active"
+    }
+  ],
+  "flow_sequence": [
+    "Player sets bet and spins 6x5 grid",
+    "Symbols land, 8+ matches anywhere = win",
+    "Winning symbols removed, tumble cascade begins",
+    "Multiplier orbs may land (Zeus throws them)",
+    "After all tumbles: orb values summed and applied to win",
+    "4+ scatters trigger 15 Free Spins with global multiplier",
+    "During FS: multipliers accumulate, retriggers add +5 spins"
+  ]
+}

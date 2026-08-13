@@ -1,0 +1,30 @@
+{
+  "game_id": "vs20olympgate",
+  "seeded_from": "context/gates-of-olympus",
+  "seeded_at": "2026-08-12",
+  "context_refs": {
+    "frames": "context/gates-of-olympus/frames/",
+    "frame_manifest": "context/gates-of-olympus/frame_manifest.json",
+    "build_draft": "context/gates-of-olympus/build_draft_vod_youtube_vs20olympgate_Axv9FBmoNvc.json",
+    "hyperframes_output": "output/gates-pilot-ad-v3/",
+    "hyperframes_promoted": "hyperframes/gates-pilot-ad-v3/"
+  },
+  "intelligence": {
+    "spytrend_snapshot": "intelligence/spytrend_snapshot.md",
+    "updated_at": "2026-08-13"
+  },
+  "compositions": {
+    "scenes_dir": "compositions/scenes/",
+    "beats": ["b01-hook", "b02-tumble", "b03-scatter", "b04-orb", "b05-climax", "b06-endcard"]
+  },
+  "assets_expected": {
+    "screencast_primary": "assets/production/screencast/gates_of_olympus_bonus_hunt_hq.mp4",
+    "screencast_fallback": "assets/production/screencast/gates_of_olympus_20spins_hq.mp4",
+    "end_card": "assets/logo/logo_end_card_compliance_9x16.png"
+  },
+  "capture_status": {
+    "bonus_triggered": false,
+    "recapture_needed": true,
+    "note": "50-spin session \u2014 no FS trigger. See gameplay/game_analysis_v3.json"
+  }
+}

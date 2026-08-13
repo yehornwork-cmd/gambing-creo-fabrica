@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Создаёт .env и файлы secrets/ если их нет. Запусти один раз.
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+if [[ ! -f .env ]]; then
+  cp .env.example .env 2>/dev/null || true
+fi
+if [[ ! -f .env ]] || ! grep -q 'HF_KEY=' .env 2>/dev/null; then
+  cat > .env <<'EOF'
+# Вставь ключи ПОСЛЕ знака =
+HF_KEY=
+PERPLEXITY_API_KEY=
+FAL_KEY=
+CAPTURE_API_TOKEN=
+CAPTURE_WORKER_URL=http://65.108.48.54:8787
+EOF
+fi
+
+SECRETS="$ROOT/library/_pipeline/secrets"
+mkdir -p "$SECRETS"
+for name in HF_KEY PERPLEXITY_API_KEY FAL_KEY; do
+  f="$SECRETS/${name}.key"
+  if [[ ! -f "$f" ]]; then
+    cp "$SECRETS/${name}.key.example" "$f" 2>/dev/null || echo "ВСТАВЬ_КЛЮЧ" > "$f"
+  fi
+done
+
+echo ""
+echo "Готово. Отредактируй ОДИН из вариантов:"
+echo "  1) $ROOT/.env                    ← проще всего"
+echo "  2) $SECRETS/HF_KEY.key"
+echo "     $SECRETS/PERPLEXITY_API_KEY.key"
+echo "     $SECRETS/FAL_KEY.key"
+echo ""
+echo "Проверка: bin/connect-factory --strict"

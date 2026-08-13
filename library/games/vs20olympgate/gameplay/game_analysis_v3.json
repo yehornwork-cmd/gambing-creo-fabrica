@@ -1,0 +1,128 @@
+{
+  "analysis_id": "go_analysis_screencast_v3",
+  "taxonomy_version": "2.0.0",
+  "game": {
+    "title": "Gates of Olympus",
+    "provider": "Pragmatic Play",
+    "game_id": "vs20olympgate"
+  },
+  "source": {
+    "type": "hq_screencast_v2",
+    "video_path": "assets/production/screencast/gates_of_olympus_bonus_hunt_hq.mp4",
+    "duration_sec": 279.27,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "viewport": "390x844 mobile @ 2x",
+    "spins": 50,
+    "cropdetect": "crop=1072:1904:4:10",
+    "letterbox_pct_v1_baseline": 62.0,
+    "active_content_pct": 99.2,
+    "capture_date": "2026-08-10T16:22:00+00:00"
+  },
+  "session_summary": {
+    "total_spins": 50,
+    "bet_display": "€2.00",
+    "starting_balance": 99990.0,
+    "ending_balance_observed": 99986.0,
+    "max_win_observed_eur": null,
+    "bonus_triggered": false,
+    "free_spins_observed": false,
+    "ante_bet_enabled": false,
+    "note": "50-spin bonus hunt — no 4-scatter FS trigger. Ante Bet toggle clicks did not persist OFF state."
+  },
+  "segments_verified": [
+    {
+      "segment_id": "seg_v2_motion_hook",
+      "time_start_sec": 48.0,
+      "time_end_sec": 51.5,
+      "ui_state": "spinning",
+      "taxonomy_tags": ["spin_button_press", "cascade"],
+      "meta_tags": ["motion_hook", "hook_candidate"],
+      "montage_tags": ["hard_cut"],
+      "audio_tags": ["reel_stop"],
+      "notes": "TAP TO STOP REELS — motion hook (not idle)"
+    },
+    {
+      "segment_id": "seg_v2_tumble_spin",
+      "time_start_sec": 52.0,
+      "time_end_sec": 57.0,
+      "ui_state": "spinning",
+      "taxonomy_tags": ["tumble_chain", "cluster_win"],
+      "meta_tags": ["hook_candidate"],
+      "audio_tags": ["tumble_cascade_sfx"],
+      "notes": "Reels in motion with symbols landing"
+    },
+    {
+      "segment_id": "seg_v2_scatter_proxy",
+      "time_start_sec": 54.0,
+      "time_end_sec": 60.0,
+      "ui_state": "spinning",
+      "taxonomy_tags": ["scatter_tease", "bonus_tease"],
+      "meta_tags": ["proxy_segment"],
+      "audio_tags": ["scatter_stinger"],
+      "notes": "Spin tension proxy — no 3-scatter frame found"
+    },
+    {
+      "segment_id": "seg_v2_grid_full",
+      "time_start_sec": 108.0,
+      "time_end_sec": 114.0,
+      "ui_state": "idle",
+      "taxonomy_tags": ["idle_grid", "multiplier_orb"],
+      "meta_tags": ["full_bleed"],
+      "notes": "Full grid + orb multiply hint banner"
+    },
+    {
+      "segment_id": "seg_v2_climax_proxy",
+      "time_start_sec": 52.0,
+      "time_end_sec": 57.0,
+      "ui_state": "spinning",
+      "taxonomy_tags": ["multiplier_climax"],
+      "meta_tags": ["proxy_segment", "climax_candidate", "recapture_needed"],
+      "montage_tags": ["zoom_punch"],
+      "audio_tags": ["big_win_stinger", "vo_ru_placeholder"],
+      "proxy_segment_id": "seg_06_orb_multiply",
+      "notes": "No big win in v2 capture — uses spin motion + v1 VO payoff text"
+    },
+    {
+      "segment_id": "seg_12_bonus_trigger",
+      "taxonomy_tags": ["bonus_trigger", "free_spins_start"],
+      "meta_tags": ["missing_in_capture", "recapture_needed"],
+      "status": "missing_in_capture",
+      "notes": "4-scatter + FS fanfare not captured in 50 spins"
+    },
+    {
+      "segment_id": "seg_17_multiplier_climax",
+      "taxonomy_tags": ["global_multiplier", "crown_hit", "mega_win"],
+      "meta_tags": ["missing_in_capture", "recapture_needed"],
+      "status": "missing_in_capture",
+      "notes": "No global x35 crown mega win — extended session or Bonus Buy required"
+    }
+  ],
+  "pilot_ad_trim_map_v2": {
+    "target_duration_sec": 30,
+    "output_path": "assets/production/pilot/gates_pilot_ad_v2_30s.mp4",
+    "hook_note": "B01 opens on spinning reels (48s), not idle grid",
+    "beats": [
+      { "beat": "B01_motion_hook", "segment_id": "seg_v2_motion_hook", "trim_in_sec": 48.0, "duration_sec": 3.5 },
+      { "beat": "B02_tumble_energy", "segment_id": "seg_v2_tumble_spin", "trim_in_sec": 52.0, "duration_sec": 5.0 },
+      { "beat": "B03_scatter_tension", "segment_id": "seg_v2_scatter_proxy", "trim_in_sec": 54.0, "duration_sec": 6.0 },
+      { "beat": "B04_orb_build", "segment_id": "seg_v2_grid_full", "trim_in_sec": 108.0, "duration_sec": 6.0 },
+      { "beat": "B05_win_climax", "segment_id": "seg_v2_climax_proxy", "trim_in_sec": 52.0, "duration_sec": 5.0,
+        "fallback_v1_trim": { "source": "gates_of_olympus_20spins_hq.mp4", "trim_in_sec": 52.0, "duration_sec": 5.0, "crop": true }
+      },
+      { "beat": "B06_end_card", "type": "logo_png", "asset": "assets/logo/logo_end_card_compliance_9x16.png", "duration_sec": 3.0 }
+    ],
+    "total_gameplay_sec": 25.5,
+    "total_with_endcard_sec": 28.5
+  },
+  "verification_notes": {
+    "method": "ffmpeg cropdetect + manual frame probe (_probe_v2/)",
+    "bonus_status": "NOT captured — 50 spins, credit 99990→99986",
+    "letterbox_fix": "v2 post-crop achieves 99.2% active content vs v1 38.3%",
+    "capture_quality_tags": {
+      "v1": ["letterbox_artifact"],
+      "v2": ["full_bleed"]
+    },
+    "ante_bet_capture_issue": "proposed:ante_bet_failed_toggle"
+  }
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Print marathon progress summary from state + latest runs.
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+echo "=== Creative Factory marathon status ==="
+python3 library/_pipeline/orchestrator/factory_run.py status
+echo
+python3 library/_pipeline/orchestrator/factory_run.py status --phase phase2
+echo
+echo "Latest runs:"
+ls -1t library/_pipeline/runs/ 2>/dev/null | head -5 | while read -r r; do
+  echo "  - $r"
+done
+echo
+bash bin/connect-factory 2>/dev/null || true

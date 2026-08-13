@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Unattended marathon daemon — refresh intel, batch dry-run, wait for keys, execute when ready.
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+# shellcheck disable=SC1091
+source library/_pipeline/orchestrator/load_env.sh
+
+LOG="${REPO_ROOT}/library/_pipeline/runs/marathon_daemon.log"
+BRIEF="library/games/vs20olympgate/briefs/pilot-ad-v3/BRIEF.md"
+
+log() { printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" | tee -a "$LOG"; }
+
+log "marathon daemon start"
+
+while true; do
+  python3 tools/spytrend_snapshot.py >>"$LOG" 2>&1 || log "spytrend refresh skipped"
+  bash bin/factory-batch "$BRIEF" --dry-run >>"$LOG" 2>&1 || log "batch dry-run had failures"
+
+  if bash bin/connect-factory --strict >>"$LOG" 2>&1; then
+    log "connectors ready — executing ugc_streamer_template"
+    python3 library/_pipeline/orchestrator/preset_factory.py run ugc_streamer_template "$BRIEF" \
+      --game-id vs20olympgate --game-title "Gates of Olympus" >>"$LOG" 2>&1 \
+      && python3 library/_pipeline/orchestrator/factory_run.py complete P8.1 --phase phase2 \
+      && python3 library/_pipeline/orchestrator/factory_run.py complete P8.2 --phase phase2 \
+      && log "P8.1+P8.2 complete" \
+      && break
+  fi
+
+  log "connectors not ready — sleep 300s"
+  sleep 300
+done
+
+log "marathon daemon done"

@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "game_id": "vs20olympgate",
+  "geo": {
+    "default": {
+      "disclaimer_18_plus": "18+ | Play responsibly",
+      "cta_text": "Play Now",
+      "vo_restrictions": [],
+      "notes": "User must validate per target GEO before render."
+    },
+    "PL": {
+      "disclaimer_18_plus": "18+ | Graj odpowiedzialnie",
+      "cta_text": "Zagraj teraz",
+      "vo_restrictions": ["no_guaranteed_win"],
+      "notes": "SpyTrend sample: PL affiliate ads use star-rating hooks — avoid mirroring fake ratings."
+    },
+    "DE": {
+      "disclaimer_18_plus": "18+ | Glücksspiel kann süchtig machen",
+      "cta_text": "Jetzt spielen",
+      "vo_restrictions": ["no_guaranteed_win"],
+      "notes": "Strict responsible-gaming copy required."
+    },
+    "CA": {
+      "disclaimer_18_plus": "19+ | Play responsibly (varies by province)",
+      "cta_text": "Play Now",
+      "vo_restrictions": [],
+      "notes": "SpyTrend sample: CA affiliate landers on *.pics domains."
+    },
+    "CZ": {
+      "disclaimer_18_plus": "18+ | Hrajte zodpovědně",
+      "cta_text": "Hrát nyní",
+      "vo_restrictions": [],
+      "notes": "SpyTrend: direct Gates Of Olympus title ads observed."
+    }
+  },
+  "end_card_slots": {
+    "logo_asset": "assets/logo/logo_end_card_compliance_9x16.png",
+    "cta_slot": "compositions/scenes/b06-endcard.html [data-slot=cta_text]",
+    "disclaimer_slot": "compositions/scenes/b06-endcard.html [data-slot=disclaimer_18_plus]"
+  },
+  "blocked_claims": [
+    "guaranteed_win",
+    "bonus_triggered_when_not_in_capture",
+    "fake_star_rating_social_proof"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "project_id": "gates-pilot-ad-v3",
+  "game_id": "vs20olympgate",
+  "promoted_from": "output/gates-pilot-ad-v3/",
+  "promoted_at": "2026-08-13",
+  "canvas": { "width": 1080, "height": 1920, "aspect": "9:16" },
+  "duration_target_sec": 28.5,
+  "entry": "index.html",
+  "preview": "preview.mp4",
+  "scene_stubs": "library/games/vs20olympgate/compositions/scenes/",
+  "trim_map": "library/games/vs20olympgate/gameplay/pilot_ad_trim_map_v2.json",
+  "scenario": "library/games/vs20olympgate/gameplay/pilot_ad_scenario.md"
+}

@@ -1,0 +1,1648 @@
+{
+  "build_id": "build_draft_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+  "arc_id": "ARC_TEASE_NEAR_MISS_PAYOFF",
+  "game_id": "vs20olympgate",
+  "vod_id": "vod_youtube_vs20olympgate_Axv9FBmoNvc",
+  "format_variant": "streamer_pip",
+  "source": "dual_track_vod_analysis",
+  "beats": [
+    {
+      "beat_id": "CB_001",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 3.5,
+        "end": 6.0
+      },
+      "causal_prev_beat_id": null,
+      "game_layer": {
+        "taxonomy_tags": [
+          "spin_button_press"
+        ],
+        "ui_state": "",
+        "game_event": "",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_001",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0000_4s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "focus",
+        "intensity": 2,
+        "streamer_tags": [
+          "speaking",
+          "engaged"
+        ],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_001",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0000_4s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": []
+      }
+    },
+    {
+      "beat_id": "CB_002",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 6.0,
+        "end": 40.0
+      },
+      "causal_prev_beat_id": "CB_001",
+      "game_layer": {
+        "taxonomy_tags": [
+          "spin_button_press"
+        ],
+        "ui_state": null,
+        "game_event": null,
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_002",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0001_6s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "amusement",
+        "intensity": 2,
+        "streamer_tags": [
+          "pointing_gesture"
+        ],
+        "micro_gestures": [
+          "pointing_finger"
+        ],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_002",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0001_6s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": []
+      }
+    },
+    {
+      "beat_id": "CB_003",
+      "arc_slot_id": "ARC_TEASE",
+      "time_range_sec": {
+        "start": 40.0,
+        "end": 45.0
+      },
+      "causal_prev_beat_id": "CB_002",
+      "game_layer": {
+        "taxonomy_tags": [
+          "scatter_tease",
+          "bonus_trigger"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "bonus_trigger",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_003",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0002_40s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_003",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0002_40s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "scatter_tease",
+          "bonus_trigger"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_004",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 45.0,
+        "end": 49.5
+      },
+      "causal_prev_beat_id": "CB_003",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "scatter_tease"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_004",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0003_45s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_004",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0003_45s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "scatter_tease"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_005",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 49.5,
+        "end": 70.0
+      },
+      "causal_prev_beat_id": "CB_004",
+      "game_layer": {
+        "taxonomy_tags": [
+          "spin_button_press"
+        ],
+        "ui_state": "idle",
+        "game_event": "none",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_005",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0004_50s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_005",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0004_50s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": []
+      }
+    },
+    {
+      "beat_id": "CB_006",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 70.0,
+        "end": 77.0
+      },
+      "causal_prev_beat_id": "CB_005",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "win_event"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_006",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0005_70s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_006",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0005_70s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "win_event"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_007",
+      "arc_slot_id": "ARC_TEASE",
+      "time_range_sec": {
+        "start": 77.0,
+        "end": 106.5
+      },
+      "causal_prev_beat_id": "CB_006",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_win",
+          "scatter_tease"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_007",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0006_77s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "fulfilled",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_007",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0006_77s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_win",
+          "scatter_tease"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_008",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 106.5,
+        "end": 116.5
+      },
+      "causal_prev_beat_id": "CB_007",
+      "game_layer": {
+        "taxonomy_tags": [
+          "gates_of_olympus_1000",
+          "scatter_pays_mechanic",
+          "bonus_buy_available",
+          "ante_bet_enabled"
+        ],
+        "ui_state": "idle",
+        "game_event": "none",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_008",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0007_106s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_008",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0007_106s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "gates_of_olympus_1000",
+          "scatter_pays_mechanic",
+          "bonus_buy_available",
+          "ante_bet_enabled"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_009",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 116.5,
+        "end": 122.5
+      },
+      "causal_prev_beat_id": "CB_008",
+      "game_layer": {
+        "taxonomy_tags": [
+          "spin_button_press"
+        ],
+        "ui_state": "idle",
+        "game_event": "none",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_009",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0008_116s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_009",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0008_116s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": []
+      }
+    },
+    {
+      "beat_id": "CB_010",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 122.5,
+        "end": 172.0
+      },
+      "causal_prev_beat_id": "CB_009",
+      "game_layer": {
+        "taxonomy_tags": [
+          "win_display",
+          "scatter_visible",
+          "tumble_chain"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_010",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0009_122s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_010",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0009_122s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "win_display",
+          "scatter_visible",
+          "tumble_chain"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_011",
+      "arc_slot_id": "ARC_TEASE",
+      "time_range_sec": {
+        "start": 172.0,
+        "end": 183.0
+      },
+      "causal_prev_beat_id": "CB_010",
+      "game_layer": {
+        "taxonomy_tags": [
+          "win",
+          "scatter_tease",
+          "tumble_chain"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_011",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0010_172s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_011",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0010_172s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "win",
+          "scatter_tease",
+          "tumble_chain"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_012",
+      "arc_slot_id": "ARC_TEASE",
+      "time_range_sec": {
+        "start": 183.0,
+        "end": 192.0
+      },
+      "causal_prev_beat_id": "CB_011",
+      "game_layer": {
+        "taxonomy_tags": [
+          "scatter_tease",
+          "idle_spin_state"
+        ],
+        "ui_state": "idle",
+        "game_event": "scatter_land",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_012",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0011_183s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_012",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0011_183s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "scatter_tease",
+          "idle_spin_state"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_013",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 192.0,
+        "end": 195.0
+      },
+      "causal_prev_beat_id": "CB_012",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins_active",
+          "multiplier_active"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "multiplier_reveal",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_013",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0012_192s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "none",
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_013",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0012_192s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins_active",
+          "multiplier_active"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_014",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 195.0,
+        "end": 200.0
+      },
+      "causal_prev_beat_id": "CB_013",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins",
+          "multiplier"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "none",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_014",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0013_195s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_014",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0013_195s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins",
+          "multiplier"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_015",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 200.0,
+        "end": 202.5
+      },
+      "causal_prev_beat_id": "CB_014",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins",
+          "multiplier_active",
+          "tumble_mechanic"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "none",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_015",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0014_200s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_015",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0014_200s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins",
+          "multiplier_active",
+          "tumble_mechanic"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_016",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 202.5,
+        "end": 210.5
+      },
+      "causal_prev_beat_id": "CB_015",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins"
+        ],
+        "ui_state": "free_spins",
+        "game_event": null,
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_016",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0015_202s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_016",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0015_202s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_017",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 210.5,
+        "end": 216.5
+      },
+      "causal_prev_beat_id": "CB_016",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_017",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0016_210s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "fulfilled",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_017",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0016_210s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_018",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 216.5,
+        "end": 219.5
+      },
+      "causal_prev_beat_id": "CB_017",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins_active"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_018",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0017_216s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_018",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0017_216s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins_active"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_019",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 219.5,
+        "end": 224.0
+      },
+      "causal_prev_beat_id": "CB_018",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier_land",
+          "bonus_round"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_019",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0018_220s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "none",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_019",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0018_220s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier_land",
+          "bonus_round"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_020",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 224.0,
+        "end": 228.0
+      },
+      "causal_prev_beat_id": "CB_019",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier",
+          "win_highlight"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_020",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0019_224s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_020",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0019_224s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier",
+          "win_highlight"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_021",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 228.0,
+        "end": 234.5
+      },
+      "causal_prev_beat_id": "CB_020",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins",
+          "tumble_chain",
+          "multiplier"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "tumble_win_cleared",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_021",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0020_228s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_021",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0020_228s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins",
+          "tumble_chain",
+          "multiplier"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_022",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 234.5,
+        "end": 236.5
+      },
+      "causal_prev_beat_id": "CB_021",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_win",
+          "free_spins",
+          "multiplier_active"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_022",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0021_234s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "none",
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_022",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0021_234s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_win",
+          "free_spins",
+          "multiplier_active"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_023",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 236.5,
+        "end": 238.5
+      },
+      "causal_prev_beat_id": "CB_022",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "win_highlight",
+          "multiplier"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_023",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0022_236s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_023",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0022_236s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "win_highlight",
+          "multiplier"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_024",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 238.5,
+        "end": 242.5
+      },
+      "causal_prev_beat_id": "CB_023",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier_active",
+          "win_highlight"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_024",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0023_238s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_024",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0023_238s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier_active",
+          "win_highlight"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_025",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 242.5,
+        "end": 244.5
+      },
+      "causal_prev_beat_id": "CB_024",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier",
+          "win_highlight"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_025",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0024_242s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "excitement",
+        "intensity": 3,
+        "streamer_tags": [
+          "reaction_beat",
+          "disbelief_face"
+        ],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "fulfilled",
+          "arousal_level": 3,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_025",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0024_242s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "free_spins",
+          "multiplier",
+          "win_highlight"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_026",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 244.5,
+        "end": 252.0
+      },
+      "causal_prev_beat_id": "CB_025",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "big_win",
+          "win_highlight",
+          "free_spins"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_026",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0025_244s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_026",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0025_244s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "big_win",
+          "win_highlight",
+          "free_spins"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_027",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 252.0,
+        "end": 259.0
+      },
+      "causal_prev_beat_id": "CB_026",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "win_highlight",
+          "free_spins",
+          "multiplier_applied"
+        ],
+        "ui_state": "win_highlight",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_027",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0026_252s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_027",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0026_252s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "win_highlight",
+          "free_spins",
+          "multiplier_applied"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_028",
+      "arc_slot_id": "ARC_TEASE",
+      "time_range_sec": {
+        "start": 259.0,
+        "end": 263.5
+      },
+      "causal_prev_beat_id": "CB_027",
+      "game_layer": {
+        "taxonomy_tags": [
+          "free_spins",
+          "last_spin_tension",
+          "retrigger_tease",
+          "bonus_tease",
+          "scatter_tease",
+          "tumble_chain"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "retrigger_tease",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_028",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0027_259s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "neutral",
+        "intensity": 1,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "building",
+          "arousal_level": 1,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_028",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0027_259s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "free_spins",
+          "last_spin_tension",
+          "retrigger_tease",
+          "bonus_tease",
+          "scatter_tease",
+          "tumble_chain"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_029",
+      "arc_slot_id": "ARC_PAYOFF",
+      "time_range_sec": {
+        "start": 263.5,
+        "end": 279.5
+      },
+      "causal_prev_beat_id": "CB_028",
+      "game_layer": {
+        "taxonomy_tags": [
+          "big_win",
+          "bonus_end",
+          "total_multiplier_display"
+        ],
+        "ui_state": "big_win_banner",
+        "game_event": "bonus_round_payout",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_029",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0028_264s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": "none",
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_029",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0028_264s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "big_win",
+          "bonus_end",
+          "total_multiplier_display"
+        ]
+      }
+    },
+    {
+      "beat_id": "CB_030",
+      "arc_slot_id": "ARC_MECHANIC_SHOWCASE",
+      "time_range_sec": {
+        "start": 279.5,
+        "end": 282.5
+      },
+      "causal_prev_beat_id": "CB_029",
+      "game_layer": {
+        "taxonomy_tags": [
+          "tumble_chain",
+          "bonus_round",
+          "high_multiplier"
+        ],
+        "ui_state": "free_spins",
+        "game_event": "tumble_win",
+        "segment_ref": {
+          "source_type": "stream_vod",
+          "analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "segment_id": "CB_030",
+          "asset_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/game_0029_280s.png"
+        },
+        "confidence": 0.75
+      },
+      "streamer_layer": {
+        "present": true,
+        "emotion": null,
+        "intensity": 2,
+        "streamer_tags": [],
+        "micro_gestures": [],
+        "psychophysical": {
+          "expectation_state": "none",
+          "arousal_level": 2,
+          "attention_target": "game_screen",
+          "latency_after_game_ms": 400
+        },
+        "segment_ref": {
+          "persona_analysis_id": "dual_vod_youtube_vs20olympgate_Axv9FBmoNvc",
+          "beat_id": "CB_030",
+          "face_crop_path": "library/_pipeline/streamer_corpus/extracted_assets/vod_youtube_vs20olympgate_Axv9FBmoNvc/dual_frames/face_0029_280s.png"
+        }
+      },
+      "format_layer": {
+        "layout": "streamer_pip",
+        "aspect": "16:9"
+      },
+      "substitution": {
+        "substitution_group": "scatter_bonus_4",
+        "equivalent_taxonomy_tags": [
+          "tumble_chain",
+          "bonus_round",
+          "high_multiplier"
+        ]
+      }
+    }
+  ]
+}
