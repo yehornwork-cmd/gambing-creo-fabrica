@@ -14,8 +14,14 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PIPELINE = REPO_ROOT / "library" / "_pipeline"
 ROADMAP = PIPELINE / "phases" / "MVP_ROADMAP.md"
+ROADMAP_PHASE2 = PIPELINE / "phases" / "PHASE2_ROADMAP.md"
 STATE_FILE = PIPELINE / "state.json"
 RUNS_DIR = PIPELINE / "runs"
+
+ROADMAP_FILES = {
+    "mvp": ROADMAP,
+    "phase2": ROADMAP_PHASE2,
+}
 
 CHUNK_RE = re.compile(
     r"^\|\s*(P\d+\.\d+)\s*\|\s*([^|]+)\|\s*([^|]+)(?:\|\s*([^|]+))?\s*\|$"
@@ -45,11 +51,12 @@ def save_state(state: dict[str, Any]) -> None:
     STATE_FILE.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
 
 
-def parse_roadmap() -> list[dict[str, str]]:
-    if not ROADMAP.exists():
+def parse_roadmap(path: Path | None = None) -> list[dict[str, str]]:
+    roadmap_path = path or ROADMAP
+    if not roadmap_path.exists():
         return []
     chunks: list[dict[str, str]] = []
-    for line in ROADMAP.read_text(encoding="utf-8").splitlines():
+    for line in roadmap_path.read_text(encoding="utf-8").splitlines():
         match = CHUNK_RE.match(line.strip())
         if not match:
             continue
@@ -84,14 +91,17 @@ def run_id_for(chunk_id: str) -> str:
     return f"{stamp}_{chunk_id}"
 
 
-def cmd_status(_: argparse.Namespace) -> int:
+def cmd_status(args: argparse.Namespace) -> int:
     state = load_state()
-    chunks = parse_roadmap()
+    phase = getattr(args, "phase", "mvp")
+    roadmap_path = ROADMAP_FILES.get(phase, ROADMAP)
+    chunks = parse_roadmap(roadmap_path)
     completed = state.get("completed", [])
     blocked = state.get("blocked", {})
     pending = [c["id"] for c in chunks if c["id"] not in completed and c["id"] not in blocked]
 
     print("Creative Factory — status")
+    print(f"  phase:     {phase}")
     print(f"  repo:      {REPO_ROOT}")
     print(f"  updated:   {state.get('updated_at', '—')}")
     print(f"  completed: {len(completed)}/{len(chunks)} chunks")
@@ -112,9 +122,11 @@ def cmd_status(_: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_tick(_: argparse.Namespace) -> int:
+def cmd_tick(args: argparse.Namespace) -> int:
     state = load_state()
-    chunks = parse_roadmap()
+    phase = getattr(args, "phase", "mvp")
+    roadmap_path = ROADMAP_FILES.get(phase, ROADMAP)
+    chunks = parse_roadmap(roadmap_path)
     if not chunks:
         print("ERROR: MVP roadmap not found or empty.", file=sys.stderr)
         return 1
@@ -122,8 +134,8 @@ def cmd_tick(_: argparse.Namespace) -> int:
     chunk = next_chunk(state, chunks)
     if chunk is None:
         save_state(state)
-        print("No actionable chunk — all complete or blocked.")
-        cmd_status(_)
+        print(f"No actionable chunk in phase {phase} — all complete or blocked.")
+        cmd_status(args)
         return 0
 
     rid = run_id_for(chunk["id"])
@@ -177,7 +189,9 @@ python3 library/_pipeline/orchestrator/factory_run.py complete {chunk['id']}
 def cmd_complete(args: argparse.Namespace) -> int:
     state = load_state()
     chunk_id = args.chunk_id
-    if chunk_id not in {c["id"] for c in parse_roadmap()}:
+    phase = getattr(args, "phase", "mvp")
+    roadmap_path = ROADMAP_FILES.get(phase, ROADMAP)
+    if chunk_id not in {c["id"] for c in parse_roadmap(roadmap_path)}:
         print(f"ERROR: unknown chunk {chunk_id}", file=sys.stderr)
         return 1
     completed = set(state.get("completed", []))
@@ -196,13 +210,16 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_status = sub.add_parser("status", help="Show pipeline status")
+    p_status.add_argument("--phase", choices=list(ROADMAP_FILES.keys()), default="mvp")
     p_status.set_defaults(func=cmd_status)
 
     p_tick = sub.add_parser("tick", help="Start next bounded MVP chunk")
+    p_tick.add_argument("--phase", choices=list(ROADMAP_FILES.keys()), default="mvp")
     p_tick.set_defaults(func=cmd_tick)
 
     p_done = sub.add_parser("complete", help="Mark a chunk complete")
     p_done.add_argument("chunk_id", help="Chunk ID e.g. P1.2")
+    p_done.add_argument("--phase", choices=list(ROADMAP_FILES.keys()), default="mvp")
     p_done.set_defaults(func=cmd_complete)
 
     args = parser.parse_args()

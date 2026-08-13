@@ -42,6 +42,12 @@ python3 library/_pipeline/orchestrator/preset_factory.py run ugc_streamer_templa
   --game-id vs20olympgate --game-title "Gates of Olympus"
 ```
 
-## PR
+## Preset batch (10/10 dry-run)
 
-https://github.com/yehornwork-cmd/gambing-creo-fabrica/pull/6
+Run: `library/_pipeline/runs/20260813T042706Z_preset_batch/` (retried after fal routing fix)
+
+## Phase 2 started
+
+- P8.6 SpyTrend refresh automated via `tools/spytrend_snapshot.py`
+- `factory_run.py --phase phase2` supported
+- `bin/factory-batch` dry-runs all catalog presets

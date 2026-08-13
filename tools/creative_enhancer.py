@@ -77,6 +77,8 @@ def build_enhancement(
         "duration_sec": "30",
         "locale": "en",
         "competitor_hook": "",
+        "scenario_summary": "",
+        "capture_note": "",
     }
     if variables:
         merged_vars.update({k: str(v) for k, v in variables.items()})

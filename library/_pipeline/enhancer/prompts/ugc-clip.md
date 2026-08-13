@@ -7,6 +7,9 @@ You are generating a **UGC gameplay reaction clip** for a {{duration_sec}}s vert
 - Game: **{{game_title}}** (`{{game_id}}`)
 - Aspect: **{{aspect}}**
 - Locale: **{{locale}}**
+- Competitor insight: {{competitor_hook}}
+- Scenario: {{scenario_summary}}
+- Capture status: {{capture_note}}
 
 ## Brief
 

@@ -7,6 +7,9 @@ You are generating a **streamer reaction b-roll clip** prompt for a {{duration_s
 - Game: **{{game_title}}** (`{{game_id}}`)
 - Aspect: **{{aspect}}**
 - Locale: **{{locale}}**
+- Competitor insight: {{competitor_hook}}
+- Scenario: {{scenario_summary}}
+- Capture status: {{capture_note}}
 
 ## Brief
 

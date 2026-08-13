@@ -12,6 +12,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from factory_context import brief_source_path, enhancer_variables
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PIPELINE = REPO_ROOT / "library" / "_pipeline"
 RUNS_DIR = PIPELINE / "runs"
@@ -45,16 +48,6 @@ def shell_with_env(inner: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def load_competitor_hook(game_id: str) -> str:
-    intel = REPO_ROOT / "library" / "games" / game_id / "intelligence" / "spytrend_snapshot.md"
-    if not intel.is_file():
-        return "Use verified gameplay footage — avoid fake star-rating affiliate tropes."
-    for line in intel.read_text(encoding="utf-8").splitlines():
-        if line.startswith("1. **"):
-            return line.lstrip("1. ").strip()
-    return "Differentiate with authentic screencast + compliance end card."
-
-
 def run_enhancer(
     preset: dict[str, Any],
     brief: str,
@@ -66,14 +59,13 @@ def run_enhancer(
 ) -> str:
     flow = preset.get("enhancer_flow", "ugc-character")
     vars_json = json.dumps(
-        {
-            "game_title": game_title,
-            "game_id": game_id,
-            "aspect": preset.get("aspect", "9:16"),
-            "duration_sec": str(preset.get("duration_sec", 30)),
-            "locale": preset.get("locale", "en"),
-            "competitor_hook": load_competitor_hook(game_id),
-        }
+        enhancer_variables(
+            game_id=game_id,
+            game_title=game_title,
+            aspect=preset.get("aspect", "9:16"),
+            duration_sec=preset.get("duration_sec", 30),
+            locale=preset.get("locale", "en"),
+        )
     )
     no_llm = " --no-llm" if dry_run else ""
     inner = (
@@ -132,13 +124,7 @@ def write_run_log(run_dir: Path, payload: dict[str, Any]) -> None:
 
 def cmd_run(args: argparse.Namespace) -> int:
     preset = find_preset(args.preset or "ugc_streamer_template")
-    brief_path = Path(args.brief)
-    if brief_path.is_file():
-        brief = brief_path.read_text(encoding="utf-8")
-        brief_source = str(brief_path)
-    else:
-        brief = args.brief
-        brief_source = args.brief
+    brief, brief_source = brief_source_path(args.brief)
 
     run_id = f"{utc_stamp()}_{preset['id']}"
     run_dir = RUNS_DIR / run_id

@@ -1,6 +1,6 @@
 # SpyTrend snapshot — gates of olympus slot
 
-- **generated:** 2026-08-13T04:21:01+00:00
+- **generated:** 2026-08-13T04:27:06+00:00
 - **source:** SpyTrend MCP (Pro linked account)
 - **query_ads:** `gates of olympus slot`
 - **total_ads_matching:** 737

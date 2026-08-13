@@ -17,6 +17,9 @@ PIPELINE = REPO_ROOT / "library" / "_pipeline"
 CATALOG = PIPELINE / "catalog" / "video_presets.json"
 LOAD_ENV = PIPELINE / "orchestrator" / "load_env.sh"
 
+sys.path.insert(0, str(REPO_ROOT / "tools"))
+from factory_context import enhancer_variables
+
 
 def load_catalog() -> dict[str, Any]:
     if not CATALOG.is_file():
@@ -73,8 +76,10 @@ def cmd_run(args: argparse.Namespace) -> int:
         print(f"ERROR: unknown preset {args.preset_id}", file=sys.stderr)
         return 1
 
+    provider = preset.get("provider")
     family = preset.get("family")
-    if family == "ugc":
+
+    if provider == "higgsfield" and family == "ugc":
         runner = PIPELINE / "orchestrator" / "higgsfield_ugc.py"
         cmd = [
             "python3",
@@ -92,8 +97,18 @@ def cmd_run(args: argparse.Namespace) -> int:
             cmd.append("--dry-run")
         return subprocess.call(cmd, cwd=REPO_ROOT)
 
-    # Streamer and generic presets: enhance locally, optionally submit.
+    if provider == "fal":
+        return run_fal_preset(preset, args)
+
+    # Streamer higgsfield and other local-enhance presets.
     enhancer = REPO_ROOT / "tools" / "creative_enhancer.py"
+    vars_payload = enhancer_variables(
+        game_id=args.game_id,
+        game_title=args.game_title,
+        aspect=preset.get("aspect", "9:16"),
+        duration_sec=preset.get("duration_sec", 30),
+        locale=preset.get("locale", "en"),
+    )
     cmd = [
         "python3",
         str(enhancer),
@@ -101,15 +116,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         preset["enhancer_flow"],
         args.brief,
         "--vars",
-        json.dumps(
-            {
-                "game_title": args.game_title,
-                "game_id": args.game_id,
-                "aspect": preset.get("aspect", "9:16"),
-                "duration_sec": str(preset.get("duration_sec", 30)),
-                "locale": preset.get("locale", "en"),
-            }
-        ),
+        json.dumps(vars_payload),
     ]
     if args.dry_run:
         cmd.append("--no-llm")
@@ -118,6 +125,48 @@ def cmd_run(args: argparse.Namespace) -> int:
         print(proc.stderr or proc.stdout, file=sys.stderr)
         return proc.returncode
     print(proc.stdout)
+    return 0
+
+
+def run_fal_preset(preset: dict[str, Any], args: argparse.Namespace) -> int:
+    enhancer = REPO_ROOT / "tools" / "creative_enhancer.py"
+    vars_payload = enhancer_variables(
+        game_id=args.game_id,
+        game_title=args.game_title,
+        aspect=preset.get("aspect", "9:16"),
+        duration_sec=preset.get("duration_sec", 30),
+        locale=preset.get("locale", "en"),
+    )
+    cmd = [
+        "python3",
+        str(enhancer),
+        "enhance",
+        preset["enhancer_flow"],
+        args.brief,
+        "--vars",
+        json.dumps(vars_payload),
+        "--no-llm",
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO_ROOT)
+    if proc.returncode != 0:
+        print(proc.stderr or proc.stdout, file=sys.stderr)
+        return proc.returncode
+    prompt = proc.stdout.strip()
+    model_id = preset.get("fal_model_id")
+    if not model_id:
+        print(f"ERROR: fal preset {preset['id']} missing fal_model_id", file=sys.stderr)
+        return 1
+    body = dict(preset.get("default_arguments") or {})
+    body["prompt"] = prompt
+    if args.dry_run:
+        print(json.dumps({"dry_run": True, "model_id": model_id, "arguments": body}, indent=2))
+        return 0
+    inner = f"python3 tools/fal_client.py subscribe {shlex.quote(model_id)} {shlex.quote(json.dumps(body))}"
+    proc2 = shell_with_env(inner)
+    if proc2.returncode != 0:
+        print(proc2.stderr or proc2.stdout, file=sys.stderr)
+        return proc2.returncode
+    print(proc2.stdout)
     return 0
 
 

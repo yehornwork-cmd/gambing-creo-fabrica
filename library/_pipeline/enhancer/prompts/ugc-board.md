@@ -8,6 +8,9 @@ You are generating a **UGC ad storyboard** frame sequence description for {{game
 - Aspect: **{{aspect}}**
 - Target duration: **{{duration_sec}}s**
 - Locale: **{{locale}}**
+- Competitor insight: {{competitor_hook}}
+- Scenario: {{scenario_summary}}
+- Capture status: {{capture_note}}
 
 ## Brief
 

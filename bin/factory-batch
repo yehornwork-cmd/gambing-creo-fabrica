@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Dry-run all catalog presets against a game brief.
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+source "${REPO_ROOT}/library/_pipeline/orchestrator/load_env.sh"
+python3 "${REPO_ROOT}/tools/preset_batch.py" "$@"
