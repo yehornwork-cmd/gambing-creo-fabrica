@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Run path normalizer + library audit (P1.3 acceptance check).
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+echo "=== Factory path audit ==="
+python3 tools/path_normalizer.py library -r
+echo
+python3 tools/library_audit.py
+echo
+echo "Done."

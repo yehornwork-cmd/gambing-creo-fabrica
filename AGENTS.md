@@ -18,7 +18,7 @@ After `tick`, implement **exactly one** PR-sized chunk from the returned run log
 | `library/games/<game_id>/` | Canonical Game DNA, gameplay analysis, assets refs |
 | `library/_pipeline/` | Orchestrator, MVP roadmap, run logs |
 | `hyperframes/` | Renderable HyperFrames projects |
-| `tools/` | Helper scripts (path normalizer, capture client) |
+| `tools/` | Helper scripts (path normalizer, capture client, media connectors) |
 | `context/` | Staging area — migrate into `library/` then deprecate |
 | `output/` | Render previews (promote to `hyperframes/` when approved) |
 | `n8n/` | Automation workflow JSONs |
@@ -37,6 +37,7 @@ After `tick`, implement **exactly one** PR-sized chunk from the returned run log
 | Blocker | Env / decision needed |
 |---------|----------------------|
 | Capture jobs | `CAPTURE_API_TOKEN` for Hetzner worker (`65.108.48.54:8787`) |
+| Media generation | `HF_KEY`, `PERPLEXITY_API_KEY`, `FAL_KEY` — see `bin/connect-factory` |
 | Compliance copy | GEO-specific disclaimers, 18+ text, CTA legality |
 | Ambiguous business reqs | Target GEO, brand voice, budget caps |
 

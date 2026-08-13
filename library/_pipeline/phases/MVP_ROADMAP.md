@@ -78,4 +78,6 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current focus
 
-Autopilot advances **one chunk per tick** in ID order, skipping `[!]` blocked chunks unless unblocked in state.
+**MVP roadmap complete (14/14 chunks).** Next: live media generation when `HF_KEY`, `PERPLEXITY_API_KEY`, `FAL_KEY`, and optional `CAPTURE_API_TOKEN` are set.
+
+Autopilot `tick` will report no actionable chunks until new phases are added.

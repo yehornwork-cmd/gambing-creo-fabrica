@@ -35,6 +35,12 @@ RESULT=$(
 )
 echo "$RESULT"
 
+if [[ -n "${CAPTURE_API_TOKEN:-}" ]]; then
+  CAP=$(python3 "${REPO_ROOT}/tools/capture_client.py" check-auth 2>&1 || true)
+  echo
+  echo "capture_client: $CAP"
+fi
+
 if [[ "$STRICT" -eq 1 ]]; then
   if echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); sys.exit(0 if all(v.get('ok') for v in d.values()) else 1)"; then
     echo

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <title>B06 — End card</title>
+  <style>
+    html, body { margin: 0; width: 1080px; height: 1920px; background: #000; color: #f7f1ff; font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .logo { font-size: 64px; font-weight: 800; color: #f5d06a; margin-bottom: 24px; }
+    .cta { font-size: 36px; padding: 16px 48px; background: #7b3cff; border-radius: 12px; margin-bottom: 48px; }
+    .disclaimer { font-size: 22px; opacity: 0.85; max-width: 800px; line-height: 1.4; }
+    .meta { position: absolute; bottom: 24px; left: 24px; font-size: 14px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+  <div data-beat="B06_end_card" data-duration="3.0" data-asset="assets/logo/logo_end_card_compliance_9x16.png">
+    <div class="logo">Gates of Olympus</div>
+    <div class="cta" data-slot="cta_text">{{ compliance.geo.default.cta_text }}</div>
+    <div class="disclaimer" data-slot="disclaimer_18_plus">{{ compliance.geo.default.disclaimer_18_plus }}</div>
+    <p style="margin-top: 32px; font-size: 28px;">VO: Открой врата. Играй ответственно. 18+.</p>
+  </div>
+  <div class="meta">compositions/scenes/b06-endcard.html · P5.2 placeholder slots</div>
+</body>
+</html>
