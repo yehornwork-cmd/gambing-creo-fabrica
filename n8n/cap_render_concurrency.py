@@ -1,29 +1,30 @@
 #!/usr/bin/env python3
-"""Cap Factory v3 render fan-out to the local renderer capacity.
+"""Set Factory v3 render fan-out.
 
-forge-renderer runs with CONCURRENCY=2. The Code node used CONC=12, so a
-buyer localization of 3+ geos raced the renderer and one geo came back
-`рендер не отработал: Request failed with status code 500`. AU-only
-retries succeeded — this is overload, not an AU copy bug.
+Renderer jobs used to share one HyperFrames project dir, so live sat at
+CONCURRENCY=2 and this node was capped to match. Projects are now per-job;
+fan-out can be higher. Renderer still queues above its slot count.
 
-Also retries a failed geo once after 2s.
+Keeps a single retry after 2s for a transient 500.
 """
 
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 WORKFLOW_ID = "bzPWFbzTKkGHW1hW"
+TARGET_CONC = 8
 BACKUP = Path("/opt/forge") / (
     f"backup-v3-before-render-conc-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
 )
 
-OLD_CONC = "const CONC = 12;"
-NEW_CONC = "const CONC = 2; // match forge-renderer CONCURRENCY=2"
+CONC_RE = re.compile(r"const CONC = \d+;(?:[^\n]*)")
+NEW_CONC = f"const CONC = {TARGET_CONC}; // renderer queues above CONCURRENCY"
 
 OLD_SHOT = """const shot = async (item) => {
   const j = item.json;
@@ -95,16 +96,15 @@ def patch_nodes(nodes: list[dict]) -> int:
         code = params.get("jsCode")
         if not isinstance(code, str):
             continue
-        if "const CONC = 2;" in code and "attempt < 2" in code:
-            continue
-        if OLD_CONC in code:
-            code = code.replace(OLD_CONC, NEW_CONC, 1)
+        next_code = CONC_RE.sub(NEW_CONC, code, count=1)
+        if next_code != code:
+            code = next_code
             changed += 1
-        if OLD_SHOT in code:
+        if "attempt < 2" not in code:
+            if OLD_SHOT not in code:
+                raise SystemExit("render shot() marker missing — live node drifted")
             code = code.replace(OLD_SHOT, NEW_SHOT, 1)
             changed += 1
-        elif "attempt < 2" not in code:
-            raise SystemExit("render shot() marker missing — live node drifted")
         params["jsCode"] = code
         node["parameters"] = params
     return changed
@@ -121,10 +121,6 @@ def main() -> int:
     print(f"backup {BACKUP}")
 
     changed = patch_nodes(nodes)
-    if changed == 0:
-        print("already capped (CONC=2 + retry)")
-        return 0
-
     payload = json.dumps(nodes, ensure_ascii=False)
     sql = (
         "UPDATE workflow_entity SET nodes = $wf$%s$wf$::json, \"updatedAt\" = NOW() "
@@ -138,12 +134,10 @@ def main() -> int:
             "WHERE \"versionId\" = '%s';" % (payload, version)
         )
         psql(hist_sql)
-    check = psql(
-        f"SELECT nodes::text FROM workflow_entity WHERE id='{WORKFLOW_ID}';"
-    )
-    ok_conc = "const CONC = 2;" in check
+    check = psql(f"SELECT nodes::text FROM workflow_entity WHERE id='{WORKFLOW_ID}';")
+    ok_conc = f"const CONC = {TARGET_CONC};" in check
     ok_retry = "attempt < 2" in check
-    print(f"patched {changed} replacement(s); conc2={ok_conc} retry={ok_retry}")
+    print(f"patched {changed} replacement(s); conc{TARGET_CONC}={ok_conc} retry={ok_retry}")
     return 0 if ok_conc and ok_retry else 1
 
 
