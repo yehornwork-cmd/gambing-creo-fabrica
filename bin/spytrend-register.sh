@@ -17,7 +17,8 @@ CLIENT_SECRET="$(printf '%s' "$RESP" | python3 -c 'import json,sys; print(json.l
 
 printf '%s' "$CLIENT_ID" > "${SECRETS}/SPYTREND_CLIENT_ID.key"
 printf '%s' "$CLIENT_SECRET" > "${SECRETS}/SPYTREND_CLIENT_SECRET.key"
-chmod 600 "${SECRETS}/SPYTREND_CLIENT_ID.key" "${SECRETS}/SPYTREND_CLIENT_SECRET.key"
+printf '%s' "basic" > "${SECRETS}/SPYTREND_AUTH_METHOD.key"
+chmod 600 "${SECRETS}/SPYTREND_CLIENT_ID.key" "${SECRETS}/SPYTREND_CLIENT_SECRET.key" "${SECRETS}/SPYTREND_AUTH_METHOD.key"
 
 echo "Saved SpyTrend OAuth credentials to library/_pipeline/secrets/"
 echo "client_id: ${CLIENT_ID}"

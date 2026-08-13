@@ -9,13 +9,27 @@ source "${REPO_ROOT}/library/_pipeline/orchestrator/load_env.sh"
 : "${SPYTREND_CLIENT_ID:?Missing SPYTREND_CLIENT_ID}"
 : "${SPYTREND_CLIENT_SECRET:?Missing SPYTREND_CLIENT_SECRET}"
 
+AUTH_METHOD="${SPYTREND_AUTH_METHOD:-basic}"
+
+mint_token() {
+  if [[ "$AUTH_METHOD" == "post" ]]; then
+    curl -sS -X POST 'https://mcp.spytrend.com/oauth2/token' \
+      -d "grant_type=client_credentials" \
+      -d 'scope=mcp:read' \
+      -d 'audience=https://mcp.spytrend.com/mcp' \
+      -d "client_id=${SPYTREND_CLIENT_ID}" \
+      -d "client_secret=${SPYTREND_CLIENT_SECRET}"
+  else
+    curl -sS -u "${SPYTREND_CLIENT_ID}:${SPYTREND_CLIENT_SECRET}" \
+      -d 'grant_type=client_credentials' \
+      -d 'scope=mcp:read' \
+      -d 'audience=https://mcp.spytrend.com/mcp' \
+      'https://mcp.spytrend.com/oauth2/token'
+  fi
+}
+
 TOKEN="$(
-  curl -sS -u "${SPYTREND_CLIENT_ID}:${SPYTREND_CLIENT_SECRET}" \
-    -d 'grant_type=client_credentials' \
-    -d 'scope=mcp:read' \
-    -d 'audience=https://mcp.spytrend.com/mcp' \
-    'https://mcp.spytrend.com/oauth2/token' \
-  | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])'
+  mint_token | python3 -c 'import json,sys; data=json.load(sys.stdin); print(data["access_token"])'
 )"
 
 printf '{"Authorization":"Bearer %s"}' "$TOKEN"

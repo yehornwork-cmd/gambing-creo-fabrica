@@ -12,7 +12,9 @@ Examples:
   cp FAL_KEY.key.example FAL_KEY.key
 
 SpyTrend uses OAuth client_id/client_secret (not a static API key).
-After register, Cursor MCP reads bin/spytrend-token.sh via headersHelper.
+- Self-registered demo: SPYTREND_AUTH_METHOD=basic (default)
+- Cabinet keys (spytrend.com/settings → AI): SPYTREND_AUTH_METHOD=post
+After setup, Cursor MCP reads bin/spytrend-token.sh via headersHelper.
 
 Verify wiring:
   bin/connect-factory
