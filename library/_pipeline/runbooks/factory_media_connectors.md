@@ -88,8 +88,8 @@ python3 tools/fal_client.py subscribe fal-ai/flux/schnell '{"prompt":"vertical s
 
 Optional MCP servers (see `.cursor/mcp.json.example`):
 
-- **SpyTrend** — competitor ad intelligence (`spytrend` tag in MVP roadmap)
-- **Magnific** — upscaling / enhancement via MCP
+- **SpyTrend** — competitor ad intelligence; OAuth via `bin/spytrend-register.sh` + `headersHelper`
+- **Magnific** — upscaling / enhancement via MCP OAuth
 
 ## Agent skills
 

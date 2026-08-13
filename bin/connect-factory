@@ -19,6 +19,17 @@ echo
 python3 "${REPO_ROOT}/tools/perplexity_client.py" probe 2>/dev/null || true
 echo
 
+if [[ -f "${REPO_ROOT}/library/_pipeline/secrets/SPYTREND_CLIENT_ID.key" ]]; then
+  if bash "${REPO_ROOT}/bin/spytrend-token.sh" >/dev/null 2>&1; then
+    echo "spytrend: ok (OAuth token minted)"
+  else
+    echo "spytrend: fail (OAuth token mint failed)"
+  fi
+else
+  echo "spytrend: skip (run bin/spytrend-register.sh)"
+fi
+echo
+
 RESULT=$(
   python3 "${REPO_ROOT}/library/_pipeline/orchestrator/preset_factory.py" check-auth 2>&1 || true
 )

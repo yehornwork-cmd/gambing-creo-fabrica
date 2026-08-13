@@ -2,9 +2,7 @@
   "mcpServers": {
     "spytrend": {
       "url": "https://mcp.spytrend.com/mcp",
-      "headers": {
-        "Authorization": "Bearer ${SPYTREND_API_KEY}"
-      }
+      "headersHelper": "bash bin/spytrend-token.sh"
     },
     "magnific": {
       "url": "https://mcp.magnific.com"
