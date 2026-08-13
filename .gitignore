@@ -2,3 +2,13 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+library/_pipeline/buyer_uploads/
+.env
+.env.*
+!.env.example
+**/.env
+!**/.env.example
+library/_pipeline/secrets/*
+!library/_pipeline/secrets/.gitignore
+!library/_pipeline/secrets/README.txt
+!library/_pipeline/secrets/*.example

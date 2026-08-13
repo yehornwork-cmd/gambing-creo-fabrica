@@ -15,6 +15,11 @@
           "cta_main": "GRAJ TERAZ",
           "cta_sub": "Zakład od 2,00 €",
           "end_tag": "Otwórz wrota."
+        },
+        "en": {
+          "cta_main": "PLAY NOW",
+          "cta_sub": "From €2.00",
+          "end_tag": "Open the gates."
         }
       }
     },
@@ -31,6 +36,11 @@
           "cta_main": "ODBIERZ BONUS",
           "cta_sub": "+100% na pierwszy depozyt",
           "end_tag": "Otwórz wrota. Bonus na pierwszy depozyt."
+        },
+        "en": {
+          "cta_main": "GET BONUS",
+          "cta_sub": "+100% on first deposit",
+          "end_tag": "Open the gates. First-deposit bonus."
         }
       }
     }

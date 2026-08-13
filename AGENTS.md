@@ -47,7 +47,7 @@ Everything else: make a reasonable default, document the assumption in the run l
 
 ## Material sources
 
-Demo-game capture is retired. Gameplay and streamer beats come from **YouTube / Kick / Twitch VOD analysis** on Hetzner (`POST /jobs/youtube/tick` with `platforms: "youtube,kick,twitch"`). See [VOD_SOURCES.md](library/_pipeline/VOD_SOURCES.md). Do not fabricate bonus/FS claims that are not in an analyzed clip.
+Demo-game capture is retired. Gameplay and streamer beats come from **YouTube / Kick / Twitch VOD analysis** on Hetzner (`POST /jobs/youtube/tick` with `platforms: "youtube,kick,twitch"`). Buyer masters on **forge.vizioner.xyz** use `POST /jobs/buyer/multiply` (ffprobe + constructor explode). See [BUYER_LOOP.md](library/_pipeline/BUYER_LOOP.md) and [CONNECTORS.md](library/_pipeline/CONNECTORS.md). Do not fabricate bonus/FS claims that are not in an analyzed clip.
 
 ## Ad intelligence (SpyTrend)
 
@@ -56,5 +56,5 @@ When a chunk tags `spytrend`, query SpyTrend MCP for competitor vertical ads (Me
 ## Git workflow
 
 - Work on `cursor/*` branches only.
-- No secrets in the repo.
+- No secrets in the repo. Keys go on Hetzner `.env` / `secrets/` / n8n Credentials — see [SECRETS.md](library/_pipeline/SECRETS.md).
 - Perplexity merges after QA.
