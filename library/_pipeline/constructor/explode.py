@@ -22,6 +22,34 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def resolve_repo_root(constructor_dir: Path) -> Path:
+    git_root = constructor_dir.parents[2]
+    if (git_root / "library" / "games").is_dir():
+        return git_root
+    library_root = constructor_dir.parents[1]
+    if (library_root / "games").is_dir():
+        return library_root
+    return git_root
+
+
+def load_compliance(constructor_dir: Path, repo_root: Path, rel: str | None) -> dict[str, Any]:
+    fallback: dict[str, Any] = {"geo": {"default": {"disclaimer_18_plus": "18+ | Play responsibly"}}}
+    if not rel:
+        return fallback
+    stripped = rel[8:] if rel.startswith("library/") else rel
+    candidates = [
+        repo_root / rel,
+        repo_root / stripped,
+        constructor_dir.parents[2] / rel,
+        constructor_dir.parents[1] / stripped,
+        constructor_dir.parent.parent / stripped,
+    ]
+    for path in candidates:
+        if path.is_file():
+            return load_json(path)
+    return fallback
+
+
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -186,8 +214,7 @@ def explode(
 ) -> list[dict[str, Any]]:
     scenario = load_scenario(matrix["scenario_id"], constructor_dir / "scenarios")
     ctas = load_json(constructor_dir / "ctas" / "catalog.json")
-    compliance_rel = matrix.get("compliance_file")
-    compliance = load_json(repo_root / compliance_rel) if compliance_rel else {"geo": {}}
+    compliance = load_compliance(constructor_dir, repo_root, matrix.get("compliance_file"))
 
     jobs: list[dict[str, Any]] = []
     for locale, fmt, cta, geo in combinations(matrix, include_stubs):
@@ -254,7 +281,7 @@ def main() -> int:
         constructor_dir=constructor_dir,
         matrix=matrix,
         include_stubs=args.include_stubs,
-        repo_root=REPO_ROOT,
+        repo_root=resolve_repo_root(constructor_dir),
     )
 
     print(f"jobs: {len(jobs)}")

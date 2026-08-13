@@ -21,7 +21,7 @@ class CloneTests(unittest.TestCase):
             constructor_dir=CONSTRUCTOR,
             matrix=explode.load_json(CONSTRUCTOR / "variant_matrix.json"),
             include_stubs=False,
-            repo_root=explode.REPO_ROOT,
+            repo_root=explode.resolve_repo_root(CONSTRUCTOR),
         )
         cls.parent = next(j for j in jobs if j["cta_id"] == "play_now" and j["locale"] == "ru")
 
