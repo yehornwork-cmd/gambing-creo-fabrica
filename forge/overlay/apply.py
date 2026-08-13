@@ -33,9 +33,13 @@ export async function submitRun(
     .bind(runId, user.id, input.master_url, JSON.stringify(input.geos), input.product ?? "", input.intent ?? "", input.tone ?? "", t)
     .run();
 
+  const restricted = new Set(["NL", "PL"]);
   let analysis: Record<string, unknown> | null = null;
   let multiplyNotice = "";
-  let n8nGeos = input.geos;
+  let n8nGeos = input.geos.filter((g) => !restricted.has(g));
+  let skipN8n = n8nGeos.length === 0;
+  let blockedGeos: string[] = input.geos.filter((g) => restricted.has(g));
+  let multiply: Record<string, unknown> | null = null;
   try {
     const plan = await triggerBuyerMultiply({
       master_url: input.master_url,
@@ -48,11 +52,11 @@ export async function submitRun(
       analysis = plan.analysis ?? null;
       const summary = (plan.summary ?? {}) as Record<string, unknown>;
       const readyGeos = Array.isArray(summary.ready_geos) ? (summary.ready_geos as string[]) : [];
-      const blockedGeos = Array.isArray(summary.blocked_geos) ? (summary.blocked_geos as string[]) : [];
+      blockedGeos = Array.isArray(summary.blocked_geos) ? (summary.blocked_geos as string[]) : blockedGeos;
       const planned = Array.isArray(summary.n8n_geos) ? (summary.n8n_geos as string[]) : [];
-      if (readyGeos.length > 0) n8nGeos = readyGeos;
-      else if (planned.length > 0) n8nGeos = planned;
-      const multiply = {
+      n8nGeos = planned.length ? planned : readyGeos;
+      skipN8n = n8nGeos.length === 0;
+      multiply = {
         analysis_id: plan.analysis_id,
         jobs: summary.jobs ?? plan.jobs?.length ?? 0,
         ready_jobs: summary.ready_jobs,
@@ -62,6 +66,7 @@ export async function submitRun(
         ready_geos: readyGeos,
         blocked_geos: blockedGeos,
         n8n_geos: n8nGeos,
+        n8n_skip_reason: skipN8n ? "all_geos_held" : null,
         ctas: summary.ctas,
         format: summary.format,
         duration_sec: summary.duration_sec,
@@ -83,7 +88,37 @@ export async function submitRun(
       multiplyNotice += ". ";
     }
   } catch {
-    multiplyNotice = "Разбор не успел за отведённое время — фабрика всё равно локализует мастер. ";
+    multiplyNotice = "Разбор не успел за отведённое время — фабрика локализует только открытые GEO. ";
+  }
+
+  if (skipN8n) {
+    const holdReport = {
+      готово: 0,
+      отсеяно: blockedGeos.length || input.geos.length,
+      гео_отсеяно: (blockedGeos.length ? blockedGeos : input.geos).map((g) => ({
+        гео: g,
+        этап: "hold",
+        причина: "licensed operator / compliance.allow",
+      })),
+      analysis,
+      multiply,
+    };
+    await db()
+      .prepare("UPDATE runs SET status='done', report_json=?1, error=NULL, summary=?2, finished_at=?3 WHERE id=?4")
+      .bind(
+        JSON.stringify(holdReport),
+        `0/${blockedGeos.length || input.geos.length}`,
+        nowIso(),
+        runId,
+      )
+      .run();
+    const row = await fetchRunRow(runId);
+    return {
+      run: runToSummary(row),
+      notice:
+        multiplyNotice +
+        "Рендер не запущен: нет открытых GEO. Выберите CA-EN, AU, IT или CH-DE. NL и PL — только с licensed operator.",
+    };
   }
 
   void triggerRun({
@@ -199,6 +234,8 @@ def main() -> int:
     duration_sec?: number;
     beats?: number;
     deep_job_id?: string | null;
+    n8n_geos?: string[];
+    n8n_skip_reason?: string | null;
     variants?: {
       job_id: string;
       geo?: string;
@@ -245,7 +282,13 @@ def main() -> int:
               небольшое число рынков за раз; большие батчи уходят в работу и файлы публикуются в
               Google Drive.""",
         """              Разбор и план вариантов — за секунды. Рендер локализаций обычно 30–60 секунд
-              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.""",
+              на 1–2 рынка; большие батчи дописываются в библиотеку и Drive.
+              NL и PL на hold без licensed operator — для проверки берите CA-EN, AU, IT или CH-DE.""",
+        1,
+    )
+    g = g.replace(
+        '{g.code === "GULF-EN" ? "Gulf" : g.code}',
+        '{g.code === "GULF-EN" ? "Gulf" : g.code}{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
         1,
     )
     gen.write_text(g, encoding="utf-8")

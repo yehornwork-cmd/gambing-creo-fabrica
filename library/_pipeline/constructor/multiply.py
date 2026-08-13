@@ -224,8 +224,8 @@ def summary_payload(analysis: dict[str, Any], jobs: list[dict[str, Any]]) -> dic
         "ready_geos": sorted({geo_of(job) for job in ready}),
         "blocked_geos": sorted({geo_of(job) for job in blocked}),
         "ctas": sorted({job["cta_id"] for job in jobs}),
-        "n8n_geos": sorted({geo_of(job) for job in ready})
-        or sorted({geo_of(job) for job in jobs}),
+        "n8n_geos": sorted({geo_of(job) for job in ready}),
+        "n8n_skip_reason": "all_geos_held" if jobs and not ready else None,
     }
 
 

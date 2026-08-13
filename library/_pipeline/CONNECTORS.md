@@ -16,7 +16,7 @@ Research date: 2026-08-13. Method: live **Perplexity Multi Gateway** (`sonar-pro
 | SpyTrend MCP | R41 gateway (`mcp.spytrend.com`) | Competitor Meta ads |
 | Google Drive | Factory v3/v5 | Delivery |
 | ffmpeg compositor | Factory v5, `forge-renderer:8890` | Headline + disclaimer + VO on master |
-| Layout analyzer | Factory v3 → `creative-localizer.vercel.app` | Overlay boxes («раскладка») |
+| Layout analyzer | Factory v3 → `forge-renderer` `POST /api/layout` | Overlay boxes («раскладка»). Vercel `creative-localizer` retired — own server only |
 | yt-dlp VOD | youtube-worker | YouTube / Kick / Twitch corpus |
 | Pexels + Pixabay | WF-41 **inactive** | Stock hooks |
 | Redis / embeddings | PC-03…PC-06 | Memory, semantic search |
@@ -97,7 +97,7 @@ Multiply should **block** NL/PL slot ads unless a human sets `compliance.allow =
 
 ```
 Forge upload
-  → worker fast: ffprobe + layout (creative-localizer or forge-renderer /api/layout)
+  → worker fast: ffprobe + layout (forge-renderer POST /api/layout on the Hetzner host)
   → constructor explode (geo × CTA)           # already F6.1
   → n8n factory v5 webhook (parallel TTS + ffmpeg)
   → PC-26 Gemini QA sample

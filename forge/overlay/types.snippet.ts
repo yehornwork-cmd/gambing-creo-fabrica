@@ -70,6 +70,7 @@ export type RunReportShape = {
     ready_geos?: string[];
     blocked_geos?: string[];
     n8n_geos?: string[];
+    n8n_skip_reason?: string | null;
     variants?: BuyerJobPreview[];
   } | null;
 };

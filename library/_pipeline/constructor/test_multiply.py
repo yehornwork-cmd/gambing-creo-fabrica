@@ -129,7 +129,16 @@ class AnalyzeAndMultiplyTests(unittest.TestCase):
         self.assertEqual(payload["beats"], 6)
         self.assertEqual(set(payload["geos"]), {"PL", "NL"})
         self.assertEqual(set(payload["blocked_geos"]), {"PL", "NL"})
-        self.assertEqual(payload["n8n_geos"], ["NL", "PL"])
+        self.assertEqual(payload["n8n_geos"], [])
+        self.assertEqual(payload["n8n_skip_reason"], "all_geos_held")
+
+    def test_mixed_batch_sends_only_ready_geos(self) -> None:
+        jobs = multiply.multiply(analysis=self.analysis, geos=["PL", "CA-EN"], cta_ids=["play_now"])
+        payload = multiply.summary_payload(self.analysis, jobs)
+        self.assertEqual(payload["ready_geos"], ["CA-EN"])
+        self.assertEqual(payload["blocked_geos"], ["PL"])
+        self.assertEqual(payload["n8n_geos"], ["CA-EN"])
+        self.assertIsNone(payload["n8n_skip_reason"])
 
     def test_it_and_cz_use_local_cta(self) -> None:
         jobs = multiply.multiply(analysis=self.analysis, geos=["IT", "CZ"], cta_ids=["play_now"])

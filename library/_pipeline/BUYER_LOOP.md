@@ -9,7 +9,8 @@ upload (Forge /media)
         explode locale × CTA with parent_creative_id
         NL/PL jobs status=blocked unless compliance_allow
     → buyer sees N variants immediately (hold chips on restricted geos)
-    → n8n webhook localizes/renders ready geos (existing farm)
+    → n8n webhook localizes/renders **ready** geos only (all-hold → no farm call)
+    → Factory v3 layout is `forge-renderer` `/api/layout` (not Vercel)
     → async buyer_deep: Gemini native video rewrites beats + optional extract_signals
 ```
 
@@ -56,4 +57,6 @@ Artifacts on Hetzner: `/opt/igaming-library/_pipeline/buyer_uploads/<analysis_id
 
 ## Forge wiring
 
-`submitRun` calls the worker **before** n8n, stores `analysis` / `multiply` on the run report, then fires the existing factory webhook so files still land in Drive / library.
+`submitRun` calls the worker **before** n8n, stores `analysis` / `multiply` on the run report, then fires the factory webhook **only if `n8n_geos` is non-empty**. An all-hold batch (NL/PL without `compliance.allow`) finishes immediately with a hold notice — do not retry those geos.
+
+Layout/render stay on the Hetzner host (`forge-renderer`). Do not call `creative-localizer.vercel.app`.
