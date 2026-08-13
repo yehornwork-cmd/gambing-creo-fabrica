@@ -20,7 +20,7 @@ python3 library/_pipeline/constructor/test_multiply.py
 python3 library/_pipeline/orchestrator/factory_run.py status
 ```
 
-Buyer path (forge.vizioner.xyz): upload a winner → `analyze_upload.py` + `multiply.py` → n8n renders. See `library/_pipeline/BUYER_LOOP.md`.
+Buyer path (forge.vizioner.xyz): upload a winner → `analyze_upload.py` + `multiply.py` → n8n renders. See `library/_pipeline/BUYER_LOOP.md`. Keys: `library/_pipeline/SECRETS.md` (Hetzner `.env` / n8n Credentials, never this repo).
 
 ## Usage
 This repo is used by Perplexity Computer to delegate coding tasks to Cursor Cloud Agents.

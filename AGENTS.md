@@ -56,5 +56,5 @@ When a chunk tags `spytrend`, query SpyTrend MCP for competitor vertical ads (Me
 ## Git workflow
 
 - Work on `cursor/*` branches only.
-- No secrets in the repo.
+- No secrets in the repo. Keys go on Hetzner `.env` / `secrets/` / n8n Credentials — see [SECRETS.md](library/_pipeline/SECRETS.md).
 - Perplexity merges after QA.

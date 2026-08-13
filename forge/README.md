@@ -11,4 +11,4 @@ This directory versions the buyer-loop patches so the next agent can re-apply th
 | `overlay/types.snippet.ts` | fields on `RunReportShape` |
 | `overlay/generate.copy.md` | copy changes for `src/routes/app/generate.tsx` |
 
-Do **not** copy secrets. Worker token is `WORKER_TOKEN` in `/opt/forge/.env` (same value as worker `CAPTURE_API_TOKEN`, never committed).
+Do **not** copy secrets. Live env is `/opt/forge/.env` (see `forge/.env.example` and [SECRETS.md](../library/_pipeline/SECRETS.md)). `WORKER_TOKEN` must match worker `CAPTURE_API_TOKEN`. `FORGE_N8N_FACTORY_KEY` must match n8n credential `HTTP Header Auth (x-agent-os-key)`.

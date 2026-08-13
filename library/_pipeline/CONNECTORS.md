@@ -109,4 +109,6 @@ HyperFrames `--batch` stays the *code-first* twin of ffmpeg overlays (F1.1), not
 
 ## Ops note
 
-`Perplexity Multi Gateway` currently embeds the Perplexity bearer token in a Code node. Move it to the existing `perplexityApi` / HTTP Header credential and rotate the key.
+Where to put keys and in what format: [SECRETS.md](SECRETS.md).
+
+`Perplexity Multi Gateway` currently embeds the Perplexity bearer token in a Code node. Move it to the existing `perplexityApi` / HTTP Header credential and rotate the key. Code nodes cannot read `$env` while `N8N_BLOCK_ENV_ACCESS_IN_NODE=true`.

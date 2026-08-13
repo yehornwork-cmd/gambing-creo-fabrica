@@ -16,6 +16,8 @@ upload (Forge /media)
 
 Forge already had «загрузить мастер → выбрать GEO → n8n». That path does not **read** the clip. Without analysis there is nothing to multiply: no beats, no substitution groups, no `parent_creative_id`. 500/day is combinatorial clones of a winner, not 500 unique storyboards.
 
+Keys and file formats: [SECRETS.md](SECRETS.md). Worker token is `CAPTURE_API_TOKEN`; Forge uses the same value as `WORKER_TOKEN`. Never commit `.env` or `secrets/gemini.key`.
+
 ## Worker API (localhost / docker, Bearer `CAPTURE_API_TOKEN`)
 
 `POST /jobs/buyer/multiply`

@@ -10,5 +10,5 @@
 ## Rules
 - Agents work on `cursor/*` branches
 - Perplexity merges after QA
-- No secrets in this repo
+- No secrets in this repo — [SECRETS.md](library/_pipeline/SECRETS.md)
 
