@@ -1,0 +1,43 @@
+[2026-08-13T04:28:02Z] marathon daemon start
+{
+  "ok": true,
+  "path": "/workspace/library/games/vs20olympgate/intelligence/spytrend_snapshot.md"
+}
+→ streamer_character_hook
+→ streamer_board_reveal
+→ streamer_clip_broll
+→ ugc_streamer_template
+→ ugc_board_walkthrough
+→ ugc_clip_reaction
+→ streamer_endcard_cta
+→ ugc_locale_ru
+→ streamer_multi_beat
+→ ugc_bonus_tease
+{
+  "run_id": "20260813T042805Z_preset_batch",
+  "failed": 0,
+  "run_dir": "/workspace/library/_pipeline/runs/20260813T042805Z_preset_batch"
+}
+=== iGaming Creative Factory — connector status ===
+repo: /workspace
+
+
+spytrend: ok (OAuth token minted)
+
+{
+  "higgsfield_client": {
+    "ok": false,
+    "message": "Missing Higgsfield credentials. Set HF_KEY or HF_API_KEY_ID + HF_API_KEY_SECRET."
+  },
+  "perplexity_client": {
+    "ok": false,
+    "message": "Missing PERPLEXITY_API_KEY"
+  },
+  "fal_client": {
+    "ok": false,
+    "message": "Missing FAL_KEY (or ~/.fal/auth0_token from `fal auth login`)"
+  }
+}
+
+One or more connectors missing credentials or auth failed.
+[2026-08-13T04:28:11Z] connectors not ready — sleep 300s
