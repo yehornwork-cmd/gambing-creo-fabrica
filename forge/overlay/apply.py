@@ -159,7 +159,21 @@ def main() -> int:
         needle = "  отчёт_в_drive?: string | null;\n  время?: string;\n};"
         insert = """  отчёт_в_drive?: string | null;
   время?: string;
-  analysis?: Record<string, unknown> | null;
+  analysis?: {
+    analysis_id?: string;
+    format?: string;
+    status?: string;
+    game_id?: string;
+    product?: string;
+    beats?: {
+      beat_id: string;
+      name?: string;
+      t_start?: number;
+      t_end?: number;
+      duration_sec?: number;
+      substitution_group?: string;
+    }[];
+  } | null;
   multiply?: {
     analysis_id?: string;
     jobs?: number;
