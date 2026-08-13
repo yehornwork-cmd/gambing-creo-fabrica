@@ -170,7 +170,27 @@ def main() -> int:
     text = text.replace(
         "const waveGeos = waves[w].filter((g) => !blockedGeos.includes(g));",
         "const waveGeos = waves[w];",
-        1,
+    )
+    text = text.replace(
+        """      if (readyGeos.length > 0) n8nGeos = readyGeos;
+      else if (planned.length > 0) n8nGeos = planned;""",
+        """      if (planned.length > 0) n8nGeos = planned;
+      else if (readyGeos.length > 0) n8nGeos = readyGeos;
+      else if (Array.isArray(summary.geos) && (summary.geos as string[]).length) n8nGeos = summary.geos as string[];""",
+    )
+    text = text.replace(
+        """      if (blockedGeos.length) {
+        multiplyNotice += `, hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow)`;
+      }
+""",
+        "",
+    )
+    text = text.replace(
+        """      if (blockedGeos.length) {
+        notice += `Hold: ${blockedGeos.join(", ")} (нужен licensed operator / compliance.allow). `;
+      }
+""",
+        "",
     )
     text = text.replace(
         'if (runs.length === 0) throw new ApiError("ALL_GEOS_BLOCKED");',
