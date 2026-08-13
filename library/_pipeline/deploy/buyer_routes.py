@@ -82,3 +82,32 @@ def register(
             "jobs": job_previews(result.get("jobs") or []),
             "deep_job_id": deep_job_id,
         }
+
+    @app.get("/jobs/buyer/{analysis_id}")
+    def buyer_analysis(
+        analysis_id: str,
+        _: None = Depends(verify_token),
+    ) -> dict[str, Any]:
+        from pathlib import Path
+        import json
+        import os
+
+        root = Path(os.environ.get("PIPELINE_ROOT", "/data/library/_pipeline")) / "buyer_uploads" / analysis_id
+        analysis_path = root / "analysis.json"
+        if not analysis_path.is_file():
+            raise HTTPException(status_code=404, detail="analysis not found")
+        analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+        summary = {}
+        if (root / "summary.json").is_file():
+            summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+        jobs = []
+        jobs_path = root / "jobs" / "jobs.json"
+        if jobs_path.is_file():
+            jobs = job_previews(json.loads(jobs_path.read_text(encoding="utf-8")))
+        return {
+            "status": "ok",
+            "analysis_id": analysis_id,
+            "analysis": analysis,
+            "summary": summary,
+            "jobs": jobs,
+        }
