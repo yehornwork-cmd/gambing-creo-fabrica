@@ -1,6 +1,7 @@
 .env
 .env.local
 .cursor/mcp.json
+library/_pipeline/runs/marathon_daemon.log
 __pycache__/
 *.py[cod]
 library/_pipeline/secrets/*.key
