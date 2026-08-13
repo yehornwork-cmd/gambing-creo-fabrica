@@ -169,7 +169,15 @@ def main() -> int:
             1,
         )
     start = text.find("export async function submitRun(")
-    end = text.find("// ---------- Библиотека ----------")
+    end = -1
+    for marker in (
+        "\n// ---------- Пакетный заказ",
+        "\nexport async function submitOrder(",
+        "\n// ---------- Библиотека ----------",
+    ):
+        i = text.find(marker, start + 1)
+        if i >= 0 and (end < 0 or i < end):
+            end = i
     if start < 0 or end < 0:
         raise SystemExit("submitRun block not found")
     text = text[:start] + SUBMIT_RUN.strip() + "\n\n" + text[end:]
