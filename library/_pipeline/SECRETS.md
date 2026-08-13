@@ -115,15 +115,45 @@ Webhook фабрики: `https://n8n.vizioner.xyz/webhook/prod-run-7a7298` + з�
 
 ---
 
-## 6. Не сюда
+## 6. Ключ хостинга (SSH на VPS)
+
+Это **не** Gemini и **не** строка в worker `.env`. Два разных файла:
+
+| Файл | Что это | Куда |
+|------|---------|------|
+| `id_ed25519` / `.pem` | **приватный** | только твой ноут: `~/.ssh/id_ed25519`, `chmod 600`. Никогда git, чат, `secrets/`, Forge `.env` |
+| `id_ed25519.pub` | **публичный** | одна строка в `/root/.ssh/authorized_keys` на `root@65.108.48.54` |
+
+Формат строки на сервере:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... твой-комментарий
+```
+
+Добавить (с ноута, ключ в чат не копировать):
+
+```bash
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@65.108.48.54
+```
+
+Или вручную: дописать `.pub` в `authorized_keys`, затем `chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys`.
+
+Если n8n сам ходит на машину по SSH — UI Credentials → уже существующий `SSH Private Key account` (приватный ключ вставляется там, не файлом в репо).
+
+API-токен панели Hetzner Cloud (`console.hetzner.cloud` → Security → API tokens) фабрике не нужен. Если понадобится агентам — секрет окружения Cursor, не `/opt/igaming-library/_pipeline/secrets/`.
+
+---
+
+## 7. Не сюда
 
 | Что | Куда на самом деле |
 |-----|-------------------|
+| SSH / `.pem` / ключ от хостинга | §6: приватный у себя, `.pub` в `authorized_keys` |
 | HeyGen / Higgsfield / ChatCut / Figma MCP | настройки MCP в Cursor, не Hetzner, пока нет «new hook»-lane |
 | `OPENAI_API_KEY` / `HIGGSFIELD_API_KEY` в `/opt/creative-factory/.env` | Hermes MVP, не buyer multiply |
 | ElevenLabs (если понадобится) | n8n HTTP Header `xi-api-key`, не worker `.env` |
 | Meta Marketing API | n8n OAuth, не файл в `secrets/` |
-| Whisper local | ключ не нужен |
+| Whisper local | ключ не нужен | |
 
 ---
 
