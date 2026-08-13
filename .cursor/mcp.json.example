@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "spytrend": {
+      "url": "https://mcp.spytrend.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SPYTREND_API_KEY}"
+      }
+    },
+    "magnific": {
+      "url": "https://mcp.magnific.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${MAGNIFIC_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-13T00:00:00Z",
+  "presets": [
+    {
+      "id": "streamer_character_hook",
+      "title": "Streamer character intro hook",
+      "family": "streamer",
+      "provider": "higgsfield",
+      "enhancer_flow": "streamer-character",
+      "aspect": "9:16",
+      "duration_sec": 8,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["hook", "talking-head", "streamer"]
+    },
+    {
+      "id": "streamer_board_reveal",
+      "title": "Streamer storyboard panel reveal",
+      "family": "streamer",
+      "provider": "higgsfield",
+      "enhancer_flow": "streamer-board",
+      "aspect": "9:16",
+      "duration_sec": 12,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["storyboard", "streamer"]
+    },
+    {
+      "id": "streamer_clip_broll",
+      "title": "Streamer reaction clip b-roll",
+      "family": "streamer",
+      "provider": "fal",
+      "enhancer_flow": "streamer-clip",
+      "aspect": "9:16",
+      "duration_sec": 6,
+      "locale": "en",
+      "fal_model_id": "fal-ai/flux/schnell",
+      "default_arguments": {
+        "image_size": "portrait_16_9"
+      },
+      "tags": ["broll", "streamer"]
+    },
+    {
+      "id": "ugc_streamer_template",
+      "title": "UGC streamer testimonial template",
+      "family": "ugc",
+      "provider": "higgsfield",
+      "enhancer_flow": "ugc-character",
+      "aspect": "9:16",
+      "duration_sec": 15,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["ugc", "talking-head", "template"]
+    },
+    {
+      "id": "ugc_board_walkthrough",
+      "title": "UGC storyboard walkthrough",
+      "family": "ugc",
+      "provider": "higgsfield",
+      "enhancer_flow": "ugc-board",
+      "aspect": "9:16",
+      "duration_sec": 20,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["ugc", "storyboard"]
+    },
+    {
+      "id": "ugc_clip_reaction",
+      "title": "UGC gameplay reaction clip",
+      "family": "ugc",
+      "provider": "higgsfield",
+      "enhancer_flow": "ugc-clip",
+      "aspect": "9:16",
+      "duration_sec": 10,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["ugc", "reaction"]
+    },
+    {
+      "id": "streamer_endcard_cta",
+      "title": "Streamer end-card CTA frame",
+      "family": "streamer",
+      "provider": "fal",
+      "enhancer_flow": "streamer-board",
+      "aspect": "9:16",
+      "duration_sec": 3,
+      "locale": "en",
+      "fal_model_id": "fal-ai/flux/schnell",
+      "default_arguments": {
+        "image_size": "portrait_16_9"
+      },
+      "tags": ["endcard", "cta"]
+    },
+    {
+      "id": "ugc_locale_ru",
+      "title": "UGC RU locale character spot",
+      "family": "ugc",
+      "provider": "higgsfield",
+      "enhancer_flow": "ugc-character",
+      "aspect": "9:16",
+      "duration_sec": 15,
+      "locale": "ru",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "720p"
+      },
+      "tags": ["ugc", "ru"]
+    },
+    {
+      "id": "streamer_multi_beat",
+      "title": "Streamer multi-beat montage board",
+      "family": "streamer",
+      "provider": "higgsfield",
+      "enhancer_flow": "streamer-board",
+      "aspect": "9:16",
+      "duration_sec": 30,
+      "locale": "en",
+      "higgsfield_endpoint": "higgsfield-ai/soul/standard",
+      "default_arguments": {
+        "aspect_ratio": "9:16",
+        "resolution": "1080p"
+      },
+      "tags": ["montage", "streamer"]
+    },
+    {
+      "id": "ugc_bonus_tease",
+      "title": "UGC bonus tease clip",
+      "family": "ugc",
+      "provider": "fal",
+      "enhancer_flow": "ugc-clip",
+      "aspect": "9:16",
+      "duration_sec": 8,
+      "locale": "en",
+      "fal_model_id": "fal-ai/flux/schnell",
+      "default_arguments": {
+        "image_size": "portrait_16_9"
+      },
+      "tags": ["ugc", "bonus", "tease"]
+    }
+  ]
+}
