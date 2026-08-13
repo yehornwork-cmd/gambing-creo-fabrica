@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Health-check all factory media connectors (Higgsfield, Perplexity, fal).
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+# shellcheck disable=SC1091
+source "${REPO_ROOT}/library/_pipeline/orchestrator/load_env.sh"
+
+STRICT=0
+if [[ "${1:-}" == "--strict" ]]; then
+  STRICT=1
+  shift
+fi
+
+echo "=== iGaming Creative Factory — connector status ==="
+echo "repo: ${REPO_ROOT}"
+echo
+
+python3 "${REPO_ROOT}/tools/perplexity_client.py" probe 2>/dev/null || true
+echo
+
+RESULT=$(
+  python3 "${REPO_ROOT}/library/_pipeline/orchestrator/preset_factory.py" check-auth 2>&1 || true
+)
+echo "$RESULT"
+
+if [[ "$STRICT" -eq 1 ]]; then
+  if echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); sys.exit(0 if all(v.get('ok') for v in d.values()) else 1)"; then
+    echo
+    echo "All connectors authenticated."
+    exit 0
+  fi
+  echo
+  echo "One or more connectors missing credentials or auth failed." >&2
+  exit 1
+fi
+
+echo
+echo "Tip: add runtime secrets in Cursor → Cloud Agents → Environment → Secrets,"
+echo "or copy *.key.example → *.key in library/_pipeline/secrets/"

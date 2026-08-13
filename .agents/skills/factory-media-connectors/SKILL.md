@@ -14,11 +14,15 @@ description: Orchestrate Creative Factory media connectors (Higgsfield, Perplexi
 ## Quick start
 
 ```bash
+bin/connect-factory              # status (non-fatal)
+bin/connect-factory --strict   # fail if any connector missing
 source library/_pipeline/orchestrator/load_env.sh
 python3 library/_pipeline/orchestrator/preset_factory.py check-auth
 python3 library/_pipeline/orchestrator/preset_factory.py list
 python3 library/_pipeline/orchestrator/preset_factory.py validate
 ```
+
+Credentials load from: Cursor runtime secrets → `.env` → `library/_pipeline/secrets/*.key`
 
 ## Run preset
 
@@ -50,7 +54,7 @@ python3 tools/creative_enhancer.py enhance ugc-character "Brief text here"
 |------|---------|
 | `tools/higgsfield_client.py` | `HF_KEY` |
 | `tools/perplexity_client.py` | `PERPLEXITY_API_KEY` |
-| `tools/fal_client.py` | `FAL_KEY` |
+| `tools/fal_client.py` | `FAL_KEY` or `~/.fal/auth0_token` |
 
 All HTTP via `tools/media_http.py` (stdlib + certifi).
 

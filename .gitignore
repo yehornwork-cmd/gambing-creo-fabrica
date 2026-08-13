@@ -1,5 +1,8 @@
 .env
 .env.local
+.cursor/mcp.json
+__pycache__/
+*.py[cod]
 library/_pipeline/secrets/*.key
 !library/_pipeline/secrets/*.key.example
 !library/_pipeline/secrets/.gitignore

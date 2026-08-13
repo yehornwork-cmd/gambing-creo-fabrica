@@ -21,9 +21,16 @@ TERMINAL_STATUSES = {"COMPLETED", "FAILED", "CANCELED", "CANCELLED"}
 
 def load_fal_key() -> str:
     key = os.environ.get("FAL_KEY", "").strip()
-    if not key:
-        raise MediaHttpError("Missing FAL_KEY")
-    return key
+    if key:
+        return key
+
+    token_path = Path.home() / ".fal" / "auth0_token"
+    if token_path.is_file():
+        token = token_path.read_text(encoding="utf-8").strip()
+        if token:
+            return token
+
+    raise MediaHttpError("Missing FAL_KEY (or ~/.fal/auth0_token from `fal auth login`)")
 
 
 def auth_headers() -> dict[str, str]:

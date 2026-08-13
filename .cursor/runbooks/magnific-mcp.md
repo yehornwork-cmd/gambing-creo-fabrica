@@ -4,9 +4,11 @@ Optional MCP integration for AI upscaling and enhancement in the Creative Factor
 
 ## Setup
 
-1. Copy `.cursor/mcp.json.example` → `.cursor/mcp.json` (gitignored).
-2. Set `MAGNIFIC_API_KEY` in repo `.env` or `library/_pipeline/.env`.
-3. Enable **magnific** in Cursor Settings → Tools & MCP.
+1. Run `bash .cursor/setup-mcp.sh` (or copy `.cursor/mcp.json.example` → `.cursor/mcp.json`, gitignored).
+2. Enable **magnific** in Cursor Settings → Tools & MCP.
+3. Reload the server — Cursor opens OAuth in your browser; sign in with your Magnific account.
+
+Magnific MCP uses **OAuth**, not an API key env var.
 
 Example fragment:
 
@@ -14,10 +16,7 @@ Example fragment:
 {
   "mcpServers": {
     "magnific": {
-      "url": "https://mcp.magnific.ai/mcp",
-      "headers": {
-        "Authorization": "Bearer ${MAGNIFIC_API_KEY}"
-      }
+      "url": "https://mcp.magnific.com"
     }
   }
 }

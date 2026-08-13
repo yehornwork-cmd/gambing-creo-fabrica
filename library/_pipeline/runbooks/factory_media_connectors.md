@@ -8,10 +8,19 @@ Unified entry point for Higgsfield, Perplexity Sonar, and fal queue clients used
 source library/_pipeline/orchestrator/load_env.sh
 ```
 
-Sources, in order:
+Sources, in order (runtime secrets from Cursor Cloud Agent win over files):
 
-1. `<repo>/.env`
-2. `<repo>/library/_pipeline/.env`
+1. Injected runtime secrets (`HF_KEY`, `PERPLEXITY_API_KEY`, `FAL_KEY`, …)
+2. `<repo>/.env`
+3. `<repo>/library/_pipeline/.env`
+4. `<repo>/library/_pipeline/secrets/<VAR>.key` (gitignored single-line files)
+
+Quick wiring check:
+
+```bash
+bin/connect-factory
+bin/connect-factory --strict   # exit 1 if any connector is down
+```
 
 ## Required keys
 
