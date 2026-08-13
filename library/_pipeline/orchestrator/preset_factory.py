@@ -196,7 +196,8 @@ def cmd_check_auth(_: argparse.Namespace) -> int:
         try:
             payload = json.loads(proc.stdout or "{}")
         except json.JSONDecodeError:
-            payload = {"ok": False, "message": proc.stdout or proc.stderr}
+            err = (proc.stderr or proc.stdout or "").strip()
+            payload = {"ok": False, "message": err or "check-auth failed"}
         results[name] = payload
         if not payload.get("ok"):
             exit_code = 1

@@ -45,6 +45,18 @@ if [[ -n "${CAPTURE_API_TOKEN:-}" ]]; then
 fi
 
 if [[ "$STRICT" -eq 1 ]]; then
+  MISSING=0
+  for v in HF_KEY PERPLEXITY_API_KEY FAL_KEY; do
+    if [[ -z "${!v:-}" ]]; then
+      MISSING=1
+    fi
+  done
+  if [[ "$MISSING" -eq 1 ]]; then
+    echo
+    echo "Ключи из Cursor Secrets пока не видны этому агенту."
+    echo "Если ты уже добавил их на dashboard — запусти НОВОГО агента (New Agent)."
+    echo "Dashboard: https://cursor.com/dashboard/cloud-agents/environments/e/f054ebe8-9520-11f1-ba66-0e7d0216e441"
+  fi
   if echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); sys.exit(0 if all(v.get('ok') for v in d.values()) else 1)"; then
     echo
     echo "All connectors authenticated."
