@@ -55,6 +55,8 @@ python3 tools/creative_enhancer.py enhance ugc-character "Brief text here"
 | `tools/higgsfield_client.py` | `HF_KEY` |
 | `tools/perplexity_client.py` | `PERPLEXITY_API_KEY` |
 | `tools/fal_client.py` | `FAL_KEY` or `~/.fal/auth0_token` |
+| `tools/capture_client.py` | `CAPTURE_API_TOKEN` |
+| `tools/spytrend_snapshot.py` | SpyTrend OAuth via `bin/spytrend-token.sh` |
 
 All HTTP via `tools/media_http.py` (stdlib + certifi).
 

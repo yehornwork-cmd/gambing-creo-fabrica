@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shlex
 import subprocess
 import sys
@@ -136,6 +137,8 @@ def cmd_check_auth(_: argparse.Namespace) -> int:
         "python3 tools/perplexity_client.py check-auth",
         "python3 tools/fal_client.py check-auth",
     ]
+    if os.environ.get("CAPTURE_API_TOKEN", "").strip():
+        checks.append("python3 tools/capture_client.py check-auth")
     results: dict[str, Any] = {}
     exit_code = 0
     for inner in checks:
