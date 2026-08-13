@@ -276,9 +276,8 @@ def main() -> int:
         1,
     )
     g = g.replace(
-        '{g.code === "GULF-EN" ? "Gulf" : g.code}{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
-        '{g.code === "GULF-EN" ? "Gulf" : g.code}',
-        1,
+        '{g.code === "NL" || g.code === "PL" ? " · hold" : ""}',
+        "",
     )
     g = g.replace(
         """    if (selected.every(([code]) => code === "NL" || code === "PL")) {
