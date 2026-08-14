@@ -1,0 +1,11 @@
+{
+  "geo": "PL",
+  "headline": ["KRĘĆ I WYGRYWAJ", "GRAJ TERAZ"],
+  "disclaimer": "No purchase necessary to play. In-game rewards are not real money.",
+  "masterSrc": "https://forge.vizioner.xyz/media/master%2Fmsrqo7yn-bbbfe25b-fd8c-43e4-954e-dc8134894da9-_2_1_.mp4",
+  "voSrc": "",
+  "badgeAppleSrc": "",
+  "badgeGoogleSrc": "",
+  "durationInSeconds": 15.15,
+  "headlineBox": { "x": 162, "y": 1056, "w": 756, "h": 422 }
+}
