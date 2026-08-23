@@ -1,0 +1,19 @@
+# Secrets / local config (never commit; see CURSOR_BRIDGE.md "No secrets in this repo")
+.env
+.env.local
+.env.*
+!.env.example
+.cursor/mcp.json
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Node
+node_modules/
+
+# Local run artifacts
+output/renders/
+library/_pipeline/runs/*.log
